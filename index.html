@@ -29,32 +29,33 @@
       }
 
       nav {
-	  background:rgba(220, 181, 242, 0.5);
+	  background:rgba(131, 96, 150, 0.5);
 	  display: flex;
 	  justify-content: space-between;
 	  align-items: center;
-	  padding: 0.5em 0.0em;
+	  padding: 0.5em 0.5em;
       }
 
       .nav-links {
 	  margin-left: auto;
 	  margin-right: 20px;
 	  text-decoration: none;
-          font-family: Arial, sans-serif;
+      font-family: "Helvetica Neue", Helvetica, sans-serif;
       }
 
       section {
 	  scroll-margin-top: 80px; /* Adjust this value based on the actual height of your header */
 	  margin-top: 40px;
 	  margin-bottom: 40px;
+	  font-family: "Helvetica Neue", Helvetica, sans-serif;
       }
 
       section h2 {
-	  font-family: Arial, sans-serif;
+	  font-family: "Helvetica Neue", Helvetica, sans-serif;
       }
 
       h3 {
-	  font-family: Arial, sans-serif;
+	  font-family: "Helvetica Neue", Helvetica, sans-serif;
 	  font-size: x-large;
       }
 
@@ -77,6 +78,11 @@
 	  .image-container {
 		display: flex;
 		justify-content: center;
+		align-items: center;
+	  }
+	  .software-image-container {
+		display: flex;
+		justify-content: left;
 		align-items: center;
 	  }
       .grid-item {
@@ -130,7 +136,8 @@
 
 	  <h2>Welcome</h2>
 	  <p>
-	    Hello, I am a Postdoctoral Researcher in the School of Mathematics and Statistics at the University of Melbourne. I am interested in Mathematical Biology, to reseaerch problems within Tissue Dynamics and Dynamical systems.
+	    Hello, I am a Postdoctoral Researcher in the School of Mathematics and Statistics at the University of Melbourne. 
+		I am interested in Mathematical Biology, to research problems within Tissue Dynamics and Dynamical systems.
 	  </p>
 	  <p>
 	    If you're interested in my work please contact me at domenic (at) unimelb.edu.au
@@ -182,9 +189,14 @@
 	</section>
 	<section id="software">
 	  <h2>Software</h2>
-	  <ul>
-	    <li><a href="https://github.com/DGermano8/Hybrid_IDD">Jump-Switch-Flow</a></li>
-	  </ul>
+	  <div class="grid-item">
+		<p>  Jump-Switch-Flow </p>
+		<div class="software-image-container">
+				<a href="./JSF/index.html" target="_blank">
+					<img src="./JSF/_images/jsf-logo.png">
+				</a>
+			</div>
+		</div>
 	</section>
 	<!-- <section id="teaching">
 	  <h2>Teaching</h2>
@@ -200,8 +212,8 @@
 	<section id="engagment">
 		<h2>Engagment</h2>
 		<ul>
-		  <li> I was an organisers for a week long MATRIX Research Program, titled <a href="https://www.matrix-inst.org.au/events/mathematics-of-tissue-dynamics/">"Mathematics of Tissue Dynamics"</a> (2022). </li>
-		  <li> I was an organisers for a one-day conference, titled <a href="https://mathematical-biology.science.unimelb.edu.au/2022/08/04/frontiers-of-mathematical-biology-a-workshop-honouring-prof-edmund-crampin/">"Frontiers of Mathematical Biology: A workshop honouring Prof Edmund Crampin"</a> (2022). </li>
+		  <li> I was an organiser for a week long MATRIX Research Program, titled <a href="https://www.matrix-inst.org.au/events/mathematics-of-tissue-dynamics/">"Mathematics of Tissue Dynamics"</a> (2022). </li>
+		  <li> I was an organiser for a one-day conference, titled <a href="https://mathematical-biology.science.unimelb.edu.au/2022/08/04/frontiers-of-mathematical-biology-a-workshop-honouring-prof-edmund-crampin/">"Frontiers of Mathematical Biology: A workshop honouring Prof Edmund Crampin"</a> (2022). </li>
 		</ul>
 	</section>
       </main>
