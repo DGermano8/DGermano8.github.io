@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+#!/usr/bin/env bash
 
 # This script is used to fetch the latest version of the the documentation
 
