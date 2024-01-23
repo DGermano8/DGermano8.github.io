@@ -15,8 +15,10 @@
     <script src="static/underscore.js"></script>
     <script src="static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="jsf" href="jsf.html" />
    
   <link rel="stylesheet" href="static/custom.css" type="text/css" />
   
@@ -39,38 +41,87 @@
 <nav class="contents local" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#overview" id="id2">Overview</a></p></li>
-<li><p><a class="reference internal" href="#epidemic-simulation-example" id="id3">Epidemic simulation example</a></p>
-<ul>
-<li><p><a class="reference internal" href="#defining-the-sis-model" id="id4">Defining the SIS model</a></p></li>
-<li><p><a class="reference internal" href="#visualising-the-simulation" id="id5">Visualising the simulation</a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#installation" id="id6">Installation</a></p>
-<ul>
-<li><p><a class="reference internal" href="#from-local-copy" id="id7">From Local Copy</a></p></li>
-<li><p><a class="reference internal" href="#from-github" id="id8">From GitHub</a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#faqs" id="id9">FAQs</a></p></li>
-<li><p><a class="reference internal" href="#housekeeping" id="id10">Housekeeping</a></p>
-<ul>
-<li><p><a class="reference internal" href="#testing" id="id11">Testing</a></p></li>
-<li><p><a class="reference internal" href="#code-formating-and-checking" id="id12">Code formating and checking</a></p></li>
-<li><p><a class="reference internal" href="#building-the-documentation" id="id13">Building the documentation</a></p></li>
-</ul>
-</li>
+<li><p><a class="reference internal" href="#method" id="id3">Method</a></p></li>
+<li><p><a class="reference internal" href="#epidemic-simulation-example" id="id4">Epidemic simulation example</a></p></li>
+<li><p><a class="reference internal" href="#types" id="id5">Types</a></p></li>
+<li><p><a class="reference internal" href="#api" id="id6">API</a></p></li>
+<li><p><a class="reference internal" href="#installation" id="id7">Installation</a></p></li>
+<li><p><a class="reference internal" href="#faqs" id="id8">FAQs</a></p></li>
+<li><p><a class="reference internal" href="#housekeeping" id="id9">Housekeeping</a></p></li>
 </ul>
 </nav>
 <section id="overview">
 <h2><a class="toc-backref" href="#id2" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
 <p>This package provides an algorithm for sampling from the
 Jump-Switch-Flow (JSF) process. The JSF process is a continuous-time
-process that can be used so represent compartmental models where
+process that can be used to represent compartmental models where
 stochastic effects are important at low population sizes but can be
 ignored at high population sizes.</p>
 </section>
+<section id="method">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Method</a><a class="headerlink" href="#method" title="Permalink to this heading">¶</a></h2>
+<p>To couple both the stochastic (Jumping) and deterministic (Flowing)
+compartments, we model each compartment as to where they are in state space.</p>
+<p>Consider a compartmental model where <span class="math notranslate nohighlight">\(V_{i}(t)\)</span> represents the value
+of the <span class="math notranslate nohighlight">\(i\)</span> th compartment at time <span class="math notranslate nohighlight">\(t\)</span>. In a differential equation based
+model, the <span class="math notranslate nohighlight">\(V_{i}\)</span> could take values in <span class="math notranslate nohighlight">\(\mathbb{R}_{\geq 0}\)</span>, and
+in a CTMC model they might take values in <span class="math notranslate nohighlight">\(\mathbb{Z}_{\geq 0}\)</span>.</p>
+<p>To couple both the stochastic (Jumping) and deterministic (Flowing)
+compartments in Jump-Switch-Flow, we model each compartment as taking
+values in <span class="math notranslate nohighlight">\(\mathcal{V}_{\Omega} = \{0,1,\ldots,\Omega\} \cup (\Omega,\infty)\)</span>.
+The value <span class="math notranslate nohighlight">\(\Omega\)</span> is the value at which the system transitions from discrete
+to continuous dynamics. If a compartment <span class="math notranslate nohighlight">\(V_{i}\)</span> has a value in
+<span class="math notranslate nohighlight">\(\{0,1,\ldots,\Omega\}\)</span>, we describe that compartment as
+<cite>discrete</cite> (or <cite>Jumping</cite>), and if it has a value in
+<span class="math notranslate nohighlight">\((\Omega,\infty)\)</span>, we describe it as <cite>continuous</cite> (or
+<cite>Flowing</cite>).</p>
+<p>Changes to the <span class="math notranslate nohighlight">\(V_i\)</span> in these models are defined by a set of
+<cite>reactions</cite>. Each reaction consists of three things: the rate it
+occurs, the reactants consumed it, and the products generated. For a
+given reaction, we refer to the difference in the amount produced, and
+the mount consumed as the <cite>flow</cite>.</p>
+<p>The set <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> consists of the reactions which have at least
+one discrete reactant or product. We refer to the occurrence of these
+reactions as a <cite>jumps</cite> because they involve one of the discrete
+variables values changing discretely. The reactions not in
+<span class="math notranslate nohighlight">\(\mathcal{S}\)</span> are called <cite>flows`</cite> because they represent the
+continual change of value.</p>
+<p>Jump events occur following an inhomogeneous arrival process. Reaction
+<span class="math notranslate nohighlight">\(j\)</span> occurs at a rate <span class="math notranslate nohighlight">\(\lambda_{j}\)</span>, which may depend upon the
+values of all the reactants of that reaction. The net rate of
+reactions is <span class="math notranslate nohighlight">\(\sum_{j \in \mathcal{S}} \lambda_{j}\)</span>.
+For a detailed description of how to sample these reaction times, see the description
+of time-varying Poisson arrival processes by <a class="reference external" href="https://journals.sagepub.com/doi/10.1177/003754978404300406">Klein and Roberts</a>.</p>
+<p>For each possible reaction in the system, <span class="math notranslate nohighlight">\(k\)</span>, we include
+a new variable, <span class="math notranslate nohighlight">\(J_{k}(t)\)</span>, which counts down the time until that
+reaction will occur. At time <span class="math notranslate nohighlight">\(t_0\)</span> the value of <span class="math notranslate nohighlight">\(J_{k}(t_0)\)</span> is
+initialised with a uniform random variable,
+<span class="math notranslate nohighlight">\(u_{k}\sim\text{Uniform(0,1)}\)</span>. The remaining time until the
+reaction fires then decreases as described by the following equation:</p>
+<div class="math notranslate nohighlight">
+\[J_{k}(t)=u_{k} - \left( 1 - \exp\left\{- \int_{t_{0}}^{t} \lambda_{k} ds \right\} \right),\]</div>
+<p>where <span class="math notranslate nohighlight">\(\lambda_{k}\)</span> is the rate of the <span class="math notranslate nohighlight">\(k\)</span> th reaction type. Since
+the reaction rates are continuous, this is a strictly decreasing
+function of time. Once one of the <span class="math notranslate nohighlight">\(J_k\)</span> reaches zero, that reaction
+occurs and all of the <span class="math notranslate nohighlight">\(J_i\)</span> are rest. Note that the rate of
+reactions can change continuously through time. This is because the
+rate may depend on other variables that are governed by differential
+equations.</p>
+<p>Between jump events, the discrete variables remain constant and the
+change of continuous variables follows a system of differential
+equations: <span class="math notranslate nohighlight">\(dV_i/dt = \sum_{j\in \mathcal{S}^{c}} \lambda_j \Delta_{i,j}\)</span>,
+where <span class="math notranslate nohighlight">\(\Delta_{i,j}\)</span> is the change in the amount of
+variable <span class="math notranslate nohighlight">\(i\)</span> during a reaction <span class="math notranslate nohighlight">\(j\)</span>.</p>
+<p>The below figure shows how it is
+possible for a variable to <cite>switch</cite> between flowing and jumping
+regimes. When a flowing variable decreases to <span class="math notranslate nohighlight">\(\Omega\)</span>, it switches
+to jumping and we consider it a discrete variable. When a jumping
+variable jumps from <span class="math notranslate nohighlight">\(\Omega\)</span> to <span class="math notranslate nohighlight">\(\Omega+1\)</span> it switches to flowing
+and we consider it to be a continuous variable.</p>
+<a class="reference internal image-reference" href="images/compartment_switching_depiction.png"><img alt="SIS epidemic example" class="align-center" src="images/compartment_switching_depiction.png" style="width: 600px;" /></a>
+</section>
 <section id="epidemic-simulation-example">
-<h2><a class="toc-backref" href="#id3" role="doc-backlink">Epidemic simulation example</a><a class="headerlink" href="#epidemic-simulation-example" title="Permalink to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Epidemic simulation example</a><a class="headerlink" href="#epidemic-simulation-example" title="Permalink to this heading">¶</a></h2>
 <p>As a simple example, consider the SIS epidemic model. In this model,
 individuals are either susceptible (S) or infected (I). Susceptible
 individuals become infected at a rate proportional to the number of
@@ -87,7 +138,7 @@ visualise the results.</p>
 </pre></div>
 </div>
 <section id="defining-the-sis-model">
-<h3><a class="toc-backref" href="#id4" role="doc-backlink">Defining the SIS model</a><a class="headerlink" href="#defining-the-sis-model" title="Permalink to this heading">¶</a></h3>
+<h3>Defining the SIS model<a class="headerlink" href="#defining-the-sis-model" title="Permalink to this heading">¶</a></h3>
 <p>Next, we define the initial condition of the SIS model and the
 infection and recovery process. The SIS model has two compartments,
 so we define the initial condition as a list of length two. The
@@ -129,13 +180,14 @@ actually run the simulation.</p>
 <span class="n">my_opts</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;EnforceDo&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;dt&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span> <span class="s2">&quot;SwitchingThreshold&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">]}</span>
 </pre></div>
 </div>
-<p>Then we can call <cite>jsf.JumpSwitchFlowSimulator</cite> to simulate the process</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span> <span class="o">=</span> <span class="n">jsf</span><span class="o">.</span><span class="n">JumpSwitchFlowSimulator</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">rates</span><span class="p">,</span> <span class="n">stoich</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">my_opts</span><span class="p">)</span>
+<p>Then we can call <cite>jsf.jsf</cite> to simulate the process using the operator
+splitting method.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span> <span class="o">=</span> <span class="n">jsf</span><span class="o">.</span><span class="n">jsf</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">rates</span><span class="p">,</span> <span class="n">stoich</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">my_opts</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;operator-splitting&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
 <section id="visualising-the-simulation">
-<h3><a class="toc-backref" href="#id5" role="doc-backlink">Visualising the simulation</a><a class="headerlink" href="#visualising-the-simulation" title="Permalink to this heading">¶</a></h3>
+<h3>Visualising the simulation<a class="headerlink" href="#visualising-the-simulation" title="Permalink to this heading">¶</a></h3>
 <p>Finally, we can plot the results of the simulation. We’ll use a
 combination of <cite>pandas</cite> and <cite>plotnine</cite> to do this, but the output of
 <cite>jsf</cite> is a list of numbers so it should be easy to use whichever
@@ -163,18 +215,43 @@ point it follows the differential equations.</p>
 <a class="reference internal image-reference" href="images/sis_example.png"><img alt="SIS epidemic example" class="align-center" src="images/sis_example.png" style="width: 700px;" /></a>
 </section>
 </section>
+<section id="types">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Types</a><a class="headerlink" href="#types" title="Permalink to this heading">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">jsf.types</span></code> module provides some key types for this package.
+There is nothing fancy here; they are just used to make the type hints
+more informative and help to leverage <code class="docutils literal notranslate"><span class="pre">mypy</span></code>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CompartmentValue</span></code>: the value of a compartment, this is a <code class="docutils literal notranslate"><span class="pre">float</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SystemState</span></code>: the state of the system, this is a list of <code class="docutils literal notranslate"><span class="pre">CompartmentValue</span></code> s.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Time</span></code>: the time, this is a float.</p></li>
+</ul>
+<p>Recall you can use the following to type check the code:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mypy jsf tests
+</pre></div>
+</div>
+</section>
+<section id="api">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">API</a><a class="headerlink" href="#api" title="Permalink to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="jsf.html">jsf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exact.html">exact</a></li>
+</ul>
+</div>
+</section>
 <section id="installation">
-<h2><a class="toc-backref" href="#id6" role="doc-backlink">Installation</a><a class="headerlink" href="#installation" title="Permalink to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Installation</a><a class="headerlink" href="#installation" title="Permalink to this heading">¶</a></h2>
 <p id="id1">This package is not yet available on PyPI. You can install it from a <a class="reference internal" href="#local-copy-installation"><span class="std std-ref">local copy</span></a> or from <a class="reference internal" href="#github-installation"><span class="std std-ref">GitHub</span></a>.</p>
 <section id="from-local-copy">
-<span id="local-copy-installation"></span><h3><a class="toc-backref" href="#id7" role="doc-backlink">From Local Copy</a><a class="headerlink" href="#from-local-copy" title="Permalink to this heading">¶</a></h3>
+<span id="local-copy-installation"></span><h3>From Local Copy<a class="headerlink" href="#from-local-copy" title="Permalink to this heading">¶</a></h3>
 <p>If you have a local copy of the package, you can install it with pip.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install /path/to/package
 </pre></div>
 </div>
 </section>
 <section id="from-github">
-<span id="github-installation"></span><h3><a class="toc-backref" href="#id8" role="doc-backlink">From GitHub</a><a class="headerlink" href="#from-github" title="Permalink to this heading">¶</a></h3>
+<span id="github-installation"></span><h3>From GitHub<a class="headerlink" href="#from-github" title="Permalink to this heading">¶</a></h3>
 <p>This won’t work until the package has been made public. Once it has,
 you can install it with pip.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install git+https://github.com/DGermano8/jsf.git
@@ -183,15 +260,15 @@ you can install it with pip.</p>
 </section>
 </section>
 <section id="faqs">
-<h2><a class="toc-backref" href="#id9" role="doc-backlink">FAQs</a><a class="headerlink" href="#faqs" title="Permalink to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">FAQs</a><a class="headerlink" href="#faqs" title="Permalink to this heading">¶</a></h2>
 <p>If you have a question that is not answered by this documentation,
 please lodge an issue on the GitHub page for this package:
 <a class="reference external" href="https://github.com/DGermano8/jsf">https://github.com/DGermano8/jsf</a></p>
 </section>
 <section id="housekeeping">
-<h2><a class="toc-backref" href="#id10" role="doc-backlink">Housekeeping</a><a class="headerlink" href="#housekeeping" title="Permalink to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Housekeeping</a><a class="headerlink" href="#housekeeping" title="Permalink to this heading">¶</a></h2>
 <section id="testing">
-<h3><a class="toc-backref" href="#id11" role="doc-backlink">Testing</a><a class="headerlink" href="#testing" title="Permalink to this heading">¶</a></h3>
+<h3>Testing<a class="headerlink" href="#testing" title="Permalink to this heading">¶</a></h3>
 <p>There are some unit tests in the <code class="docutils literal notranslate"><span class="pre">tests</span></code> directory. You can run them
 with the following command.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python3 -m unittest discover -s tests
@@ -199,7 +276,7 @@ with the following command.</p>
 </div>
 </section>
 <section id="code-formating-and-checking">
-<h3><a class="toc-backref" href="#id12" role="doc-backlink">Code formating and checking</a><a class="headerlink" href="#code-formating-and-checking" title="Permalink to this heading">¶</a></h3>
+<h3>Code formating and checking<a class="headerlink" href="#code-formating-and-checking" title="Permalink to this heading">¶</a></h3>
 <p>This package uses <code class="docutils literal notranslate"><span class="pre">black</span></code> and <code class="docutils literal notranslate"><span class="pre">mypy</span></code> for code formatting and type
 checking, respectively. You can run them with the following commands.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>black jsf
@@ -208,7 +285,7 @@ mypy jsf
 </div>
 </section>
 <section id="building-the-documentation">
-<h3><a class="toc-backref" href="#id13" role="doc-backlink">Building the documentation</a><a class="headerlink" href="#building-the-documentation" title="Permalink to this heading">¶</a></h3>
+<h3>Building the documentation<a class="headerlink" href="#building-the-documentation" title="Permalink to this heading">¶</a></h3>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>make html
 cp build/html &lt;my/website&gt;
 </pre></div>
@@ -234,11 +311,17 @@ cp build/html &lt;my/website&gt;
 
 
 <h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="jsf.html">jsf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exact.html">exact</a></li>
+</ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="jsf.html" title="next chapter">jsf</a></li>
   </ul></li>
 </ul>
 </div>
