@@ -196,7 +196,7 @@ initial condition as a list of length two:
 
 .. code-block:: python
 
-   x0 = [10, 50]
+   x0 = [50, 10]
 
 
 This initalises the model with 50 prey and 10 predators.
@@ -207,35 +207,35 @@ the death rate of the predators, ``mC``:
 .. code-block:: python
 
    mA = 2.00
-   mB = 1.50
-   mC = 0.05
+   mB = 0.05
+   mC = 1.50
 
 
 We then define the Rates if the model:
 
 .. code-block:: python
 
-   rates = lambda x, t: [mA * x[0],
-                         mB * x[1],
-                         mC * x[0] * x[1]]
+   rates = lambda x, _: [mA * x[0],
+                         mC * x[1],
+                         mB * x[0] * x[1]]
 
 and the stoichiometric matrices of the model:
 
 .. code-block:: python
 
    reactant_matrix = [[1 , 0],
-                     [0 , 1],
-                     [1 , 1]]
+                      [0 , 1],
+                      [1 , 1]]
 
-   product_matrix = [[0 , 0],
-                     [0 , 2],
-                     [2 , 0]]
+   product_matrix = [[2 , 0],
+                     [0 , 0],
+                     [0 , 2]]
 
 We define the maximum time of the simulation:
 
 .. code-block:: python
 
-   t_max = 9.2
+   t_max = 10
 
 There is a little bit of configuration needed to tell JSF how to
 actually run the simulation. Namely, we use the stoichiometric matrices to define the stoichiometry

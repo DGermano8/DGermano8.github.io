@@ -184,35 +184,35 @@ as shown in the figure below.</p>
 <p>Next, we define the initial condition of the predator-prey model and the
 model parameters. The predator-prey model has two compartments, so we define the
 initial condition as a list of length two:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x0</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x0</span> <span class="o">=</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>This initalises the model with 50 prey and 10 predators.</p>
 <p>Next, the model parameters are the reproduction rate of the prey, <code class="docutils literal notranslate"><span class="pre">mA</span></code>, the predation rate, <code class="docutils literal notranslate"><span class="pre">mB</span></code>,
 the death rate of the predators, <code class="docutils literal notranslate"><span class="pre">mC</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mA</span> <span class="o">=</span> <span class="mf">2.00</span>
-<span class="n">mB</span> <span class="o">=</span> <span class="mf">1.50</span>
-<span class="n">mC</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">mB</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">mC</span> <span class="o">=</span> <span class="mf">1.50</span>
 </pre></div>
 </div>
 <p>We then define the Rates if the model:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rates</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="p">[</span><span class="n">mA</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                      <span class="n">mB</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-                      <span class="n">mC</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rates</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="p">[</span><span class="n">mA</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                      <span class="n">mC</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                      <span class="n">mB</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
 </pre></div>
 </div>
 <p>and the stoichiometric matrices of the model:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">reactant_matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span> <span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-                  <span class="p">[</span><span class="mi">0</span> <span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-                  <span class="p">[</span><span class="mi">1</span> <span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+                   <span class="p">[</span><span class="mi">0</span> <span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                   <span class="p">[</span><span class="mi">1</span> <span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
 
-<span class="n">product_matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-                  <span class="p">[</span><span class="mi">0</span> <span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
-                  <span class="p">[</span><span class="mi">2</span> <span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+<span class="n">product_matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">2</span> <span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">0</span> <span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">0</span> <span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
 </pre></div>
 </div>
 <p>We define the maximum time of the simulation:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t_max</span> <span class="o">=</span> <span class="mf">9.2</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t_max</span> <span class="o">=</span> <span class="mi">10</span>
 </pre></div>
 </div>
 <p>There is a little bit of configuration needed to tell JSF how to
