@@ -102,7 +102,7 @@ any moment into the upper-triangular block form
 where :math:`\eta_{\mathcal{S}'} \in \mathbb{Z}^{q\times p}`, :math:`\eta_{\mathcal{S}} \in \mathbb{Z}^{(n-q)\times (m-p)}`
 and :math:`\bar{\eta}_{\mathcal{S}} \in \mathbb{Z}^{q\times (m-p)}` refer to stoichiometric coefficients for changes in flowing 
 compartments under flows, jumping compartments under jumps, and flowing compartments under jumps, respectively. Written 
-as a system of equations analogous to (\ref{ODEmodels}), the hybrid JSF model we propose formally takes the following form. 
+as a system of equations analogous to the above ODE equation, the hybrid JSF model we propose formally takes the following form. 
 For any time interval :math:`t_0<t<t_1` between switching events, 
 
 .. math::
