@@ -1,20 +1,17 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Welcome to the Jump-Switch-Flow Documentation! &#8212; Jump-Switch-Flow  documentation</title>
-    <link rel="stylesheet" type="text/css" href="static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="static/alabaster.css" />
-    <link rel="stylesheet" type="text/css" href="static/custom.css" />
-    <script data-url_root="./" id="documentation_options" src="static/documentation_options.js"></script>
-    <script src="static/jquery.js"></script>
-    <script src="static/underscore.js"></script>
-    <script src="static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="static/doctools.js"></script>
+    <title>Jump-Switch-Flow Documentation &#8212; Jump-Switch-Flow  documentation</title>
+    <link rel="stylesheet" type="text/css" href="static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="static/alabaster.css?v=12dfc556" />
+    <link rel="stylesheet" type="text/css" href="static/custom.css?v=fe58cb32" />
+    <script src="static/documentation_options.js?v=5929fcd5"></script>
+    <script src="static/doctools.js?v=9a2dae69"></script>
+    <script src="static/sphinx_highlight.js?v=dc90522c"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -22,8 +19,9 @@
    
   <link rel="stylesheet" href="static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -35,188 +33,237 @@
 
           <div class="body" role="main">
             
-  <section id="welcome-to-the-jump-switch-flow-documentation">
-<h1>Welcome to the Jump-Switch-Flow Documentation!<a class="headerlink" href="#welcome-to-the-jump-switch-flow-documentation" title="Permalink to this heading">¶</a></h1>
-<a class="reference internal image-reference" href="images/jsf-logo.png"><img alt="_images/jsf-logo.png" class="align-center" src="images/jsf-logo.png" style="width: 400px;" /></a>
+  <section id="jump-switch-flow-documentation">
+<h1>Jump-Switch-Flow Documentation<a class="headerlink" href="#jump-switch-flow-documentation" title="Link to this heading">¶</a></h1>
+<a class="reference internal image-reference" href="images/jsf-logo.png"><img alt="_images/jsf-logo.png" class="align-center" src="images/jsf-logo.png" style="width: 400px;" />
+</a>
 <nav class="contents local" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#overview" id="id2">Overview</a></p></li>
-<li><p><a class="reference internal" href="#method" id="id3">Method</a></p></li>
-<li><p><a class="reference internal" href="#epidemic-simulation-example" id="id4">Epidemic simulation example</a></p></li>
-<li><p><a class="reference internal" href="#types" id="id5">Types</a></p></li>
-<li><p><a class="reference internal" href="#api" id="id6">API</a></p></li>
-<li><p><a class="reference internal" href="#installation" id="id7">Installation</a></p></li>
-<li><p><a class="reference internal" href="#faqs" id="id8">FAQs</a></p></li>
-<li><p><a class="reference internal" href="#housekeeping" id="id9">Housekeeping</a></p></li>
+<li><p><a class="reference internal" href="#jsf-mathematical-framework" id="id3">JSF Mathematical Framework</a></p></li>
+<li><p><a class="reference internal" href="#lotka-volterra-predator-prey-model-example" id="id4">Lotka-Volterra predator-prey model example</a></p></li>
+<li><p><a class="reference internal" href="#predator-prey-model-with-jsf-example" id="id5">Predator-prey model with JSF example</a></p></li>
+<li><p><a class="reference internal" href="#types" id="id6">Types</a></p></li>
+<li><p><a class="reference internal" href="#api" id="id7">API</a></p></li>
+<li><p><a class="reference internal" href="#installation" id="id8">Installation</a></p></li>
+<li><p><a class="reference internal" href="#faqs" id="id9">FAQs</a></p></li>
+<li><p><a class="reference internal" href="#housekeeping" id="id10">Housekeeping</a></p></li>
 </ul>
 </nav>
 <section id="overview">
-<h2><a class="toc-backref" href="#id2" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
 <p>This package provides an algorithm for sampling from the
 Jump-Switch-Flow (JSF) process. The JSF process is a continuous-time
 process that can be used to represent compartmental models where
 stochastic effects are important at low population sizes but can be
 ignored at high population sizes.</p>
 </section>
-<section id="method">
-<h2><a class="toc-backref" href="#id3" role="doc-backlink">Method</a><a class="headerlink" href="#method" title="Permalink to this heading">¶</a></h2>
+<section id="jsf-mathematical-framework">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">JSF Mathematical Framework</a><a class="headerlink" href="#jsf-mathematical-framework" title="Link to this heading">¶</a></h2>
 <p>To couple both the stochastic (Jumping) and deterministic (Flowing)
 compartments, we model each compartment as to where they are in state space.</p>
-<p>Consider a compartmental model where <span class="math notranslate nohighlight">\(V_{i}(t)\)</span> represents the value
-of the <span class="math notranslate nohighlight">\(i\)</span> th compartment at time <span class="math notranslate nohighlight">\(t\)</span>. In a differential equation based
-model, the <span class="math notranslate nohighlight">\(V_{i}\)</span> could take values in <span class="math notranslate nohighlight">\(\mathbb{R}_{\geq 0}\)</span>, and
-in a CTMC model they might take values in <span class="math notranslate nohighlight">\(\mathbb{Z}_{\geq 0}\)</span>.</p>
-<p>To couple both the stochastic (Jumping) and deterministic (Flowing)
-compartments in Jump-Switch-Flow, we model each compartment as taking
-values in <span class="math notranslate nohighlight">\(\mathcal{V}_{\Omega} = \{0,1,\ldots,\Omega\} \cup (\Omega,\infty)\)</span>.
-The value <span class="math notranslate nohighlight">\(\Omega\)</span> is the value at which the system transitions from discrete
-to continuous dynamics. If a compartment <span class="math notranslate nohighlight">\(V_{i}\)</span> has a value in
-<span class="math notranslate nohighlight">\(\{0,1,\ldots,\Omega\}\)</span>, we describe that compartment as
-<cite>discrete</cite> (or <cite>Jumping</cite>), and if it has a value in
-<span class="math notranslate nohighlight">\((\Omega,\infty)\)</span>, we describe it as <cite>continuous</cite> (or
-<cite>Flowing</cite>).</p>
-<p>Changes to the <span class="math notranslate nohighlight">\(V_i\)</span> in these models are defined by a set of
-<cite>reactions</cite>. Each reaction consists of three things: the rate it
-occurs, the reactants consumed it, and the products generated. For a
-given reaction, we refer to the difference in the amount produced, and
-the mount consumed as the <cite>flow</cite>.</p>
-<p>The set <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> consists of the reactions which have at least
-one discrete reactant or product. We refer to the occurrence of these
-reactions as a <cite>jumps</cite> because they involve one of the discrete
-variables values changing discretely. The reactions not in
-<span class="math notranslate nohighlight">\(\mathcal{S}\)</span> are called <cite>flows`</cite> because they represent the
-continual change of value.</p>
-<p>Jump events occur following an inhomogeneous arrival process. Reaction
-<span class="math notranslate nohighlight">\(j\)</span> occurs at a rate <span class="math notranslate nohighlight">\(\lambda_{j}\)</span>, which may depend upon the
-values of all the reactants of that reaction. The net rate of
-reactions is <span class="math notranslate nohighlight">\(\sum_{j \in \mathcal{S}} \lambda_{j}\)</span>.
-For a detailed description of how to sample these reaction times, see the description
-of time-varying Poisson arrival processes by <a class="reference external" href="https://journals.sagepub.com/doi/10.1177/003754978404300406">Klein and Roberts</a>.</p>
-<p>For each possible reaction in the system, <span class="math notranslate nohighlight">\(k\)</span>, we include
-a new variable, <span class="math notranslate nohighlight">\(J_{k}(t)\)</span>, which counts down the time until that
-reaction will occur. At time <span class="math notranslate nohighlight">\(t_0\)</span> the value of <span class="math notranslate nohighlight">\(J_{k}(t_0)\)</span> is
-initialised with a uniform random variable,
-<span class="math notranslate nohighlight">\(u_{k}\sim\text{Uniform(0,1)}\)</span>. The remaining time until the
-reaction fires then decreases as described by the following equation:</p>
+<p>Consider a compartmental model with <span class="math notranslate nohighlight">\(n\)</span> compartments <span class="math notranslate nohighlight">\(\vec{V} = \left\{ V_i\right\}_{i=1}^n\)</span>,
+where <span class="math notranslate nohighlight">\(V_{i}(t)\)</span> represents the value of the <span class="math notranslate nohighlight">\(i\)</span> th compartment at time <span class="math notranslate nohighlight">\(t\)</span>.
+For example, <span class="math notranslate nohighlight">\(V_i\)</span> could be the number of people infected with a pathogen, or the copy
+number of a molecule in a cell. The state variables <span class="math notranslate nohighlight">\(V_i\)</span> may take values from different
+domains depending upon the resolution needed for the model. For example, in an ODE, <span class="math notranslate nohighlight">\(\vec{V}\)</span>
+will have real values and in a CTMC <span class="math notranslate nohighlight">\(\vec{V}\)</span>  might have integer values.</p>
+<p>Typically, discrete values are used to represent small populations, while larger populations
+will be represented with a continuum. To accommodate both scales, we model the domain of <span class="math notranslate nohighlight">\(V_{i}\)</span>
+as <span class="math notranslate nohighlight">\(\mathcal{V}_{\Omega_i}=\{0,1,\ldots,\Omega_{i}\}\cup(\Omega_{i},\infty)\)</span>. The switching
+threshold parameter, <span class="math notranslate nohighlight">\(\Omega_i\in \mathbb{Z}_{\geq 0}\)</span>, is where the <span class="math notranslate nohighlight">\(i\)</span> th compartment
+transitions from discrete to continuous dynamics. If a compartment <span class="math notranslate nohighlight">\(V_{i}\)</span> has a value in
+<span class="math notranslate nohighlight">\(\{0,1,\ldots,\Omega_{i}\}\)</span>, we call it “discrete” (or “jumping”), and if it has a value in
+<span class="math notranslate nohighlight">\((\Omega_{i},\infty)\)</span>, we call it “continuous” (or “flowing”). While the switching threshold
+can be compartment specific, for ease of exposition, we will only consider a single threshold shared
+between all compartments <span class="math notranslate nohighlight">\(\Omega = \Omega_i\)</span>. At any moment in time let us assume <span class="math notranslate nohighlight">\(q\)</span> of the
+<span class="math notranslate nohighlight">\(n\)</span> compartments are flowing. We use the notation <span class="math notranslate nohighlight">\(\vec{V}_F = \left\{ V_i: V_i&gt;\Omega \right\} \in (\Omega,\infty)^q\)</span>
+and <span class="math notranslate nohighlight">\(\vec{V}_J = \left\{ V_i: V_i\leq \Omega \right\} \in \left\{0, 1, \ldots, \Omega \right\}^{(n-q)}\)</span>
+to represent the compartments in each of the flowing and jumping states, respectively.</p>
+<p>The dynamics of each compartment <span class="math notranslate nohighlight">\(V_i\)</span> are described by a set of <span class="math notranslate nohighlight">\(m\)</span> “reactions”
+<span class="math notranslate nohighlight">\(\mathcal{R} = \left\{\mathcal{R}_k \right\}_{k=1}^m\)</span>. Each reaction <span class="math notranslate nohighlight">\(\mathcal{R}_k\)</span>
+is defined by two properties: the rate (per unit time) at which it occurs, <span class="math notranslate nohighlight">\(\lambda_{k}\)</span>, which may be
+(and usually is) a function of the state <span class="math notranslate nohighlight">\(\vec{V}\)</span>; and the effect on the state, i.e. the change <span class="math notranslate nohighlight">\(\eta_{ik}\)</span>
+to the size of compartment <span class="math notranslate nohighlight">\(V_i\)</span> when reaction <span class="math notranslate nohighlight">\(\mathcal{R}_k\)</span> occurs. As a matrix,
+<span class="math notranslate nohighlight">\(\eta\in \mathbb{Z}^{n,m}\)</span> is referred to as the “stoichiometric matrix”. For ODE models, these
+reactions occur continuously and are written in the form</p>
 <div class="math notranslate nohighlight">
-\[J_{k}(t)=u_{k} - \left( 1 - \exp\left\{- \int_{t_{0}}^{t} \lambda_{k} ds \right\} \right),\]</div>
-<p>where <span class="math notranslate nohighlight">\(\lambda_{k}\)</span> is the rate of the <span class="math notranslate nohighlight">\(k\)</span> th reaction type. Since
-the reaction rates are continuous, this is a strictly decreasing
-function of time. Once one of the <span class="math notranslate nohighlight">\(J_k\)</span> reaches zero, that reaction
-occurs and all of the <span class="math notranslate nohighlight">\(J_i\)</span> are rest. Note that the rate of
-reactions can change continuously through time. This is because the
-rate may depend on other variables that are governed by differential
-equations.</p>
-<p>Between jump events, the discrete variables remain constant and the
-change of continuous variables follows a system of differential
-equations: <span class="math notranslate nohighlight">\(dV_i/dt = \sum_{j\in \mathcal{S}^{c}} \lambda_j \Delta_{i,j}\)</span>,
-where <span class="math notranslate nohighlight">\(\Delta_{i,j}\)</span> is the change in the amount of
-variable <span class="math notranslate nohighlight">\(i\)</span> during a reaction <span class="math notranslate nohighlight">\(j\)</span>.</p>
+\[\frac{\mathrm{d}\vec{V}}{\mathrm{d}t} = \eta \vec{\lambda}(\vec{V}),\]</div>
+<p>while for CTMC models, reactions in the system <span class="math notranslate nohighlight">\(\mathcal{R}\)</span> occur as discrete events.
+In the later case, each reaction <span class="math notranslate nohighlight">\(\mathcal{R}_k\)</span> has a separate propensity described by
+<span class="math notranslate nohighlight">\(\lambda_k(\vec{V})\)</span>, this propensity remains constant between events but when an event
+<span class="math notranslate nohighlight">\(\mathcal{R}_k\)</span> occurs, there is a change in <span class="math notranslate nohighlight">\(\vec{V}\)</span> (as specified by the elements of
+<span class="math notranslate nohighlight">\(\eta_{\cdot k}\)</span>) and therefore in <span class="math notranslate nohighlight">\(\vec{\lambda}(\vec{V})\)</span>.</p>
+<p>We define the subset of reactions <span class="math notranslate nohighlight">\(\mathcal{S}\subseteq \mathcal{R}\)</span> to contain those treated
+as stochastic events. We define <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>, which we use throughout this manuscript, captures
+a larger set of reactions; <span class="math notranslate nohighlight">\(\mathcal{S} = \left\{\mathcal{R}_k:\exists i \text{ s.t. } V_i\in\vec{V}_J \text{ and }  \left(\eta_{ik}\neq 0 \text{ or } \partial_{V_i}\lambda_k \neq 0\right)   \right\}\)</span>.
+In this definition, a reaction is included in <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> if either (1) it causes a change in
+jumping (discrete) populations textit{or} (2) it is influenced by a discrete population (perhaps as reactants for example).</p>
+<p>Reactions in <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> are simulated using stochastically sampled times similar to CTMC models.
+It is important to note that, unlike time homogeneous CTMC models, the propensities are not constant
+because the state <span class="math notranslate nohighlight">\(\vec{V}\)</span> (and therefore <span class="math notranslate nohighlight">\(\vec{\lambda}\)</span>) are continuously varying.
+When any reaction <span class="math notranslate nohighlight">\(\mathcal{R}_k\in\mathcal{S}\)</span> occurs, we say the system has “jumped” and an
+instantaneous change of <span class="math notranslate nohighlight">\(\eta_{ik}\)</span> for each compartment <span class="math notranslate nohighlight">\(V_i\)</span> occurs (irrespective of whether
+<span class="math notranslate nohighlight">\(V_i\in\vec{V}_J\)</span> or <span class="math notranslate nohighlight">\(V_i\in\vec{V}_F\)</span> to ensure mass conservation is observed). We will refer
+therefore to reactions in <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> as “jumps”. The reactions in <span class="math notranslate nohighlight">\(\mathcal{S}'=\mathcal{R}\setminus \mathcal{S}\)</span>
+are not stochastic, we call these “flows” because they represent the continual change of value of the
+relevant compartments, all of which are continuous by definition of <span class="math notranslate nohighlight">\(\mathcal{S}'\)</span>.
+At any moment in time, we denote <span class="math notranslate nohighlight">\(|\mathcal{S}'| = p = m - |\mathcal{S}|\)</span> to be the number of reactions
+which are flowing.</p>
+<p>Finally, the hybrid model that we propose is capable of “switching”. Switch events are defined as a
+compartment between <span class="math notranslate nohighlight">\(\vec{V}_F\)</span> and <span class="math notranslate nohighlight">\(\vec{V}_J\)</span>. These events occur when a compartment’s
+value crosses the switching threshold <span class="math notranslate nohighlight">\(\Omega\)</span>. Importantly, switch events can change
+<span class="math notranslate nohighlight">\(\mathcal{S}\)</span> and are paradigm defining events which should occur infrequently compared to
+jumps (frequent) and flows (continuous).</p>
+<p>Due to the way that <span class="math notranslate nohighlight">\(\mathcal{R}\)</span> is partitioned, it is possible to order the rows and columns of <span class="math notranslate nohighlight">\(\eta\)</span> at
+any moment into the upper-triangular block form</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\eta = \left(\begin{array}{c|c}
+\eta_{\mathcal{S}'} &amp; \bar{\eta}_{\mathcal{S}} \\ \hline
+0 &amp; \eta_{\mathcal{S}} \end{array}\right),\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\eta_{\mathcal{S}'} \in \mathbb{Z}^{q\times p}\)</span>, <span class="math notranslate nohighlight">\(\eta_{\mathcal{S}} \in \mathbb{Z}^{(n-q)\times (m-p)}\)</span>
+and <span class="math notranslate nohighlight">\(\bar{\eta}_{\mathcal{S}} \in \mathbb{Z}^{q\times (m-p)}\)</span> refer to stoichiometric coefficients for changes in flowing
+compartments under flows, jumping compartments under jumps, and flowing compartments under jumps, respectively. Written
+as a system of equations analogous to (ref{ODEmodels}), the hybrid JSF model we propose formally takes the following form.
+For any time interval <span class="math notranslate nohighlight">\(t_0&lt;t&lt;t_1\)</span> between switching events,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\frac{\mathrm{d} \vec{V}_F}{\mathrm{d} t} &amp;= \eta_{\mathcal{S}'} \vec{\lambda}_{\mathcal{S}'}(\vec{V}) + \bar{\eta}_{\mathcal{S}} \vec{\Lambda}_{\mathcal{S}}(\vec{V}),\\
+\vec{V}_J(t) &amp;= \vec{V}_J(t_0) + \eta_{\mathcal{S}} \int_{t_0}^t  \vec{\Lambda}_{\mathcal{S}}(\vec{V}) \ \mathrm{d} s,\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\vec{\lambda}_{\mathcal{S}'}\in\mathbb{R}^p\)</span> are the reaction rates of flows and <span class="math notranslate nohighlight">\(\vec{\Lambda}_{\mathcal{S}}\)</span>
+is a stochastic vector of <span class="math notranslate nohighlight">\(m-p\)</span> delta-function spike trains that are derived from the realisations of <span class="math notranslate nohighlight">\(m-p\)</span>
+different jumps sampled at rates which are dependent on the dynamic changes in the propensities <span class="math notranslate nohighlight">\(\vec{\lambda}_{\mathcal{S}}\in\mathbb{R}^{m-p}\)</span> for these jumps.</p>
 <p>The below figure shows how it is
 possible for a variable to <cite>switch</cite> between flowing and jumping
 regimes. When a flowing variable decreases to <span class="math notranslate nohighlight">\(\Omega\)</span>, it switches
 to jumping and we consider it a discrete variable. When a jumping
 variable jumps from <span class="math notranslate nohighlight">\(\Omega\)</span> to <span class="math notranslate nohighlight">\(\Omega+1\)</span> it switches to flowing
 and we consider it to be a continuous variable.</p>
-<a class="reference internal image-reference" href="images/compartment_switching_depiction.png"><img alt="SIS epidemic example" class="align-center" src="images/compartment_switching_depiction.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="images/compartment_switching_depiction.png"><img alt="compartment_switching_depiction" class="align-center" src="images/compartment_switching_depiction.png" style="width: 500px;" />
+</a>
 </section>
-<section id="epidemic-simulation-example">
-<h2><a class="toc-backref" href="#id4" role="doc-backlink">Epidemic simulation example</a><a class="headerlink" href="#epidemic-simulation-example" title="Permalink to this heading">¶</a></h2>
-<p>As a simple example, consider the SIS epidemic model. In this model,
-individuals are either susceptible (S) or infected (I). Susceptible
-individuals become infected at a rate proportional to the number of
-infected individuals, and infected individuals recover at a constant
-rate.</p>
-<p>We can simulate this model using the JSF process. The only package
-that is needed is <cite>jsf</cite>, but we will import a few others to help us
-visualise the results.</p>
+<section id="lotka-volterra-predator-prey-model-example">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Lotka-Volterra predator-prey model example</a><a class="headerlink" href="#lotka-volterra-predator-prey-model-example" title="Link to this heading">¶</a></h2>
+<p>As a simple example for how JSF can be used to capture both stochastic and deterministic
+dynamics, we consider the classic Lotka-Volterra preditor-prey model.
+In this model, individuals are either prey (<span class="math notranslate nohighlight">\(V_1\)</span>) or predator (<span class="math notranslate nohighlight">\(V_2\)</span>).
+This model is famous for being susceptible to Atto-fox problem, where the deterministic description
+of the model allows for states to become infeasibly small, where the compartment would have otherwise had gone
+extinct. However, we will see that the JSF process can capture the stochastic effects of the model and permit
+the system to exhibit both the typical coexistence of the two species and the extinction of one of the species.</p>
+<p>The model is described as the following way: the prey reproduce at a constant rate and are eaten by predator at a rate proportional
+to the number of predator. The predator die at a constant rate and are reproduced at
+a rate proportional to the number of prey they eat. Mathematically, the model is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\frac{\mathrm{d} V_1}{\mathrm{d} t} &amp;= \alpha V_1 - \beta V_1 V_2,\\
+\frac{\mathrm{d} V_2}{\mathrm{d} t} &amp;=  \beta V_1 V_2 - \gamma V_2.\end{split}\]</div>
+<p>The compartment model diagram for this preditor-prey model is shown below.</p>
+<a class="reference internal image-reference" href="images/preditorPreyModel.png"><img alt="preditorPreyModel" class="align-center" src="images/preditorPreyModel.png" style="width: 400px;" />
+</a>
+<p>Written as a JSF model, the stoichiometric matrices for the predator-prey model is given by:</p>
+<a class="reference internal image-reference" href="images/JSF_PredPrey.png"><img alt="JSF_PredPrey" class="align-center" src="images/JSF_PredPrey.png" style="width: 500px;" />
+</a>
+<p>We can simulate this model using the JSF process. In doing so, we can see how the model behaves
+as both a stochastic and deterministic process to obtain both the limit cycle and absorbing state behaviour,
+as shown in the figure below.</p>
+<a class="reference internal image-reference" href="images/PP_Behaviour.png"><img alt="PP_Behaviour" class="align-center" src="images/PP_Behaviour.png" style="width: 600px;" />
+</a>
+</section>
+<section id="predator-prey-model-with-jsf-example">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Predator-prey model with JSF example</a><a class="headerlink" href="#predator-prey-model-with-jsf-example" title="Link to this heading">¶</a></h2>
+<p>To simulate the Lotka-Volterra predator-prey model using the JSF process, we first need to import the necessary packages.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">plotnine</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">jsf</span>
-<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 </pre></div>
 </div>
-<section id="defining-the-sis-model">
-<h3>Defining the SIS model<a class="headerlink" href="#defining-the-sis-model" title="Permalink to this heading">¶</a></h3>
-<p>Next, we define the initial condition of the SIS model and the
-infection and recovery process. The SIS model has two compartments,
-so we define the initial condition as a list of length two. The
-infection and recovery process is defined by a function that takes
-the current state of the system and the current time and returns a
-list of length two containing the rates of infection and recovery.</p>
-<p>The reactant and product matrices are used to define the stoichiometry
-of the process. The reactant matrix defines the change in the number
-of individuals in each compartment when a reaction occurs, and the
-product matrix defines the change in the number of individuals in each
-compartment after a reaction occurs. For the SIS model, the reactant
-matrix is <code class="docutils literal notranslate"><span class="pre">[[1,</span> <span class="pre">1],</span> <span class="pre">[0,</span> <span class="pre">1]]</span></code> and the product matrix is
-<code class="docutils literal notranslate"><span class="pre">[[0,</span> <span class="pre">2],</span> <span class="pre">[1,</span> <span class="pre">0]]</span></code>. This means that when an infection occurs, the
-number of susceptible individuals decreases by one and the number of
-infected individuals increases by one. When a recovery occurs, the
-number of infected individuals decreases by one and the number of
-susceptible individuals increases by one.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x0</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1000</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-<span class="n">rates</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="p">[</span><span class="mf">2e-3</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
-<span class="n">reactant_matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
-<span class="n">product_matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">pandas</span></code> is used to store the simulation results, <code class="docutils literal notranslate"><span class="pre">random</span></code> is used to set the seed for reproducibility,
+<code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> is used to plot the results, and <code class="docutils literal notranslate"><span class="pre">jsf</span></code> is the package we are using to simulate the process.</p>
+<p>Next, we define the initial condition of the predator-prey model and the
+model parameters. The predator-prey model has two compartments, so we define the
+initial condition as a list of length two:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x0</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>Finally, we define the maximum time of the simulation.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t_max</span> <span class="o">=</span> <span class="mf">10.0</span>
+<p>This initalises the model with 50 prey and 10 predators.</p>
+<p>Next, the model parameters are the reproduction rate of the prey, <code class="docutils literal notranslate"><span class="pre">mA</span></code>, the predation rate, <code class="docutils literal notranslate"><span class="pre">mB</span></code>,
+the death rate of the predators, <code class="docutils literal notranslate"><span class="pre">mC</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mA</span> <span class="o">=</span> <span class="mf">2.00</span>
+<span class="n">mB</span> <span class="o">=</span> <span class="mf">1.50</span>
+<span class="n">mC</span> <span class="o">=</span> <span class="mf">0.05</span>
+</pre></div>
+</div>
+<p>We then define the Rates if the model:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rates</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="p">[</span><span class="n">mA</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                      <span class="n">mB</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                      <span class="n">mC</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>and the stoichiometric matrices of the model:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">reactant_matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span> <span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">0</span> <span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">1</span> <span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+
+<span class="n">product_matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">0</span> <span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">2</span> <span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>We define the maximum time of the simulation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t_max</span> <span class="o">=</span> <span class="mf">9.2</span>
 </pre></div>
 </div>
 <p>There is a little bit of configuration needed to tell JSF how to
-actually run the simulation.</p>
+actually run the simulation. Namely, we use the stoichiometric matrices to define the stoichiometry
+of the process. <code class="docutils literal notranslate"><span class="pre">DoDisc</span></code> is a boolean list, and describes which compartments are initially represented
+as a stochastic processes.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stoich</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;nu&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">[</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">)]</span>
-        <span class="k">for</span> <span class="n">r1</span><span class="p">,</span> <span class="n">r2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">product_matrix</span><span class="p">,</span> <span class="n">reactant_matrix</span><span class="p">)</span>
-    <span class="p">],</span>
-    <span class="s2">&quot;DoDisc&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-    <span class="s2">&quot;nuReactant&quot;</span><span class="p">:</span> <span class="n">reactant_matrix</span><span class="p">,</span>
-    <span class="s2">&quot;nuProduct&quot;</span><span class="p">:</span> <span class="n">product_matrix</span><span class="p">,</span>
-<span class="p">}</span>
-<span class="n">my_opts</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;EnforceDo&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;dt&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span> <span class="s2">&quot;SwitchingThreshold&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">]}</span>
+         <span class="s2">&quot;nu&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="p">[</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">)]</span>
+                <span class="k">for</span> <span class="n">r1</span><span class="p">,</span> <span class="n">r2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">product_matrix</span><span class="p">,</span> <span class="n">reactant_matrix</span><span class="p">)</span> <span class="p">],</span>
+         <span class="s2">&quot;DoDisc&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+         <span class="s2">&quot;nuReactant&quot;</span><span class="p">:</span> <span class="n">reactant_matrix</span><span class="p">,</span>
+         <span class="s2">&quot;nuProduct&quot;</span><span class="p">:</span> <span class="n">product_matrix</span><span class="p">,</span>
+         <span class="p">}</span>
 </pre></div>
 </div>
-<p>Then we can call <cite>jsf.jsf</cite> to simulate the process using the operator
-splitting method.</p>
+<p>Now all we need to set are the options for the simulation. We set the time step, <code class="docutils literal notranslate"><span class="pre">dt</span></code> to be 0.01 and the
+threshold for switching, <code class="docutils literal notranslate"><span class="pre">SwitchingThreshold</span></code>,  to be 30 for both compartments. <code class="docutils literal notranslate"><span class="pre">EnforceDo</span></code> is a boolean list and describes which
+compartments are permitted to dynamically change between discrete and continuous regimes. If an entry of <code class="docutils literal notranslate"><span class="pre">EnforceDo</span></code> is 1,
+then that compartment is allowed to switch between discrete and continuous regimes. If an entry of <code class="docutils literal notranslate"><span class="pre">EnforceDo</span></code> is 0, then that
+compartment is not allowed to switch, and will remain in the regime it was initialised in.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">my_opts</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;EnforceDo&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+            <span class="s2">&quot;dt&quot;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
+            <span class="s2">&quot;SwitchingThreshold&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
+           <span class="p">}</span>
+</pre></div>
+</div>
+<p>We are now able to call <cite>jsf.jsf</cite> to simulate the process using the “operator splitting” method.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span> <span class="o">=</span> <span class="n">jsf</span><span class="o">.</span><span class="n">jsf</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">rates</span><span class="p">,</span> <span class="n">stoich</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">my_opts</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;operator-splitting&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
 <section id="visualising-the-simulation">
-<h3>Visualising the simulation<a class="headerlink" href="#visualising-the-simulation" title="Permalink to this heading">¶</a></h3>
-<p>Finally, we can plot the results of the simulation. We’ll use a
-combination of <cite>pandas</cite> and <cite>plotnine</cite> to do this, but the output of
-<cite>jsf</cite> is a list of numbers so it should be easy to use whichever
-plotting library you prefer.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sim_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="n">sim</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;susceptible&quot;</span><span class="p">:</span> <span class="n">sim</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;infectious&quot;</span><span class="p">:</span> <span class="n">sim</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]}</span>
-<span class="p">)</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">],</span> <span class="n">value_vars</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;susceptible&quot;</span><span class="p">,</span> <span class="s2">&quot;infectious&quot;</span><span class="p">])</span>
-
-<span class="n">sim_p9</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">ggplot</span><span class="p">()</span>
-    <span class="o">+</span> <span class="n">geom_line</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">sim_df</span><span class="p">,</span> <span class="n">mapping</span><span class="o">=</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="n">colour</span><span class="o">=</span><span class="s2">&quot;variable&quot;</span><span class="p">))</span>
-    <span class="o">+</span> <span class="n">geom_hline</span><span class="p">(</span><span class="n">yintercept</span><span class="o">=</span><span class="n">my_opts</span><span class="p">[</span><span class="s2">&quot;SwitchingThreshold&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">linetype</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">)</span>
-    <span class="o">+</span> <span class="n">scale_y_sqrt</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Population size&quot;</span><span class="p">)</span>
-    <span class="o">+</span> <span class="n">labs</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Time&quot;</span><span class="p">,</span> <span class="n">colour</span><span class="o">=</span><span class="s2">&quot;Status&quot;</span><span class="p">)</span>
-    <span class="o">+</span> <span class="n">theme</span><span class="p">(</span><span class="n">legend_position</span><span class="o">=</span><span class="s2">&quot;top&quot;</span><span class="p">)</span>
-    <span class="o">+</span> <span class="n">theme_bw</span><span class="p">()</span>
-<span class="p">)</span>
-
-<span class="n">sim_p9</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;sis_example.png&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<h3>Visualising the simulation<a class="headerlink" href="#visualising-the-simulation" title="Link to this heading">¶</a></h3>
+<p>Finally, we can plot the results of the simulation. We’ll use a combination of <cite>pandas</cite> and <cite>matplotlib</cite> to do this,
+but the output of <cite>jsf</cite> is a pandas DataFrame of numbers so it’s easy to use whichever plotting library you prefer.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sim</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">sim</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predator&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sim</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">sim</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Prey&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">my_opts</span><span class="p">[</span><span class="s2">&quot;SwitchingThreshold&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Population size&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;PredatorPrey.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Which gives us the following plot. Note that initially the process is
-stochastic as it jumps around before hitting the threshold at which
-point it follows the differential equations.</p>
-<a class="reference internal image-reference" href="images/sis_example.png"><img alt="SIS epidemic example" class="align-center" src="images/sis_example.png" style="width: 700px;" /></a>
+<a class="reference internal image-reference" href="images/PredatorPrey.png"><img alt="PredatorPrey example" class="align-center" src="images/PredatorPrey.png" style="width: 600px;" />
+</a>
 </section>
 </section>
 <section id="types">
-<h2><a class="toc-backref" href="#id5" role="doc-backlink">Types</a><a class="headerlink" href="#types" title="Permalink to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Types</a><a class="headerlink" href="#types" title="Link to this heading">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">jsf.types</span></code> module provides some key types for this package.
 There is nothing fancy here; they are just used to make the type hints
 more informative and help to leverage <code class="docutils literal notranslate"><span class="pre">mypy</span></code>.</p>
@@ -226,68 +273,82 @@ more informative and help to leverage <code class="docutils literal notranslate"
 <li><p><code class="docutils literal notranslate"><span class="pre">Time</span></code>: the time, this is a float.</p></li>
 </ul>
 <p>Recall you can use the following to type check the code:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mypy jsf tests
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mypy<span class="w"> </span>jsf<span class="w"> </span>tests
 </pre></div>
 </div>
 </section>
 <section id="api">
-<h2><a class="toc-backref" href="#id6" role="doc-backlink">API</a><a class="headerlink" href="#api" title="Permalink to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">API</a><a class="headerlink" href="#api" title="Link to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Modules</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="jsf.html">jsf</a></li>
-<li class="toctree-l1"><a class="reference internal" href="exact.html">exact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jsf.html">jsf</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="jsf.html#jsf.ArrayMultiplyAB"><code class="docutils literal notranslate"><span class="pre">ArrayMultiplyAB()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jsf.html#jsf.ArrayPlusAB"><code class="docutils literal notranslate"><span class="pre">ArrayPlusAB()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jsf.html#jsf.ArraySubtractAB"><code class="docutils literal notranslate"><span class="pre">ArraySubtractAB()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jsf.html#jsf.ComputeFiringTimes"><code class="docutils literal notranslate"><span class="pre">ComputeFiringTimes()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jsf.html#jsf.ComputeIntegralOfFiringTimes"><code class="docutils literal notranslate"><span class="pre">ComputeIntegralOfFiringTimes()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jsf.html#jsf.ComputedXdt"><code class="docutils literal notranslate"><span class="pre">ComputedXdt()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jsf.html#jsf.ImplementFiredReaction"><code class="docutils literal notranslate"><span class="pre">ImplementFiredReaction()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jsf.html#jsf.IsDiscrete"><code class="docutils literal notranslate"><span class="pre">IsDiscrete()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jsf.html#jsf.JumpSwitchFlowSimulator"><code class="docutils literal notranslate"><span class="pre">JumpSwitchFlowSimulator()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jsf.html#jsf.MatrixDOTArray"><code class="docutils literal notranslate"><span class="pre">MatrixDOTArray()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jsf.html#jsf.MatrixPlusAB"><code class="docutils literal notranslate"><span class="pre">MatrixPlusAB()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jsf.html#jsf.MatrixSubtractAB"><code class="docutils literal notranslate"><span class="pre">MatrixSubtractAB()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jsf.html#jsf.UpdateCompartmentRegime"><code class="docutils literal notranslate"><span class="pre">UpdateCompartmentRegime()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jsf.html#jsf.jsf"><code class="docutils literal notranslate"><span class="pre">jsf()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jsf.html#jsf.num_non_zero"><code class="docutils literal notranslate"><span class="pre">num_non_zero()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="exact.html">exact</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="exact.html#jsf.exact.JumpClock"><code class="docutils literal notranslate"><span class="pre">JumpClock</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="exact.html#jsf.exact.JumpSwitchFlowExact"><code class="docutils literal notranslate"><span class="pre">JumpSwitchFlowExact()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
 <section id="installation">
-<h2><a class="toc-backref" href="#id7" role="doc-backlink">Installation</a><a class="headerlink" href="#installation" title="Permalink to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Installation</a><a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <p id="id1">This package is not yet available on PyPI. You can install it from a <a class="reference internal" href="#local-copy-installation"><span class="std std-ref">local copy</span></a> or from <a class="reference internal" href="#github-installation"><span class="std std-ref">GitHub</span></a>.</p>
 <section id="from-local-copy">
-<span id="local-copy-installation"></span><h3>From Local Copy<a class="headerlink" href="#from-local-copy" title="Permalink to this heading">¶</a></h3>
+<span id="local-copy-installation"></span><h3>From Local Copy<a class="headerlink" href="#from-local-copy" title="Link to this heading">¶</a></h3>
 <p>If you have a local copy of the package, you can install it with pip.</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install /path/to/package
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>/path/to/package
 </pre></div>
 </div>
 </section>
 <section id="from-github">
-<span id="github-installation"></span><h3>From GitHub<a class="headerlink" href="#from-github" title="Permalink to this heading">¶</a></h3>
+<span id="github-installation"></span><h3>From GitHub<a class="headerlink" href="#from-github" title="Link to this heading">¶</a></h3>
 <p>This won’t work until the package has been made public. Once it has,
 you can install it with pip.</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install git+https://github.com/DGermano8/jsf.git
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/DGermano8/jsf.git
 </pre></div>
 </div>
 </section>
 </section>
 <section id="faqs">
-<h2><a class="toc-backref" href="#id8" role="doc-backlink">FAQs</a><a class="headerlink" href="#faqs" title="Permalink to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">FAQs</a><a class="headerlink" href="#faqs" title="Link to this heading">¶</a></h2>
 <p>If you have a question that is not answered by this documentation,
 please lodge an issue on the GitHub page for this package:
 <a class="reference external" href="https://github.com/DGermano8/jsf">https://github.com/DGermano8/jsf</a></p>
 </section>
 <section id="housekeeping">
-<h2><a class="toc-backref" href="#id9" role="doc-backlink">Housekeeping</a><a class="headerlink" href="#housekeeping" title="Permalink to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">Housekeeping</a><a class="headerlink" href="#housekeeping" title="Link to this heading">¶</a></h2>
 <section id="testing">
-<h3>Testing<a class="headerlink" href="#testing" title="Permalink to this heading">¶</a></h3>
+<h3>Testing<a class="headerlink" href="#testing" title="Link to this heading">¶</a></h3>
 <p>There are some unit tests in the <code class="docutils literal notranslate"><span class="pre">tests</span></code> directory. You can run them
 with the following command.</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python3 -m unittest discover -s tests
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>unittest<span class="w"> </span>discover<span class="w"> </span>-s<span class="w"> </span>tests
 </pre></div>
 </div>
 </section>
 <section id="code-formating-and-checking">
-<h3>Code formating and checking<a class="headerlink" href="#code-formating-and-checking" title="Permalink to this heading">¶</a></h3>
+<h3>Code formating and checking<a class="headerlink" href="#code-formating-and-checking" title="Link to this heading">¶</a></h3>
 <p>This package uses <code class="docutils literal notranslate"><span class="pre">black</span></code> and <code class="docutils literal notranslate"><span class="pre">mypy</span></code> for code formatting and type
 checking, respectively. You can run them with the following commands.</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>black jsf
-mypy jsf
-</pre></div>
-</div>
-</section>
-<section id="building-the-documentation">
-<h3>Building the documentation<a class="headerlink" href="#building-the-documentation" title="Permalink to this heading">¶</a></h3>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>make html
-cp build/html &lt;my/website&gt;
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>black<span class="w"> </span>jsf
+mypy<span class="w"> </span>jsf
 </pre></div>
 </div>
 </section>
@@ -325,7 +386,7 @@ cp build/html &lt;my/website&gt;
   </ul></li>
 </ul>
 </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
@@ -333,7 +394,7 @@ cp build/html &lt;my/website&gt;
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
 
 
@@ -348,11 +409,11 @@ cp build/html &lt;my/website&gt;
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2023, Domenic Germano.
+      &#169;2023, Domenic Germano.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="sources/index.rst.txt"

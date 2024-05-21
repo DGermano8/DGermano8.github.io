@@ -1,20 +1,17 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>jsf &#8212; Jump-Switch-Flow  documentation</title>
-    <link rel="stylesheet" type="text/css" href="static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="static/alabaster.css" />
-    <link rel="stylesheet" type="text/css" href="static/custom.css" />
-    <script data-url_root="./" id="documentation_options" src="static/documentation_options.js"></script>
-    <script src="static/jquery.js"></script>
-    <script src="static/underscore.js"></script>
-    <script src="static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="static/alabaster.css?v=12dfc556" />
+    <link rel="stylesheet" type="text/css" href="static/custom.css?v=1b40aadb" />
+    <script src="static/documentation_options.js?v=5929fcd5"></script>
+    <script src="static/doctools.js?v=9a2dae69"></script>
+    <script src="static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="exact" href="exact.html" />
@@ -22,8 +19,9 @@
    
   <link rel="stylesheet" href="static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -35,8 +33,133 @@
 
           <div class="body" role="main">
             
-  <section id="jsf">
-<h1>jsf<a class="headerlink" href="#jsf" title="Permalink to this heading">¶</a></h1>
+  <section id="module-jsf">
+<span id="jsf"></span><h1>jsf<a class="headerlink" href="#module-jsf" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="jsf.ArrayMultiplyAB">
+<span class="sig-prename descclassname"><span class="pre">jsf.</span></span><span class="sig-name descname"><span class="pre">ArrayMultiplyAB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ArrayA</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ArrayB</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jsf.ArrayMultiplyAB" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jsf.ArrayPlusAB">
+<span class="sig-prename descclassname"><span class="pre">jsf.</span></span><span class="sig-name descname"><span class="pre">ArrayPlusAB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ArrayA</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ArrayB</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jsf.ArrayPlusAB" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jsf.ArraySubtractAB">
+<span class="sig-prename descclassname"><span class="pre">jsf.</span></span><span class="sig-name descname"><span class="pre">ArraySubtractAB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ArrayA</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ArrayB</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jsf.ArraySubtractAB" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jsf.ComputeFiringTimes">
+<span class="sig-prename descclassname"><span class="pre">jsf.</span></span><span class="sig-name descname"><span class="pre">ComputeFiringTimes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">firedReactions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integralOfFiringTimes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randTimes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Props</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nRates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integralStep</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jsf.ComputeFiringTimes" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jsf.ComputeIntegralOfFiringTimes">
+<span class="sig-prename descclassname"><span class="pre">jsf.</span></span><span class="sig-name descname"><span class="pre">ComputeIntegralOfFiringTimes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Dtau</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Props</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xprev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xcurr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">AbsT</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jsf.ComputeIntegralOfFiringTimes" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jsf.ComputedXdt">
+<span class="sig-prename descclassname"><span class="pre">jsf.</span></span><span class="sig-name descname"><span class="pre">ComputedXdt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Props</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozenReaction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nCompartments</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#jsf.ComputedXdt" title="Link to this definition">¶</a></dt>
+<dd><p>Compute the derivative of the state vector at time t for the
+continuous compartments by summing the contributions from each
+reaction.</p>
+<dl>
+<dt>Args:</dt><dd><p>Props: A list of the propensities of each reaction.
+nu: The stoichiometry matrix.
+frozenReaction: A list of booleans indicating which reactions</p>
+<blockquote>
+<div><p>are frozen.</p>
+</div></blockquote>
+<p>nCompartments: The number of compartments in the system.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jsf.ImplementFiredReaction">
+<span class="sig-prename descclassname"><span class="pre">jsf.</span></span><span class="sig-name descname"><span class="pre">ImplementFiredReaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tauArray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integralOfFiringTimes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randTimes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Props</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integralStep</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TimePassed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">AbsT</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dXdt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">OriginalDoDisc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozenReaction</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jsf.ImplementFiredReaction" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jsf.IsDiscrete">
+<span class="sig-prename descclassname"><span class="pre">jsf.</span></span><span class="sig-name descname"><span class="pre">IsDiscrete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SwitchingThreshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">DoDisc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">EnforceDo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozenReaction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compartInNu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nCompartments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nRates</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jsf.IsDiscrete" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jsf.JumpSwitchFlowSimulator">
+<span class="sig-prename descclassname"><span class="pre">jsf.</span></span><span class="sig-name descname"><span class="pre">JumpSwitchFlowSimulator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SystemState</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rates</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">SystemState</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Time</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stoich</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Trajectory</span></span></span><a class="headerlink" href="#jsf.JumpSwitchFlowSimulator" title="Link to this definition">¶</a></dt>
+<dd><p>Simulate a jump-switch-flow process using the operator splitting
+method.</p>
+<dl>
+<dt>Args:</dt><dd><p>x0: The initial state of the system.
+rates: A function that takes the current state and time and</p>
+<blockquote>
+<div><p>returns the rates of each reaction.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>stoich: A dictionary containing the stoichiometry of the</dt><dd><p>system.</p>
+</dd>
+</dl>
+<p>t_max: The final time of the simulation.
+options: A dictionary containing the simulation options.</p>
+</dd>
+<dt>Returns:</dt><dd><p>A list containing the time series of the state of the system.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jsf.MatrixDOTArray">
+<span class="sig-prename descclassname"><span class="pre">jsf.</span></span><span class="sig-name descname"><span class="pre">MatrixDOTArray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Array</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jsf.MatrixDOTArray" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jsf.MatrixPlusAB">
+<span class="sig-prename descclassname"><span class="pre">jsf.</span></span><span class="sig-name descname"><span class="pre">MatrixPlusAB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">MatrixA</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MatrixB</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jsf.MatrixPlusAB" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jsf.MatrixSubtractAB">
+<span class="sig-prename descclassname"><span class="pre">jsf.</span></span><span class="sig-name descname"><span class="pre">MatrixSubtractAB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">MatrixA</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MatrixB</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jsf.MatrixSubtractAB" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jsf.UpdateCompartmentRegime">
+<span class="sig-prename descclassname"><span class="pre">jsf.</span></span><span class="sig-name descname"><span class="pre">UpdateCompartmentRegime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xprev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Dtau</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dXdt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Props</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SwitchingThreshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">DoDisc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">EnforceDo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozenReaction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compartInNu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nCompartments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nRates</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jsf.UpdateCompartmentRegime" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jsf.jsf">
+<span class="sig-prename descclassname"><span class="pre">jsf.</span></span><span class="sig-name descname"><span class="pre">jsf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SystemState</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stoich</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_max</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Trajectory</span></span></span><a class="headerlink" href="#jsf.jsf" title="Link to this definition">¶</a></dt>
+<dd><p>Generates a sample from the JSF process.</p>
+<dl>
+<dt>Args:</dt><dd><p>x0: The initial state of the system.
+rates: A function that takes the current state and time and</p>
+<blockquote>
+<div><p>returns the rates of each reaction.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>stoich: A dictionary containing the stoichiometry of the</dt><dd><p>system.</p>
+</dd>
+</dl>
+<p>t_max: The final time of the simulation.
+<a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs: A dictionary containing the simulation options.</p>
+</dd>
+<dt>Returns:</dt><dd><p>A list containing the time series of the state of the system.</p>
+</dd>
+<dt>Raises:</dt><dd><p>RuntimeError: If the requested method is not implemented.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jsf.num_non_zero">
+<span class="sig-prename descclassname"><span class="pre">jsf.</span></span><span class="sig-name descname"><span class="pre">num_non_zero</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Time</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#jsf.num_non_zero" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </section>
 
 
@@ -58,7 +181,24 @@
 <h3>Navigation</h3>
 <p class="caption" role="heading"><span class="caption-text">Modules</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">jsf</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">jsf</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#jsf.ArrayMultiplyAB"><code class="docutils literal notranslate"><span class="pre">ArrayMultiplyAB()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#jsf.ArrayPlusAB"><code class="docutils literal notranslate"><span class="pre">ArrayPlusAB()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#jsf.ArraySubtractAB"><code class="docutils literal notranslate"><span class="pre">ArraySubtractAB()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#jsf.ComputeFiringTimes"><code class="docutils literal notranslate"><span class="pre">ComputeFiringTimes()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#jsf.ComputeIntegralOfFiringTimes"><code class="docutils literal notranslate"><span class="pre">ComputeIntegralOfFiringTimes()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#jsf.ComputedXdt"><code class="docutils literal notranslate"><span class="pre">ComputedXdt()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#jsf.ImplementFiredReaction"><code class="docutils literal notranslate"><span class="pre">ImplementFiredReaction()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#jsf.IsDiscrete"><code class="docutils literal notranslate"><span class="pre">IsDiscrete()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#jsf.JumpSwitchFlowSimulator"><code class="docutils literal notranslate"><span class="pre">JumpSwitchFlowSimulator()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#jsf.MatrixDOTArray"><code class="docutils literal notranslate"><span class="pre">MatrixDOTArray()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#jsf.MatrixPlusAB"><code class="docutils literal notranslate"><span class="pre">MatrixPlusAB()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#jsf.MatrixSubtractAB"><code class="docutils literal notranslate"><span class="pre">MatrixSubtractAB()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#jsf.UpdateCompartmentRegime"><code class="docutils literal notranslate"><span class="pre">UpdateCompartmentRegime()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#jsf.jsf"><code class="docutils literal notranslate"><span class="pre">jsf()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#jsf.num_non_zero"><code class="docutils literal notranslate"><span class="pre">num_non_zero()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="exact.html">exact</a></li>
 </ul>
 
@@ -71,7 +211,7 @@
   </ul></li>
 </ul>
 </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
@@ -79,7 +219,7 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
 
 
@@ -94,11 +234,11 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2023, Domenic Germano.
+      &#169;2023, Domenic Germano.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="sources/jsf.rst.txt"

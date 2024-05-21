@@ -1,28 +1,22 @@
 /* This file intentionally left blank. */
 body {
+    text-align: justify;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
-    line-height: 1.428571429;
+    line-height: 1.5;
     color: #333333;
-    background-color: rgba(131, 96, 150, 0.5);
+    background-color: rgb(187, 187, 187);
 }
-div.body {
+div.body{
     background-color:  rgb(227, 227, 227);
-    border: 10px solid rgb(54, 54, 54);
-    border-radius: 15px; /* Rounded corners */
 }
 
-div.body h1 {
+div.body h1{
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-div.body h2 {
+div.body h2{
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-div.body h3 {
+div.body h3{
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-img {
-    background-color:  rgb(227, 227, 227);
-    border: 10px solid #ffffff;
-    border-radius: 10px;
 }

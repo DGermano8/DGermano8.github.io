@@ -1,28 +1,26 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>exact &#8212; Jump-Switch-Flow  documentation</title>
-    <link rel="stylesheet" type="text/css" href="static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="static/alabaster.css" />
-    <link rel="stylesheet" type="text/css" href="static/custom.css" />
-    <script data-url_root="./" id="documentation_options" src="static/documentation_options.js"></script>
-    <script src="static/jquery.js"></script>
-    <script src="static/underscore.js"></script>
-    <script src="static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="static/alabaster.css?v=12dfc556" />
+    <link rel="stylesheet" type="text/css" href="static/custom.css?v=1b40aadb" />
+    <script src="static/documentation_options.js?v=5929fcd5"></script>
+    <script src="static/doctools.js?v=9a2dae69"></script>
+    <script src="static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="jsf" href="jsf.html" />
    
   <link rel="stylesheet" href="static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -34,8 +32,47 @@
 
           <div class="body" role="main">
             
-  <section id="exact">
-<h1>exact<a class="headerlink" href="#exact" title="Permalink to this heading">¶</a></h1>
+  <section id="module-jsf.exact">
+<span id="exact"></span><h1>exact<a class="headerlink" href="#module-jsf.exact" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="jsf.exact.JumpClock">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jsf.exact.</span></span><span class="sig-name descname"><span class="pre">JumpClock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clock</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jsf.types.Time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jsf.types.Time</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jsf.exact.JumpClock" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="jsf.exact.JumpClock.clock">
+<span class="sig-name descname"><span class="pre">clock</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Time</span></em><a class="headerlink" href="#jsf.exact.JumpClock.clock" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jsf.exact.JumpClock.set_clock">
+<span class="sig-name descname"><span class="pre">set_clock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_clock</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#jsf.exact.JumpClock.set_clock" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="jsf.exact.JumpClock.start_time">
+<span class="sig-name descname"><span class="pre">start_time</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Time</span></em><a class="headerlink" href="#jsf.exact.JumpClock.start_time" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jsf.exact.JumpSwitchFlowExact">
+<span class="sig-prename descclassname"><span class="pre">jsf.exact.</span></span><span class="sig-name descname"><span class="pre">JumpSwitchFlowExact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SystemState</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rates</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">SystemState</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Time</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stoich</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Trajectory</span></span></span><a class="headerlink" href="#jsf.exact.JumpSwitchFlowExact" title="Link to this definition">¶</a></dt>
+<dd><p>Simulate a jump-switch flow model numerically by using
+forward-Euler. It is exact in the sense that it does not use
+operator splitting.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>x0: Initial state.
+rates: Function that computes reaction rates.
+stoich: Stoichiometry matrix.
+t_max: Maximum time to simulate.
+options: Simulation options.</p>
+</dd>
+<dt>Returns:</dt><dd><p>Trajectory of the simulation.</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
 
@@ -58,7 +95,11 @@
 <p class="caption" role="heading"><span class="caption-text">Modules</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="jsf.html">jsf</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">exact</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">exact</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#jsf.exact.JumpClock"><code class="docutils literal notranslate"><span class="pre">JumpClock</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#jsf.exact.JumpSwitchFlowExact"><code class="docutils literal notranslate"><span class="pre">JumpSwitchFlowExact()</span></code></a></li>
+</ul>
+</li>
 </ul>
 
 <div class="relations">
@@ -69,7 +110,7 @@
   </ul></li>
 </ul>
 </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
@@ -77,7 +118,7 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
 
 
@@ -92,11 +133,11 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2023, Domenic Germano.
+      &#169;2023, Domenic Germano.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="sources/exact.rst.txt"

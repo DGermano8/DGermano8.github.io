@@ -4,7 +4,9 @@
 
 # This script is used to fetch the latest version of the the documentation
 
-doc_home="/Users/domenicgermano/Desktop/SIR_RA_LIT/Code/jsf/build/html/*"
+doc_home="/Users/dger0683/Documents/Workspace/jsf_package/build/html/*"
+
+
 
 # do a logical check that the doc_home is not an empty directory
 if [ -z "$(ls -A $doc_home)" ]; then
@@ -17,9 +19,9 @@ cp -r $doc_home ./
 # rename all directories starting with "_" to remove the underscore
 find . -type d -name "_*" -exec bash -c 'mv "$0" "${0/_/}"' {} \;
 
-# mv _images images
-# mv _sources sources
-# mv _static static
+mv _images images
+mv _sources sources
+mv _static static
 
 
 # Using sed, rename all arguments to href and src attributes to remove the prefix underscore from _images, _sources, and _static.
