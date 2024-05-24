@@ -1,0 +1,349 @@
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>JSF Mathematical Framework &#8212; Jump-Switch-Flow  documentation</title>
+    <link rel="stylesheet" type="text/css" href="static/pygments.css?v=649a27d8" />
+    <link rel="stylesheet" type="text/css" href="static/bizstyle.css?v=658d757c" />
+    <link rel="stylesheet" type="text/css" href="static/custom.css?v=522bdb54" />
+    
+    <script src="static/documentation_options.js?v=5929fcd5"></script>
+    <script src="static/doctools.js?v=9a2dae69"></script>
+    <script src="static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="jsf" href="jsf.html" />
+    <link rel="prev" title="Jump-Switch-Flow Documentation" href="index.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="jsf.html" title="jsf"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Jump-Switch-Flow Documentation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Jump-Switch-Flow  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">JSF Mathematical Framework</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="jsf-mathematical-framework">
+<h1>JSF Mathematical Framework<a class="headerlink" href="#jsf-mathematical-framework" title="Link to this heading">¶</a></h1>
+<p>To couple both the stochastic (Jumping) and deterministic (Flowing)
+compartments, we model each compartment as to where they are in state space.</p>
+<p>Consider a compartmental model with <span class="math notranslate nohighlight">\(n\)</span> compartments <span class="math notranslate nohighlight">\(\vec{V} = \left\{ V_i\right\}_{i=1}^n\)</span>,
+where <span class="math notranslate nohighlight">\(V_{i}(t)\)</span> represents the value of the <span class="math notranslate nohighlight">\(i\)</span> th compartment at time <span class="math notranslate nohighlight">\(t\)</span>.
+For example, <span class="math notranslate nohighlight">\(V_i\)</span> could be the number of people infected with a pathogen, or the copy
+number of a molecule in a cell. The state variables <span class="math notranslate nohighlight">\(V_i\)</span> may take values from different
+domains depending upon the resolution needed for the model. For example, in an ODE, <span class="math notranslate nohighlight">\(\vec{V}\)</span>
+will have real values and in a CTMC <span class="math notranslate nohighlight">\(\vec{V}\)</span>  might have integer values.</p>
+<p>Typically, discrete values are used to represent small populations, while larger populations
+will be represented with a continuum. To accommodate both scales, we model the domain of <span class="math notranslate nohighlight">\(V_{i}\)</span>
+as <span class="math notranslate nohighlight">\(\mathcal{V}_{\Omega_i}=\{0,1,\ldots,\Omega_{i}\}\cup(\Omega_{i},\infty)\)</span>. The switching
+threshold parameter, <span class="math notranslate nohighlight">\(\Omega_i\in \mathbb{Z}_{\geq 0}\)</span>, is where the <span class="math notranslate nohighlight">\(i\)</span> th compartment
+transitions from discrete to continuous dynamics. If a compartment <span class="math notranslate nohighlight">\(V_{i}\)</span> has a value in
+<span class="math notranslate nohighlight">\(\{0,1,\ldots,\Omega_{i}\}\)</span>, we call it “discrete” (or “jumping”), and if it has a value in
+<span class="math notranslate nohighlight">\((\Omega_{i},\infty)\)</span>, we call it “continuous” (or “flowing”). While the switching threshold
+can be compartment specific, for ease of exposition, we will only consider a single threshold shared
+between all compartments <span class="math notranslate nohighlight">\(\Omega = \Omega_i\)</span>. At any moment in time let us assume <span class="math notranslate nohighlight">\(q\)</span> of the
+<span class="math notranslate nohighlight">\(n\)</span> compartments are flowing. We use the notation <span class="math notranslate nohighlight">\(\vec{V}_F = \left\{ V_i: V_i&gt;\Omega \right\} \in (\Omega,\infty)^q\)</span>
+and <span class="math notranslate nohighlight">\(\vec{V}_J = \left\{ V_i: V_i\leq \Omega \right\} \in \left\{0, 1, \ldots, \Omega \right\}^{(n-q)}\)</span>
+to represent the compartments in each of the flowing and jumping states, respectively.</p>
+<p>The dynamics of each compartment <span class="math notranslate nohighlight">\(V_i\)</span> are described by a set of <span class="math notranslate nohighlight">\(m\)</span> “reactions”
+<span class="math notranslate nohighlight">\(\mathcal{R} = \left\{\mathcal{R}_k \right\}_{k=1}^m\)</span>. Each reaction <span class="math notranslate nohighlight">\(\mathcal{R}_k\)</span>
+is defined by two properties: the rate (per unit time) at which it occurs, <span class="math notranslate nohighlight">\(\lambda_{k}\)</span>, which may be
+(and usually is) a function of the state <span class="math notranslate nohighlight">\(\vec{V}\)</span>; and the effect on the state, i.e. the change <span class="math notranslate nohighlight">\(\eta_{ik}\)</span>
+to the size of compartment <span class="math notranslate nohighlight">\(V_i\)</span> when reaction <span class="math notranslate nohighlight">\(\mathcal{R}_k\)</span> occurs. As a matrix,
+<span class="math notranslate nohighlight">\(\eta\in \mathbb{Z}^{n,m}\)</span> is referred to as the “stoichiometric matrix”. For ODE models, these
+reactions occur continuously and are written in the form</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{d}\vec{V}}{\mathrm{d}t} = \eta \vec{\lambda}(\vec{V}),\]</div>
+<p>while for CTMC models, reactions in the system <span class="math notranslate nohighlight">\(\mathcal{R}\)</span> occur as discrete events.
+In the later case, each reaction <span class="math notranslate nohighlight">\(\mathcal{R}_k\)</span> has a separate propensity described by
+<span class="math notranslate nohighlight">\(\lambda_k(\vec{V})\)</span>, this propensity remains constant between events but when an event
+<span class="math notranslate nohighlight">\(\mathcal{R}_k\)</span> occurs, there is a change in <span class="math notranslate nohighlight">\(\vec{V}\)</span> (as specified by the elements of
+<span class="math notranslate nohighlight">\(\eta_{\cdot k}\)</span>) and therefore in <span class="math notranslate nohighlight">\(\vec{\lambda}(\vec{V})\)</span>.</p>
+<p>We define the subset of reactions <span class="math notranslate nohighlight">\(\mathcal{S}\subseteq \mathcal{R}\)</span> to contain those treated
+as stochastic events. We define <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>, which we use throughout this manuscript, captures
+a larger set of reactions; <span class="math notranslate nohighlight">\(\mathcal{S} = \left\{\mathcal{R}_k:\exists i \text{ s.t. } V_i\in\vec{V}_J \text{ and }  \left(\eta_{ik}\neq 0 \text{ or } \partial_{V_i}\lambda_k \neq 0\right)   \right\}\)</span>.
+In this definition, a reaction is included in <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> if either (1) it causes a change in
+jumping (discrete) populations textit{or} (2) it is influenced by a discrete population (perhaps as reactants for example).</p>
+<p>Reactions in <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> are simulated using stochastically sampled times similar to CTMC models.
+It is important to note that, unlike time homogeneous CTMC models, the propensities are not constant
+because the state <span class="math notranslate nohighlight">\(\vec{V}\)</span> (and therefore <span class="math notranslate nohighlight">\(\vec{\lambda}\)</span>) are continuously varying.
+When any reaction <span class="math notranslate nohighlight">\(\mathcal{R}_k\in\mathcal{S}\)</span> occurs, we say the system has “jumped” and an
+instantaneous change of <span class="math notranslate nohighlight">\(\eta_{ik}\)</span> for each compartment <span class="math notranslate nohighlight">\(V_i\)</span> occurs (irrespective of whether
+<span class="math notranslate nohighlight">\(V_i\in\vec{V}_J\)</span> or <span class="math notranslate nohighlight">\(V_i\in\vec{V}_F\)</span> to ensure mass conservation is observed). We will refer
+therefore to reactions in <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> as “jumps”. The reactions in <span class="math notranslate nohighlight">\(\mathcal{S}'=\mathcal{R}\setminus \mathcal{S}\)</span>
+are not stochastic, we call these “flows” because they represent the continual change of value of the
+relevant compartments, all of which are continuous by definition of <span class="math notranslate nohighlight">\(\mathcal{S}'\)</span>.
+At any moment in time, we denote <span class="math notranslate nohighlight">\(|\mathcal{S}'| = p = m - |\mathcal{S}|\)</span> to be the number of reactions
+which are flowing.</p>
+<p>Finally, the hybrid model that we propose is capable of “switching”. Switch events are defined as a
+compartment between <span class="math notranslate nohighlight">\(\vec{V}_F\)</span> and <span class="math notranslate nohighlight">\(\vec{V}_J\)</span>. These events occur when a compartment’s
+value crosses the switching threshold <span class="math notranslate nohighlight">\(\Omega\)</span>. Importantly, switch events can change
+<span class="math notranslate nohighlight">\(\mathcal{S}\)</span> and are paradigm defining events which should occur infrequently compared to
+jumps (frequent) and flows (continuous).</p>
+<p>Due to the way that <span class="math notranslate nohighlight">\(\mathcal{R}\)</span> is partitioned, it is possible to order the rows and columns of <span class="math notranslate nohighlight">\(\eta\)</span> at
+any moment into the upper-triangular block form</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\eta = \left(\begin{array}{c|c}
+\eta_{\mathcal{S}'} &amp; \bar{\eta}_{\mathcal{S}} \\ \hline
+0 &amp; \eta_{\mathcal{S}} \end{array}\right),\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\eta_{\mathcal{S}'} \in \mathbb{Z}^{q\times p}\)</span>, <span class="math notranslate nohighlight">\(\eta_{\mathcal{S}} \in \mathbb{Z}^{(n-q)\times (m-p)}\)</span>
+and <span class="math notranslate nohighlight">\(\bar{\eta}_{\mathcal{S}} \in \mathbb{Z}^{q\times (m-p)}\)</span> refer to stoichiometric coefficients for changes in flowing
+compartments under flows, jumping compartments under jumps, and flowing compartments under jumps, respectively. Written
+as a system of equations analogous to the above ODE equation, the hybrid JSF model we propose formally takes the following form.
+For any time interval <span class="math notranslate nohighlight">\(t_0&lt;t&lt;t_1\)</span> between switching events,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\frac{\mathrm{d} \vec{V}_F}{\mathrm{d} t} &amp;= \eta_{\mathcal{S}'} \vec{\lambda}_{\mathcal{S}'}(\vec{V}) + \bar{\eta}_{\mathcal{S}} \vec{\Lambda}_{\mathcal{S}}(\vec{V}),\\
+\vec{V}_J(t) &amp;= \vec{V}_J(t_0) + \eta_{\mathcal{S}} \int_{t_0}^t  \vec{\Lambda}_{\mathcal{S}}(\vec{V}) \ \mathrm{d} s,\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\vec{\lambda}_{\mathcal{S}'}\in\mathbb{R}^p\)</span> are the reaction rates of flows and <span class="math notranslate nohighlight">\(\vec{\Lambda}_{\mathcal{S}}\)</span>
+is a stochastic vector of <span class="math notranslate nohighlight">\(m-p\)</span> delta-function spike trains that are derived from the realisations of <span class="math notranslate nohighlight">\(m-p\)</span>
+different jumps sampled at rates which are dependent on the dynamic changes in the propensities <span class="math notranslate nohighlight">\(\vec{\lambda}_{\mathcal{S}}\in\mathbb{R}^{m-p}\)</span> for these jumps.</p>
+<p>The below figure shows how it is
+possible for a variable to <cite>switch</cite> between flowing and jumping
+regimes for the previously described Lotka-Volterra model. When a flowing variable decreases to <span class="math notranslate nohighlight">\(\Omega\)</span>, it switches
+to jumping and we consider it a discrete variable. When a jumping
+variable jumps from <span class="math notranslate nohighlight">\(\Omega\)</span> to <span class="math notranslate nohighlight">\(\Omega+1\)</span> it switches to flowing
+and we consider it to be a continuous variable.</p>
+<a class="reference internal image-reference" href="images/compartment_switching_depiction.png"><img alt="compartment_switching_depiction" class="align-center" src="images/compartment_switching_depiction.png" style="width: 500px;" />
+</a>
+<p>For <span class="math notranslate nohighlight">\(t&lt; t_1\)</span>, <span class="math notranslate nohighlight">\(V_2\)</span> is jumping, and <span class="math notranslate nohighlight">\(V_1\)</span> is flowing. Since <span class="math notranslate nohighlight">\(V_2\)</span> is jumping,
+the conversion of <span class="math notranslate nohighlight">\(V_1\)</span> into <span class="math notranslate nohighlight">\(V_2\)</span> (<span class="math notranslate nohighlight">\(\mathcal{R}_3\)</span>) is a jump, and as a result
+jump increases in <span class="math notranslate nohighlight">\(V_2\)</span> due to <span class="math notranslate nohighlight">\(\mathcal{R}_3\)</span> correspond to jump decreases in <span class="math notranslate nohighlight">\(V_1\)</span>.
+On the other hand, the only flow in the system is that of <span class="math notranslate nohighlight">\(\mathcal{R}_1\)</span>, the birth of <span class="math notranslate nohighlight">\(V_1\)</span>
+which can be seen as continuous increases in <span class="math notranslate nohighlight">\(V_1\)</span> between jumps. We also note that <span class="math notranslate nohighlight">\(\mathcal{R}_2\)</span>
+(the death events of <span class="math notranslate nohighlight">\(V_2\)</span>) is also jumping. However, for <span class="math notranslate nohighlight">\(t &lt; t_1\)</span>, we do not observe this
+reaction occurring.
+At <span class="math notranslate nohighlight">\(t=t_1\)</span>, <span class="math notranslate nohighlight">\(V_2 &gt; \Omega\)</span>, and both <span class="math notranslate nohighlight">\(V_1\)</span> and <span class="math notranslate nohighlight">\(V_2\)</span> are flowing. The model
+therefore behaves according to the ODE model with an initial condition prescribed at <span class="math notranslate nohighlight">\(t=t_1\)</span>.
+At <span class="math notranslate nohighlight">\(t=t_2\)</span>, <span class="math notranslate nohighlight">\(V_1\)</span> drops below <span class="math notranslate nohighlight">\(\Omega\)</span>, and therefore switches to jumping.
+The conversion of <span class="math notranslate nohighlight">\(V_1\)</span> to <span class="math notranslate nohighlight">\(V_2\)</span> (<span class="math notranslate nohighlight">\(\mathcal{R}_3\)</span>) again become jumps. In the regime
+following <span class="math notranslate nohighlight">\(t=t_2\)</span> the only flow is <span class="math notranslate nohighlight">\(\mathcal{R}_2\)</span> (the death events of <span class="math notranslate nohighlight">\(V_2\)</span>) and so
+between <span class="math notranslate nohighlight">\(\mathcal{R}_3\)</span> events, exponential decay of <span class="math notranslate nohighlight">\(V_2\)</span> is taking place. It is also
+possible to see <span class="math notranslate nohighlight">\(\mathcal{R}_1\)</span> (births of <span class="math notranslate nohighlight">\(V_1\)</span>) occur in this regime as independent jump
+increases in <span class="math notranslate nohighlight">\(V_1\)</span> that do not change <span class="math notranslate nohighlight">\(V_2\)</span>.
+Finally, at <span class="math notranslate nohighlight">\(t=t_3\)</span>, <span class="math notranslate nohighlight">\(V_2\)</span> also drops below <span class="math notranslate nohighlight">\(\Omega\)</span> so therefore also switches to
+jumping. In this case, all compartments are jumping and therefore beyond <span class="math notranslate nohighlight">\(t_3\)</span> the hybrid model reduces to a CTMC.</p>
+<p>To implement JSF, we require three event types: jump events, flow events, and switch events, which will be described in the following sections.</p>
+</section>
+<section id="jump-events">
+<h1>Jump Events<a class="headerlink" href="#jump-events" title="Link to this heading">¶</a></h1>
+<p>The reactions that are defined in <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> are stochastic events that produce discontinuous
+jumps in the state vector <span class="math notranslate nohighlight">\(\vec{V}\)</span>. In the above JSF equation, we denote the jumps using
+the notation <span class="math notranslate nohighlight">\(\vec{\Lambda}_{\mathcal{S}}(\vec{V})\)</span>. Each element in the vector <span class="math notranslate nohighlight">\(\vec{\Lambda}_{\mathcal{S}}\)</span>
+corresponds to a reaction in <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>. Consider, for example, <span class="math notranslate nohighlight">\(\mathcal{S}_K\)</span> the <span class="math notranslate nohighlight">\(K\)</span> th reaction in
+<span class="math notranslate nohighlight">\(\mathcal{S}\)</span> and we shall suppose that this reaction corresponds to the <span class="math notranslate nohighlight">\(k\)</span> th reaction in the full model
+<span class="math notranslate nohighlight">\(\mathcal{S}_K = \mathcal{R}_k\)</span>. The <span class="math notranslate nohighlight">\(K\)</span> th element of <span class="math notranslate nohighlight">\(\vec{\Lambda}_{\mathcal{S}}\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\Lambda_{\mathcal{S},K} = \sum_{e} \delta(t-t_{k}^{(e)}),\]</div>
+<p>where <span class="math notranslate nohighlight">\(\delta\)</span> is the Dirac measure and <span class="math notranslate nohighlight">\(t_{k}^{(e)}`\)</span> is the <span class="math notranslate nohighlight">\(e\)</span> th time at which the jump event
+<span class="math notranslate nohighlight">\(\mathcal{R}_k\)</span> takes place. In this way, the term <span class="math notranslate nohighlight">\(\vec{\Lambda}_{\mathcal{S}}\)</span> the JSF equation
+manifests as discrete jumps in both <span class="math notranslate nohighlight">\(\vec{V}_F\)</span> and <span class="math notranslate nohighlight">\(\vec{V}_J\)</span> at the moments of each jump event.
+For the sake of the simulation, the computation of the jump times <span class="math notranslate nohighlight">\(t_{k}^{(e)}\)</span> for each instance <span class="math notranslate nohighlight">\(e\)</span> of each
+reaction <span class="math notranslate nohighlight">\(\mathcal{R}_k\in \mathcal{S}\)</span> is all that is required. The stoichiometric coefficients present in
+the JSF equation then indicate the amplitude of the jumps in each compartment.</p>
+<p>The instantaneous propensity for a jump associated with reaction <span class="math notranslate nohighlight">\(\mathcal{R}_k\)</span> is <span class="math notranslate nohighlight">\(\lambda_k(\vec{V})\)</span>.
+We note that this propensity <span class="math notranslate nohighlight">\(\lambda_k(\vec{V})\)</span> is likely to change with time even between jumps due to the
+continuous change caused by flows.</p>
+<p>We use a variant of the Next Reaction Method (NRM) to sample jump times. We first note that the propensity
+for a jump is dependent only on the instantaneous state <span class="math notranslate nohighlight">\(\vec{V}\)</span>, and therefore if at a current time <span class="math notranslate nohighlight">\(t_0\)</span>
+there has been <span class="math notranslate nohighlight">\(e-1\)</span> jumps associated with reaction <span class="math notranslate nohighlight">\(\mathcal{R}_k\)</span>, it has no bearing on the distribution
+of the time <span class="math notranslate nohighlight">\(t_k^{(e)}\)</span>, and therefore we shall simply denote <span class="math notranslate nohighlight">\(t_k^{(e)} = t_k\)</span> as the next jump
+time for reaction <span class="math notranslate nohighlight">\(\mathcal{R}_k\)</span>.
+The cumulative probability function from which <span class="math notranslate nohighlight">\(t_k\)</span> is sampled is dependent on the current time <span class="math notranslate nohighlight">\(t_0\)</span> and
+the evolution of the state variables in time <span class="math notranslate nohighlight">\(\vec{V}(t)\)</span>. In particular,
+<span class="math notranslate nohighlight">\(\text{CDF}(t;k) = 1 - \exp\left\{- \int_{t_{0}}^{t} \lambda_{k}(\vec{V}(s)) ds \right\}\)</span>.
+To sample <span class="math notranslate nohighlight">\(t_k\)</span>, inverse transform sampling is used. Specifically, we first sample <span class="math notranslate nohighlight">\(u_{k}\sim\text{Unif(0,1)}\)</span>
+and then solve <span class="math notranslate nohighlight">\(\text{CDF}(t_k;k) = u_k\)</span> for <span class="math notranslate nohighlight">\(t_k\)</span>. We define <span class="math notranslate nohighlight">\(J_k(t)`\)</span> as the “jump clock” for reaction
+<span class="math notranslate nohighlight">\(\mathcal{R}_k\)</span>, noting that <span class="math notranslate nohighlight">\(u_k\)</span> and <span class="math notranslate nohighlight">\(1-u_k\)</span> have the same distribution:</p>
+<div class="math notranslate nohighlight">
+\[J_k(t_k) := \log(u_{k}^{-1}) - \int_{t_{0}}^{t_k} \lambda_{k}(\vec{V}(s)) \ \mathrm{d}s = 0.\]</div>
+<p>In general, we cannot solve directly for <span class="math notranslate nohighlight">\(t_k\)</span>. Instead, we solve for it numerically by
+tracking the value of <span class="math notranslate nohighlight">\(J_k(t)\)</span> as <span class="math notranslate nohighlight">\(\vec{V}\)</span> evolves through flows, jumps and switches.
+For each reaction <span class="math notranslate nohighlight">\(\mathcal{R}_k\)</span>, at some initial time (for example <span class="math notranslate nohighlight">\(t_k^{(e-1)}\)</span>)
+we sample <span class="math notranslate nohighlight">\(u_k\)</span> and initialise <span class="math notranslate nohighlight">\(t_0 = t_k^{(e-1)}\)</span>. The initial value of <span class="math notranslate nohighlight">\(J_k(t)\)</span>
+is therefore equal to the positive number <span class="math notranslate nohighlight">\(\log(u_{k}^{-1})\)</span>. As time progresses, <span class="math notranslate nohighlight">\(J_k(t)\)</span>
+decreases according to the above equation since <span class="math notranslate nohighlight">\(\lambda_k\geq 0\)</span>. Its value ‘ticks’ down
+to zero over time and when <span class="math notranslate nohighlight">\(J_k\)</span> reaches <span class="math notranslate nohighlight">\(0\)</span>, a jump associated with <span class="math notranslate nohighlight">\(\mathcal{R}_k\)</span>
+is triggered (hence the name jump clock). As a jump clock reaches 0 and a jump is triggered, the clock
+is reset by sampling a new random number, <span class="math notranslate nohighlight">\(u_k\sim\text{Unif}(0,1)\)</span>. To update the jump clock,
+we require numerical integration of <span class="math notranslate nohighlight">\(\lambda_k(\vec{V}(t))\)</span> forward in time. Fortunately,
+we also have piece-wise polynomial approximations for <span class="math notranslate nohighlight">\(\vec{V}_F(t)\)</span> as a result of our numerical
+treatment of the continuous flows combined with piece-wise constant values for <span class="math notranslate nohighlight">\(\vec{V}_J(t)\)</span>
+which only update once jumps occur. We will discuss further the numerical integration and jump
+clock updates ‘Jump clock updates’.</p>
+</section>
+<section id="flow-events">
+<h1>Flow Events<a class="headerlink" href="#flow-events" title="Link to this heading">¶</a></h1>
+<p>Between jumps, <span class="math notranslate nohighlight">\(\vec{V}_J\)</span> remains constant and <span class="math notranslate nohighlight">\(\vec{V}_F\)</span> evolves continuously according to
+the JSF equation at the start. In particular,</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{d} \vec{V}_F}{\mathrm{d} t} = \eta_{\mathcal{S}'} \vec{\lambda}_{\mathcal{S}'}(\vec{V}).\]</div>
+<p>This is a standard dynamical system of ODEs. We shall numerically integrate this forward in time over
+discrete time steps <span class="math notranslate nohighlight">\(\Delta t\)</span> using a simple Forward Euler method. However, higher order forward
+methods may be substituted. In particular,</p>
+<div class="math notranslate nohighlight">
+\[\vec{V}_F(t+\Delta t)= \vec{V}_F(t) + \Delta t \, \Delta \vec{V}_F(t) = \vec{V}_F(t) + \Delta t \, \eta_{\mathcal{S}'} \vec{\lambda}_{\mathcal{S}'}(\vec{V}(t)) ,\]</div>
+<p>noting that <span class="math notranslate nohighlight">\(\vec{V}_J(t+\Delta t) = \vec{V}_J(t)\)</span>.</p>
+</section>
+<section id="switch-events">
+<h1>Switch Events<a class="headerlink" href="#switch-events" title="Link to this heading">¶</a></h1>
+<p>Switching events describe instances where compartment membership of <span class="math notranslate nohighlight">\(\vec{V}_J\)</span> and <span class="math notranslate nohighlight">\(\vec{V}_F\)</span>
+can suddenly change as well as reaction membership in <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> and <span class="math notranslate nohighlight">\(\mathcal{S}'\)</span>.
+There are two types of switching events. The first involves the transitioning of a compartment from <span class="math notranslate nohighlight">\(\vec{V}_J\)</span>
+to <span class="math notranslate nohighlight">\(\vec{V}_F\)</span>. This transition is straightforward as a new equation is added to the Flowing equations for
+the state <span class="math notranslate nohighlight">\(\vec{V}_F\)</span> is initialised at the switching time by continuation and initialisation of the new
+flowing compartment at <span class="math notranslate nohighlight">\(\Omega\)</span>.</p>
+<p>The second type of switching event involves the transition of a compartment from <span class="math notranslate nohighlight">\(\vec{V}_F\)</span> to <span class="math notranslate nohighlight">\(\vec{V}_J\)</span>.
+Let <span class="math notranslate nohighlight">\(V_i\)</span> be the compartment switching from <span class="math notranslate nohighlight">\(\vec{V}_F\)</span> to <span class="math notranslate nohighlight">\(\vec{V}_J\)</span> due to a jump event,
+such that <span class="math notranslate nohighlight">\(V_i \leq \Omega\)</span>. In general, these types of jump events result in <span class="math notranslate nohighlight">\(V_i\)</span> being non-integer,
+i.e. <span class="math notranslate nohighlight">\(V_i \notin \mathcal{V}_{\Omega}\)</span>.</p>
+<p>To ensure the values of <span class="math notranslate nohighlight">\(V_{i}\)</span> stay in <span class="math notranslate nohighlight">\(\mathcal{V}_{\Omega}\)</span> we add another constraint.
+Let <span class="math notranslate nohighlight">\(\hat{V}_i\)</span> be the value of the flowing compartment <span class="math notranslate nohighlight">\(V_i\)</span> after jumping down across the
+threshold <span class="math notranslate nohighlight">\(\Omega\)</span> but before being initialised into <span class="math notranslate nohighlight">\(\mathcal{V}_{\Omega}\)</span>.
+We apply the following rule to reinitialise <span class="math notranslate nohighlight">\(V_i\)</span> after the switch.
+We take:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}V_i =
+\begin{cases}
+ \lceil \hat{V}_i \rceil \text{ with probability  } \hat{V}_i-\lfloor \hat{V}_i \rfloor\\
+  \lfloor \hat{V}_i \rfloor \text{ with probability  } 1- \hat{V}_i+\lfloor \hat{V}_i \rfloor\\
+ \end{cases}\end{split}\]</div>
+<p>This ensures the expected state of the process after the switch is <span class="math notranslate nohighlight">\(\hat{V}_i\)</span>
+as described under the flowing paradigm from which this compartment has come and that the variable
+remains in the domain <span class="math notranslate nohighlight">\(\mathcal{V}_{\Omega}\)</span>.</p>
+</section>
+<section id="jump-clock-updates">
+<h1>Jump Clock Updates<a class="headerlink" href="#jump-clock-updates" title="Link to this heading">¶</a></h1>
+<p>For a given jump reaction <span class="math notranslate nohighlight">\(\mathcal{R}_k\)</span>, a clock is initialised at time <span class="math notranslate nohighlight">\(t_0\)</span>;
+and <span class="math notranslate nohighlight">\(u_k\sim\text{Unif}(0,1)\)</span>, giving <span class="math notranslate nohighlight">\(J_k = \log(u_k^{-1})\)</span>. Over the course of a time step
+from $t$ to <span class="math notranslate nohighlight">\(t+\Delta t\)</span>, it is observed from before that the clock ticks down from
+<span class="math notranslate nohighlight">\(J_k\)</span> to <span class="math notranslate nohighlight">\(J_k - \Delta J_k\)</span> where, since <span class="math notranslate nohighlight">\(\Delta t`\)</span> is small</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\Delta J_k =  \int_{0}^{\Delta t} \lambda_{k}(\vec{V}(t+s)) \ \mathrm{d}s &amp;= \int_{0}^{\Delta t} \left( \alpha  + \beta s + O(s^2) \right) \ \mathrm{d}s, \\
+&amp;\approx  \frac{\Delta t}{2} \left(2\alpha  + \beta \Delta t \right), \\
+&amp; = \frac{\Delta t}{2} \left(2\alpha  + (\Delta t \Delta \vec{V}^{\intercal}_F )(\nabla_{\vec{V}_F} \lambda_k) \right), \label{delJ}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha = \lambda_{k}(\vec{V}(t))\)</span> is simply the propensity of reaction <span class="math notranslate nohighlight">\(\mathcal{R}_k\)</span>
+at time <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(\beta = \dfrac{\mathrm{d}\vec{V}^{\intercal}(t)}{\mathrm{d}t} \nabla_{\vec{V}} \lambda_k\)</span>.
+Importantly, we know that between jumps <span class="math notranslate nohighlight">\(\vec{V}'_F\)</span> is given by the JSF equation previously described, whilst <span class="math notranslate nohighlight">\(\vec{V}'_J=0\)</span>.
+Thus, <span class="math notranslate nohighlight">\(\beta = \vec{\lambda}^{\intercal}_{\mathcal{S}'}(\vec{V})\eta^{\intercal}_{\mathcal{S}'}   \nabla_{\vec{V}_F} \lambda_k\)</span> (evaluated at <span class="math notranslate nohighlight">\(t\)</span>).</p>
+<p>To calculate the updated jump clock, we subtract <span class="math notranslate nohighlight">\(\Delta J_k\)</span> from <span class="math notranslate nohighlight">\(J_k(t)\)</span> to get a provisional <span class="math notranslate nohighlight">\(J_k(t+\Delta t)\)</span>.
+If <span class="math notranslate nohighlight">\(J_k(t) - \Delta J_k &gt; 0\)</span>, then no jump occurred during the interval <span class="math notranslate nohighlight">\((t, t+\Delta t)\)</span> and we have the jump clock
+<span class="math notranslate nohighlight">\(J_k(t+\Delta t) := J_k(t) - \Delta J_k\)</span>. If instead <span class="math notranslate nohighlight">\(J_k(t) - \Delta J_k &lt; 0\)</span> then there is a jump (i.e. a <span class="math notranslate nohighlight">\(\mathcal{R}_k\)</span> reaction)
+during the interval <span class="math notranslate nohighlight">\((t,t+\Delta t)\)</span> (where <span class="math notranslate nohighlight">\(0&lt;\Delta \tau &lt;\Delta t\)</span>) which we need to account for in the updated jump clock.
+Let <span class="math notranslate nohighlight">\(t + \Delta \tau\)</span> denote the time at which this jump occurs. We can find <span class="math notranslate nohighlight">\(\Delta \tau\)</span> by solving the equation
+<span class="math notranslate nohighlight">\(2 \Delta  J_k - \Delta \tau(2\alpha + \beta\Delta \tau) = 0\)</span> where <span class="math notranslate nohighlight">\(\Delta  J_k\)</span> is the residual of the jump clock from <span class="math notranslate nohighlight">\(t\)</span> to <span class="math notranslate nohighlight">\(t + \Delta  \tau\)</span>.
+However, the time <span class="math notranslate nohighlight">\(t+\Delta \tau\)</span> (<span class="math notranslate nohighlight">\(0&lt;\Delta \tau&lt;\Delta t\)</span>) where the jump occurs can be found by solving
+<span class="math notranslate nohighlight">\(2 \Delta  J_k - \Delta \tau(2\alpha + \beta\Delta \tau) = 0\)</span> where <span class="math notranslate nohighlight">\(\Delta  J_k\)</span> is the residual of the jump clock from <span class="math notranslate nohighlight">\(t\)</span> to <span class="math notranslate nohighlight">\(t + \Delta  \tau\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\Delta \tau =
+\begin{cases}
+\frac{\sqrt{\alpha^2 + 2\beta \Delta  J_k} - \alpha}{\beta}, \quad &amp;\beta \neq 0,\\
+\frac{\alpha}{\Delta J_k}, \quad &amp;\beta = 0.
+\end{cases}\end{split}\]</div>
+<p>In the case that a jump clock runs out, instead of using <span class="math notranslate nohighlight">\(\Delta t\)</span> to push forward the flows, we instead use <span class="math notranslate nohighlight">\(\Delta \tau\)</span>
+and implement the jump after the flow to time <span class="math notranslate nohighlight">\(t+\Delta \tau\)</span>. Subsequently, we reinitialise the jump clock <span class="math notranslate nohighlight">\(J_k\)</span>.
+For a summary of this procedure see the below figure:</p>
+<a class="reference internal image-reference" href="images/JumpClock.png"><img alt="JumpClock" class="align-center" src="images/JumpClock.png" style="width: 500px;" />
+</a>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">JSF Mathematical Framework</a></li>
+<li><a class="reference internal" href="#jump-events">Jump Events</a></li>
+<li><a class="reference internal" href="#flow-events">Flow Events</a></li>
+<li><a class="reference internal" href="#switch-events">Switch Events</a></li>
+<li><a class="reference internal" href="#jump-clock-updates">Jump Clock Updates</a></li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="index.html"
+                          title="previous chapter">Jump-Switch-Flow Documentation</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="jsf.html"
+                          title="next chapter">jsf</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="sources/jsf_mathematical_framework.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="jsf.html" title="jsf"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Jump-Switch-Flow Documentation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Jump-Switch-Flow  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">JSF Mathematical Framework</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, Domenic Germano.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    </div>
+  </body>
+</html>

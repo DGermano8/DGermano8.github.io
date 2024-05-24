@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html lang="en" data-content_root="./">
@@ -6,31 +7,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Jump-Switch-Flow Documentation &#8212; Jump-Switch-Flow  documentation</title>
-    <link rel="stylesheet" type="text/css" href="static/pygments.css?v=d1102ebc" />
-    <link rel="stylesheet" type="text/css" href="static/alabaster.css?v=12dfc556" />
-    <link rel="stylesheet" type="text/css" href="static/custom.css?v=fe58cb32" />
+    <link rel="stylesheet" type="text/css" href="static/pygments.css?v=649a27d8" />
+    <link rel="stylesheet" type="text/css" href="static/bizstyle.css?v=658d757c" />
+    <link rel="stylesheet" type="text/css" href="static/custom.css?v=522bdb54" />
+    
     <script src="static/documentation_options.js?v=5929fcd5"></script>
     <script src="static/doctools.js?v=9a2dae69"></script>
     <script src="static/sphinx_highlight.js?v=dc90522c"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="jsf" href="jsf.html" />
-   
-  <link rel="stylesheet" href="static/custom.css" type="text/css" />
-  
-
-  
-  
-
+    <link rel="next" title="JSF Mathematical Framework" href="jsf_mathematical_framework.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="static/css3-mediaqueries.js"></script>
+    <![endif]-->
   </head><body>
-  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="jsf_mathematical_framework.html" title="JSF Mathematical Framework"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">Jump-Switch-Flow  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Jump-Switch-Flow Documentation</a></li> 
+      </ul>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          
-
           <div class="body" role="main">
             
   <section id="jump-switch-flow-documentation">
@@ -40,14 +53,12 @@
 <nav class="contents local" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#overview" id="id2">Overview</a></p></li>
-<li><p><a class="reference internal" href="#jsf-mathematical-framework" id="id3">JSF Mathematical Framework</a></p></li>
-<li><p><a class="reference internal" href="#lotka-volterra-predator-prey-model-example" id="id4">Lotka-Volterra predator-prey model example</a></p></li>
-<li><p><a class="reference internal" href="#predator-prey-model-with-jsf-example" id="id5">Predator-prey model with JSF example</a></p></li>
-<li><p><a class="reference internal" href="#types" id="id6">Types</a></p></li>
-<li><p><a class="reference internal" href="#api" id="id7">API</a></p></li>
-<li><p><a class="reference internal" href="#installation" id="id8">Installation</a></p></li>
-<li><p><a class="reference internal" href="#faqs" id="id9">FAQs</a></p></li>
-<li><p><a class="reference internal" href="#housekeeping" id="id10">Housekeeping</a></p></li>
+<li><p><a class="reference internal" href="#lotka-volterra-predator-prey-model-example" id="id3">Lotka-Volterra predator-prey model example</a></p></li>
+<li><p><a class="reference internal" href="#installation" id="id4">Installation</a></p></li>
+<li><p><a class="reference internal" href="#types" id="id5">Types</a></p></li>
+<li><p><a class="reference internal" href="#api" id="id6">API</a></p></li>
+<li><p><a class="reference internal" href="#faqs" id="id7">FAQs</a></p></li>
+<li><p><a class="reference internal" href="#housekeeping" id="id8">Housekeeping</a></p></li>
 </ul>
 </nav>
 <section id="overview">
@@ -57,92 +68,12 @@ Jump-Switch-Flow (JSF) process. The JSF process is a continuous-time
 process that can be used to represent compartmental models where
 stochastic effects are important at low population sizes but can be
 ignored at high population sizes.</p>
-</section>
-<section id="jsf-mathematical-framework">
-<h2><a class="toc-backref" href="#id3" role="doc-backlink">JSF Mathematical Framework</a><a class="headerlink" href="#jsf-mathematical-framework" title="Link to this heading">¶</a></h2>
-<p>To couple both the stochastic (Jumping) and deterministic (Flowing)
-compartments, we model each compartment as to where they are in state space.</p>
-<p>Consider a compartmental model with <span class="math notranslate nohighlight">\(n\)</span> compartments <span class="math notranslate nohighlight">\(\vec{V} = \left\{ V_i\right\}_{i=1}^n\)</span>,
-where <span class="math notranslate nohighlight">\(V_{i}(t)\)</span> represents the value of the <span class="math notranslate nohighlight">\(i\)</span> th compartment at time <span class="math notranslate nohighlight">\(t\)</span>.
-For example, <span class="math notranslate nohighlight">\(V_i\)</span> could be the number of people infected with a pathogen, or the copy
-number of a molecule in a cell. The state variables <span class="math notranslate nohighlight">\(V_i\)</span> may take values from different
-domains depending upon the resolution needed for the model. For example, in an ODE, <span class="math notranslate nohighlight">\(\vec{V}\)</span>
-will have real values and in a CTMC <span class="math notranslate nohighlight">\(\vec{V}\)</span>  might have integer values.</p>
-<p>Typically, discrete values are used to represent small populations, while larger populations
-will be represented with a continuum. To accommodate both scales, we model the domain of <span class="math notranslate nohighlight">\(V_{i}\)</span>
-as <span class="math notranslate nohighlight">\(\mathcal{V}_{\Omega_i}=\{0,1,\ldots,\Omega_{i}\}\cup(\Omega_{i},\infty)\)</span>. The switching
-threshold parameter, <span class="math notranslate nohighlight">\(\Omega_i\in \mathbb{Z}_{\geq 0}\)</span>, is where the <span class="math notranslate nohighlight">\(i\)</span> th compartment
-transitions from discrete to continuous dynamics. If a compartment <span class="math notranslate nohighlight">\(V_{i}\)</span> has a value in
-<span class="math notranslate nohighlight">\(\{0,1,\ldots,\Omega_{i}\}\)</span>, we call it “discrete” (or “jumping”), and if it has a value in
-<span class="math notranslate nohighlight">\((\Omega_{i},\infty)\)</span>, we call it “continuous” (or “flowing”). While the switching threshold
-can be compartment specific, for ease of exposition, we will only consider a single threshold shared
-between all compartments <span class="math notranslate nohighlight">\(\Omega = \Omega_i\)</span>. At any moment in time let us assume <span class="math notranslate nohighlight">\(q\)</span> of the
-<span class="math notranslate nohighlight">\(n\)</span> compartments are flowing. We use the notation <span class="math notranslate nohighlight">\(\vec{V}_F = \left\{ V_i: V_i&gt;\Omega \right\} \in (\Omega,\infty)^q\)</span>
-and <span class="math notranslate nohighlight">\(\vec{V}_J = \left\{ V_i: V_i\leq \Omega \right\} \in \left\{0, 1, \ldots, \Omega \right\}^{(n-q)}\)</span>
-to represent the compartments in each of the flowing and jumping states, respectively.</p>
-<p>The dynamics of each compartment <span class="math notranslate nohighlight">\(V_i\)</span> are described by a set of <span class="math notranslate nohighlight">\(m\)</span> “reactions”
-<span class="math notranslate nohighlight">\(\mathcal{R} = \left\{\mathcal{R}_k \right\}_{k=1}^m\)</span>. Each reaction <span class="math notranslate nohighlight">\(\mathcal{R}_k\)</span>
-is defined by two properties: the rate (per unit time) at which it occurs, <span class="math notranslate nohighlight">\(\lambda_{k}\)</span>, which may be
-(and usually is) a function of the state <span class="math notranslate nohighlight">\(\vec{V}\)</span>; and the effect on the state, i.e. the change <span class="math notranslate nohighlight">\(\eta_{ik}\)</span>
-to the size of compartment <span class="math notranslate nohighlight">\(V_i\)</span> when reaction <span class="math notranslate nohighlight">\(\mathcal{R}_k\)</span> occurs. As a matrix,
-<span class="math notranslate nohighlight">\(\eta\in \mathbb{Z}^{n,m}\)</span> is referred to as the “stoichiometric matrix”. For ODE models, these
-reactions occur continuously and are written in the form</p>
-<div class="math notranslate nohighlight">
-\[\frac{\mathrm{d}\vec{V}}{\mathrm{d}t} = \eta \vec{\lambda}(\vec{V}),\]</div>
-<p>while for CTMC models, reactions in the system <span class="math notranslate nohighlight">\(\mathcal{R}\)</span> occur as discrete events.
-In the later case, each reaction <span class="math notranslate nohighlight">\(\mathcal{R}_k\)</span> has a separate propensity described by
-<span class="math notranslate nohighlight">\(\lambda_k(\vec{V})\)</span>, this propensity remains constant between events but when an event
-<span class="math notranslate nohighlight">\(\mathcal{R}_k\)</span> occurs, there is a change in <span class="math notranslate nohighlight">\(\vec{V}\)</span> (as specified by the elements of
-<span class="math notranslate nohighlight">\(\eta_{\cdot k}\)</span>) and therefore in <span class="math notranslate nohighlight">\(\vec{\lambda}(\vec{V})\)</span>.</p>
-<p>We define the subset of reactions <span class="math notranslate nohighlight">\(\mathcal{S}\subseteq \mathcal{R}\)</span> to contain those treated
-as stochastic events. We define <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>, which we use throughout this manuscript, captures
-a larger set of reactions; <span class="math notranslate nohighlight">\(\mathcal{S} = \left\{\mathcal{R}_k:\exists i \text{ s.t. } V_i\in\vec{V}_J \text{ and }  \left(\eta_{ik}\neq 0 \text{ or } \partial_{V_i}\lambda_k \neq 0\right)   \right\}\)</span>.
-In this definition, a reaction is included in <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> if either (1) it causes a change in
-jumping (discrete) populations textit{or} (2) it is influenced by a discrete population (perhaps as reactants for example).</p>
-<p>Reactions in <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> are simulated using stochastically sampled times similar to CTMC models.
-It is important to note that, unlike time homogeneous CTMC models, the propensities are not constant
-because the state <span class="math notranslate nohighlight">\(\vec{V}\)</span> (and therefore <span class="math notranslate nohighlight">\(\vec{\lambda}\)</span>) are continuously varying.
-When any reaction <span class="math notranslate nohighlight">\(\mathcal{R}_k\in\mathcal{S}\)</span> occurs, we say the system has “jumped” and an
-instantaneous change of <span class="math notranslate nohighlight">\(\eta_{ik}\)</span> for each compartment <span class="math notranslate nohighlight">\(V_i\)</span> occurs (irrespective of whether
-<span class="math notranslate nohighlight">\(V_i\in\vec{V}_J\)</span> or <span class="math notranslate nohighlight">\(V_i\in\vec{V}_F\)</span> to ensure mass conservation is observed). We will refer
-therefore to reactions in <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> as “jumps”. The reactions in <span class="math notranslate nohighlight">\(\mathcal{S}'=\mathcal{R}\setminus \mathcal{S}\)</span>
-are not stochastic, we call these “flows” because they represent the continual change of value of the
-relevant compartments, all of which are continuous by definition of <span class="math notranslate nohighlight">\(\mathcal{S}'\)</span>.
-At any moment in time, we denote <span class="math notranslate nohighlight">\(|\mathcal{S}'| = p = m - |\mathcal{S}|\)</span> to be the number of reactions
-which are flowing.</p>
-<p>Finally, the hybrid model that we propose is capable of “switching”. Switch events are defined as a
-compartment between <span class="math notranslate nohighlight">\(\vec{V}_F\)</span> and <span class="math notranslate nohighlight">\(\vec{V}_J\)</span>. These events occur when a compartment’s
-value crosses the switching threshold <span class="math notranslate nohighlight">\(\Omega\)</span>. Importantly, switch events can change
-<span class="math notranslate nohighlight">\(\mathcal{S}\)</span> and are paradigm defining events which should occur infrequently compared to
-jumps (frequent) and flows (continuous).</p>
-<p>Due to the way that <span class="math notranslate nohighlight">\(\mathcal{R}\)</span> is partitioned, it is possible to order the rows and columns of <span class="math notranslate nohighlight">\(\eta\)</span> at
-any moment into the upper-triangular block form</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\eta = \left(\begin{array}{c|c}
-\eta_{\mathcal{S}'} &amp; \bar{\eta}_{\mathcal{S}} \\ \hline
-0 &amp; \eta_{\mathcal{S}} \end{array}\right),\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\eta_{\mathcal{S}'} \in \mathbb{Z}^{q\times p}\)</span>, <span class="math notranslate nohighlight">\(\eta_{\mathcal{S}} \in \mathbb{Z}^{(n-q)\times (m-p)}\)</span>
-and <span class="math notranslate nohighlight">\(\bar{\eta}_{\mathcal{S}} \in \mathbb{Z}^{q\times (m-p)}\)</span> refer to stoichiometric coefficients for changes in flowing
-compartments under flows, jumping compartments under jumps, and flowing compartments under jumps, respectively. Written
-as a system of equations analogous to the above ODE equation, the hybrid JSF model we propose formally takes the following form.
-For any time interval <span class="math notranslate nohighlight">\(t_0&lt;t&lt;t_1\)</span> between switching events,</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\frac{\mathrm{d} \vec{V}_F}{\mathrm{d} t} &amp;= \eta_{\mathcal{S}'} \vec{\lambda}_{\mathcal{S}'}(\vec{V}) + \bar{\eta}_{\mathcal{S}} \vec{\Lambda}_{\mathcal{S}}(\vec{V}),\\
-\vec{V}_J(t) &amp;= \vec{V}_J(t_0) + \eta_{\mathcal{S}} \int_{t_0}^t  \vec{\Lambda}_{\mathcal{S}}(\vec{V}) \ \mathrm{d} s,\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\vec{\lambda}_{\mathcal{S}'}\in\mathbb{R}^p\)</span> are the reaction rates of flows and <span class="math notranslate nohighlight">\(\vec{\Lambda}_{\mathcal{S}}\)</span>
-is a stochastic vector of <span class="math notranslate nohighlight">\(m-p\)</span> delta-function spike trains that are derived from the realisations of <span class="math notranslate nohighlight">\(m-p\)</span>
-different jumps sampled at rates which are dependent on the dynamic changes in the propensities <span class="math notranslate nohighlight">\(\vec{\lambda}_{\mathcal{S}}\in\mathbb{R}^{m-p}\)</span> for these jumps.</p>
-<p>The below figure shows how it is
-possible for a variable to <cite>switch</cite> between flowing and jumping
-regimes. When a flowing variable decreases to <span class="math notranslate nohighlight">\(\Omega\)</span>, it switches
-to jumping and we consider it a discrete variable. When a jumping
-variable jumps from <span class="math notranslate nohighlight">\(\Omega\)</span> to <span class="math notranslate nohighlight">\(\Omega+1\)</span> it switches to flowing
-and we consider it to be a continuous variable.</p>
-<a class="reference internal image-reference" href="images/compartment_switching_depiction.png"><img alt="compartment_switching_depiction" class="align-center" src="images/compartment_switching_depiction.png" style="width: 500px;" />
-</a>
+<p>Here, we provide a brief overview of the JSF process and how it can be used to simulate
+compartmental models through a Lotka-Volterra predator-prey model example. The Mathematical
+framework of the JSF process is also discussed.</p>
 </section>
 <section id="lotka-volterra-predator-prey-model-example">
-<h2><a class="toc-backref" href="#id4" role="doc-backlink">Lotka-Volterra predator-prey model example</a><a class="headerlink" href="#lotka-volterra-predator-prey-model-example" title="Link to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Lotka-Volterra predator-prey model example</a><a class="headerlink" href="#lotka-volterra-predator-prey-model-example" title="Link to this heading">¶</a></h2>
 <p>As a simple example for how JSF can be used to capture both stochastic and deterministic
 dynamics, we consider the classic Lotka-Volterra preditor-prey model.
 In this model, individuals are either prey (<span class="math notranslate nohighlight">\(V_1\)</span>) or predator (<span class="math notranslate nohighlight">\(V_2\)</span>).
@@ -167,9 +98,8 @@ as both a stochastic and deterministic process to obtain both the limit cycle an
 as shown in the figure below.</p>
 <a class="reference internal image-reference" href="images/PP_Behaviour.png"><img alt="PP_Behaviour" class="align-center" src="images/PP_Behaviour.png" style="width: 600px;" />
 </a>
-</section>
-<section id="predator-prey-model-with-jsf-example">
-<h2><a class="toc-backref" href="#id5" role="doc-backlink">Predator-prey model with JSF example</a><a class="headerlink" href="#predator-prey-model-with-jsf-example" title="Link to this heading">¶</a></h2>
+<section id="implementing-the-predator-prey-model-with-jsf">
+<h3>Implementing the Predator-prey model with JSF<a class="headerlink" href="#implementing-the-predator-prey-model-with-jsf" title="Link to this heading">¶</a></h3>
 <p>To simulate the Lotka-Volterra predator-prey model using the JSF process, we first need to import the necessary packages.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">random</span>
@@ -244,6 +174,7 @@ compartment is not allowed to switch, and will remain in the regime it was initi
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span> <span class="o">=</span> <span class="n">jsf</span><span class="o">.</span><span class="n">jsf</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">rates</span><span class="p">,</span> <span class="n">stoich</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">my_opts</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;operator-splitting&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+</section>
 <section id="visualising-the-simulation">
 <h3>Visualising the simulation<a class="headerlink" href="#visualising-the-simulation" title="Link to this heading">¶</a></h3>
 <p>Finally, we can plot the results of the simulation. We’ll use a combination of <cite>pandas</cite> and <cite>matplotlib</cite> to do this,
@@ -262,8 +193,27 @@ but the output of <cite>jsf</cite> is a pandas DataFrame of numbers so it’s ea
 </a>
 </section>
 </section>
+<section id="installation">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Installation</a><a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
+<p id="id1">This package is not yet available on PyPI. You can install it from a <a class="reference internal" href="#local-copy-installation"><span class="std std-ref">local copy</span></a> or from <a class="reference internal" href="#github-installation"><span class="std std-ref">GitHub</span></a>.</p>
+<section id="from-local-copy">
+<span id="local-copy-installation"></span><h3>From Local Copy<a class="headerlink" href="#from-local-copy" title="Link to this heading">¶</a></h3>
+<p>If you have a local copy of the package, you can install it with pip.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>/path/to/package
+</pre></div>
+</div>
+</section>
+<section id="from-github">
+<span id="github-installation"></span><h3>From GitHub<a class="headerlink" href="#from-github" title="Link to this heading">¶</a></h3>
+<p>This won’t work until the package has been made public. Once it has,
+you can install it with pip.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/DGermano8/jsf.git
+</pre></div>
+</div>
+</section>
+</section>
 <section id="types">
-<h2><a class="toc-backref" href="#id6" role="doc-backlink">Types</a><a class="headerlink" href="#types" title="Link to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Types</a><a class="headerlink" href="#types" title="Link to this heading">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">jsf.types</span></code> module provides some key types for this package.
 There is nothing fancy here; they are just used to make the type hints
 more informative and help to leverage <code class="docutils literal notranslate"><span class="pre">mypy</span></code>.</p>
@@ -278,10 +228,15 @@ more informative and help to leverage <code class="docutils literal notranslate"
 </div>
 </section>
 <section id="api">
-<h2><a class="toc-backref" href="#id7" role="doc-backlink">API</a><a class="headerlink" href="#api" title="Link to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">API</a><a class="headerlink" href="#api" title="Link to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Modules</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="jsf_mathematical_framework.html">JSF Mathematical Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jsf_mathematical_framework.html#jump-events">Jump Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jsf_mathematical_framework.html#flow-events">Flow Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jsf_mathematical_framework.html#switch-events">Switch Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jsf_mathematical_framework.html#jump-clock-updates">Jump Clock Updates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="jsf.html">jsf</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="jsf.html#jsf.ArrayMultiplyAB"><code class="docutils literal notranslate"><span class="pre">ArrayMultiplyAB()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="jsf.html#jsf.ArrayPlusAB"><code class="docutils literal notranslate"><span class="pre">ArrayPlusAB()</span></code></a></li>
@@ -308,33 +263,14 @@ more informative and help to leverage <code class="docutils literal notranslate"
 </ul>
 </div>
 </section>
-<section id="installation">
-<h2><a class="toc-backref" href="#id8" role="doc-backlink">Installation</a><a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
-<p id="id1">This package is not yet available on PyPI. You can install it from a <a class="reference internal" href="#local-copy-installation"><span class="std std-ref">local copy</span></a> or from <a class="reference internal" href="#github-installation"><span class="std std-ref">GitHub</span></a>.</p>
-<section id="from-local-copy">
-<span id="local-copy-installation"></span><h3>From Local Copy<a class="headerlink" href="#from-local-copy" title="Link to this heading">¶</a></h3>
-<p>If you have a local copy of the package, you can install it with pip.</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>/path/to/package
-</pre></div>
-</div>
-</section>
-<section id="from-github">
-<span id="github-installation"></span><h3>From GitHub<a class="headerlink" href="#from-github" title="Link to this heading">¶</a></h3>
-<p>This won’t work until the package has been made public. Once it has,
-you can install it with pip.</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/DGermano8/jsf.git
-</pre></div>
-</div>
-</section>
-</section>
 <section id="faqs">
-<h2><a class="toc-backref" href="#id9" role="doc-backlink">FAQs</a><a class="headerlink" href="#faqs" title="Link to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">FAQs</a><a class="headerlink" href="#faqs" title="Link to this heading">¶</a></h2>
 <p>If you have a question that is not answered by this documentation,
 please lodge an issue on the GitHub page for this package:
 <a class="reference external" href="https://github.com/DGermano8/jsf">https://github.com/DGermano8/jsf</a></p>
 </section>
 <section id="housekeeping">
-<h2><a class="toc-backref" href="#id10" role="doc-backlink">Housekeeping</a><a class="headerlink" href="#housekeeping" title="Link to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Housekeeping</a><a class="headerlink" href="#housekeeping" title="Link to this heading">¶</a></h2>
 <section id="testing">
 <h3>Testing<a class="headerlink" href="#testing" title="Link to this heading">¶</a></h3>
 <p>There are some unit tests in the <code class="docutils literal notranslate"><span class="pre">tests</span></code> directory. You can run them
@@ -356,36 +292,52 @@ mypy<span class="w"> </span>jsf
 </section>
 
 
+            <div class="clearer"></div>
           </div>
-          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="#">Jump-Switch-Flow</a></h1>
-
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="jsf.html">jsf</a></li>
-<li class="toctree-l1"><a class="reference internal" href="exact.html">exact</a></li>
+  <div>
+    <h3><a href="#">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Jump-Switch-Flow Documentation</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#lotka-volterra-predator-prey-model-example">Lotka-Volterra predator-prey model example</a><ul>
+<li><a class="reference internal" href="#implementing-the-predator-prey-model-with-jsf">Implementing the Predator-prey model with JSF</a></li>
+<li><a class="reference internal" href="#visualising-the-simulation">Visualising the simulation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#from-local-copy">From Local Copy</a></li>
+<li><a class="reference internal" href="#from-github">From GitHub</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#types">Types</a></li>
+<li><a class="reference internal" href="#api">API</a></li>
+<li><a class="reference internal" href="#faqs">FAQs</a></li>
+<li><a class="reference internal" href="#housekeeping">Housekeeping</a><ul>
+<li><a class="reference internal" href="#testing">Testing</a></li>
+<li><a class="reference internal" href="#code-formating-and-checking">Code formating and checking</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="#">Documentation overview</a><ul>
-      <li>Next: <a href="jsf.html" title="next chapter">jsf</a></li>
-  </ul></li>
-</ul>
-</div>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="jsf_mathematical_framework.html"
+                          title="next chapter">JSF Mathematical Framework</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
 <search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
@@ -396,32 +348,29 @@ mypy<span class="w"> </span>jsf
     </div>
 </search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
-
-
-
-
-
-
-
-
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &#169;2023, Domenic Germano.
-      
-      |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
-      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
-      
-      |
-      <a href="sources/index.rst.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="jsf_mathematical_framework.html" title="JSF Mathematical Framework"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">Jump-Switch-Flow  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Jump-Switch-Flow Documentation</a></li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, Domenic Germano.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    </div>
   </body>
 </html>
