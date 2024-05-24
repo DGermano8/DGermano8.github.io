@@ -125,7 +125,7 @@ the death rate of the predators, <code class="docutils literal notranslate"><spa
 <span class="n">mC</span> <span class="o">=</span> <span class="mf">1.50</span>
 </pre></div>
 </div>
-<p>We then define the Rates if the model:</p>
+<p>We then define the rates of the model:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rates</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="p">[</span><span class="n">mA</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                       <span class="n">mC</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
                       <span class="n">mB</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
@@ -160,8 +160,8 @@ as a stochastic processes.</p>
 </div>
 <p>Now all we need to set are the options for the simulation. We set the time step, <code class="docutils literal notranslate"><span class="pre">dt</span></code> to be 0.01 and the
 threshold for switching, <code class="docutils literal notranslate"><span class="pre">SwitchingThreshold</span></code>,  to be 30 for both compartments. <code class="docutils literal notranslate"><span class="pre">EnforceDo</span></code> is a boolean list and describes which
-compartments are permitted to dynamically change between discrete and continuous regimes. If an entry of <code class="docutils literal notranslate"><span class="pre">EnforceDo</span></code> is 1,
-then that compartment is allowed to switch between discrete and continuous regimes. If an entry of <code class="docutils literal notranslate"><span class="pre">EnforceDo</span></code> is 0, then that
+compartments are permitted to dynamically change between discrete and continuous regimes. If an entry of <code class="docutils literal notranslate"><span class="pre">EnforceDo</span></code> is 0,
+then that compartment is allowed to switch between discrete and continuous regimes. If an entry of <code class="docutils literal notranslate"><span class="pre">EnforceDo</span></code> is 1, then that
 compartment is not allowed to switch, and will remain in the regime it was initialised in.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">my_opts</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;EnforceDo&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
