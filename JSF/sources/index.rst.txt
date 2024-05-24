@@ -222,8 +222,7 @@ If you have a local copy of the package, you can install it with pip.
 From GitHub
 ^^^^^^^^^^^
 
-This won't work until the package has been made public. Once it has,
-you can install it with pip.
+You can install JSF with pip from GitHub, at https://github.com/DGermano8/jsf:
 
 .. code-block:: sh
 
