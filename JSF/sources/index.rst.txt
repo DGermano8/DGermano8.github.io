@@ -27,6 +27,10 @@ Here, we provide a brief overview of the JSF process and how it can be used to s
 compartmental models through a Lotka-Volterra predator-prey model example. The Mathematical
 framework of the JSF process is also discussed.
 
+Interactive Jupyter Notebook Playground
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+An interactive BETA version of the below example is also available `here <https://dgermano8.github.io/JSFOnlineDemo>`_ (best viewed in Firefox or Chrome).
+
 Lotka-Volterra predator-prey model example
 ------------------------------------------
 
@@ -182,9 +186,9 @@ but the output of `jsf` is a pandas DataFrame of numbers so it's easy to use whi
 
 .. code-block:: python
 
-   plt.plot(sim[1], sim[0][0], label="Predator")
-   plt.plot(sim[1], sim[0][1], label="Prey")
-   plt.axhline(y=my_opts["SwitchingThreshold"][1], color="r", linestyle="--")
+   plt.plot(sim[1], sim[0][0], label="Prey")
+   plt.plot(sim[1], sim[0][1], label="Predator")
+   plt.axhline(y=my_opts["SwitchingThreshold"][1], color="k", linestyle="--")
    plt.xlabel("Time")
    plt.ylabel("Population size")
    plt.legend()

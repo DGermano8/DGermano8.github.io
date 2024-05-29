@@ -71,6 +71,10 @@ ignored at high population sizes.</p>
 <p>Here, we provide a brief overview of the JSF process and how it can be used to simulate
 compartmental models through a Lotka-Volterra predator-prey model example. The Mathematical
 framework of the JSF process is also discussed.</p>
+<section id="interactive-jupyter-notebook-playground">
+<h3>Interactive Jupyter Notebook Playground<a class="headerlink" href="#interactive-jupyter-notebook-playground" title="Link to this heading">¶</a></h3>
+<p>An interactive BETA version of the below example is also available <a class="reference external" href="https://dgermano8.github.io/JSFOnlineDemo">here</a> (best viewed in Firefox or Chrome).</p>
+</section>
 </section>
 <section id="lotka-volterra-predator-prey-model-example">
 <h2><a class="toc-backref" href="#id3" role="doc-backlink">Lotka-Volterra predator-prey model example</a><a class="headerlink" href="#lotka-volterra-predator-prey-model-example" title="Link to this heading">¶</a></h2>
@@ -179,9 +183,9 @@ compartment is not allowed to switch, and will remain in the regime it was initi
 <h3>Visualising the simulation<a class="headerlink" href="#visualising-the-simulation" title="Link to this heading">¶</a></h3>
 <p>Finally, we can plot the results of the simulation. We’ll use a combination of <cite>pandas</cite> and <cite>matplotlib</cite> to do this,
 but the output of <cite>jsf</cite> is a pandas DataFrame of numbers so it’s easy to use whichever plotting library you prefer.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sim</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">sim</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predator&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sim</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">sim</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Prey&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">my_opts</span><span class="p">[</span><span class="s2">&quot;SwitchingThreshold&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sim</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">sim</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Prey&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sim</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">sim</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predator&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">my_opts</span><span class="p">[</span><span class="s2">&quot;SwitchingThreshold&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Population size&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -301,7 +305,10 @@ mypy<span class="w"> </span>jsf
     <h3><a href="#">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">Jump-Switch-Flow Documentation</a><ul>
-<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#overview">Overview</a><ul>
+<li><a class="reference internal" href="#interactive-jupyter-notebook-playground">Interactive Jupyter Notebook Playground</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#lotka-volterra-predator-prey-model-example">Lotka-Volterra predator-prey model example</a><ul>
 <li><a class="reference internal" href="#implementing-the-predator-prey-model-with-jsf">Implementing the Predator-prey model with JSF</a></li>
 <li><a class="reference internal" href="#visualising-the-simulation">Visualising the simulation</a></li>
