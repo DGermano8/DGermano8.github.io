@@ -1,250 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Domenic Germano</title>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Domenic Germano</title>
+		<meta name="keywords" content="Tissue Dynamics, Tissue Mechanics, Individual-based Modelling, Dynamical System">
+		<meta name="author" content="Domenic P.J. Germano">
+		<link rel="canonical" href="https://DGermano8.github.io/">
+		<meta property="og:title" content="Domenic P.J. Germano | Mathematical Biology">
+		<meta property="og:url" content="https://DGermano8.github.io/">
+		<meta property="og:type" content="website">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+		<style>
+			body {
+				font-family: 'Roboto', sans-serif;
+				background: rgb(38, 38, 38);
+				color: #e7e6e6;
+				margin: 0;
+				padding: 0;
+				justify-content: center;
+			}
 
-    <meta name="keywords" content="Tissue Dynamics, Tissue Mechanics, Individual-based Modelling, Dynamical System">
-    <meta name="author" content="Domenic P.J. Germano">
-    <link rel="canonical" href="https://DGermano8.github.io/">
-    <meta property="og:title" content="Domenic P.J. Germano | Mathematical Biology">
-    <meta property="og:url" content="https://DGermano8.github.io/">
-    <meta property="og:type" content="website">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+			.container {
+				max-width: 900px;
+				margin: auto;
+				padding: 20px;
+				line-height: 1.6;
+			}
 
-    <style>
-      .container {
-	  width: 100%;
-	  max-width: 900px;
-	  margin: auto;
-	  padding: 0 20px;
-	  line-height: 1.5;
-	  text-align: justify;
-	  /* font-size: medium; */
-      }
+			header {
+				position: sticky;
+				top: 0;
+				background-color: #262626;
+				z-index: 1000;
+				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+			}
 
-      header {
-	  position: sticky;
-	  top: 0;
-	  background-color: rgb(38, 38, 38);
-	  z-index: 1000;
-      }
+			nav {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 1em;
+			}
 
-      nav {
-	  background-color: #fff; /* Add the desired background color here */
-	  background:rgba(131, 96, 150, 1);
-	  display: flex;
-	  justify-content: space-between;
-	  align-items: center;
-	  padding: 0.5em 0.5em;
-      border-radius: 10px; /* Add rounded edges to the padding */
-      }
+			nav h3 {
+				color: #8a9cde;
+				margin: 0;
+			}
 
-      .nav-links {
-	  margin-left: auto;
-	  margin-right: 20px;
-	  text-decoration: none;
-      font-family: "Courier New", Courier, monospace;
-      }
+			.nav-links a {
+				color: #8a9cde;
+				text-decoration: none;
+				margin: 0 10px;
+				font-weight: bold;
+				transition: color 0.3s ease;
+			}
 
-      section {
-	  scroll-margin-top: 80px; /* Adjust this value based on the actual height of your header */
-	  margin-top: 40px;
-	  margin-bottom: 40px;
-	  font-family: "Courier New", Courier, monospace;
-	  color: rgb(231,230,230);
-      }
+			.nav-links a:hover {
+				color: #ffffff;
+			}
 
-      section h2 {
-	  font-family: "Courier New", Courier, monospace;
-	  color: rgb(231,230,230);
-      }
+			section {
+				margin: 40px 0;
+			}
 
-      h3 {
-	  font-family: "Courier New", Courier, monospace;
-	  font-size: x-large;
-	  color: rgb(231,230,230);
-      }
+			section h2 {
+				text-align: center;
+				color: #8a9cde;
+				margin-bottom: 20px;
+			}
 
-      .grid-container {
-	  display: grid;
-	  grid-template-columns: repeat(2, 1fr); /* 3 columns */
-	  gap: 10%; /* space between grid items */
-	  max-width: 100%; /* Adjust the maximum width as needed */
-	  margin: auto; /* Center the grid */
-          padding-top: 2%;
-          padding-bottom: 2%;
-      }
+			.grid-container {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+				gap: 20px;
+			}
 
-	  img {
-		max-width: 100%;
-		margin: auto;
-		justify-content: center; /* Center horizontally */
-		align-items: center; /* Center vertically */
-	  }
-	  .image-container {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	  }
-	  .software-image-container {
-		display: flex;
-		justify-content: left;
-		align-items: center;
-	  }
-      .grid-item {
-	  max-width: 300px;
-	  height: auto;
-	  display: block;
-	  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
-	  display: flex;
-	  flex-direction: column;
-	  align-items: center;
-	  justify-content: start;
-      }
+			.grid-item {
+				background: #444;
+				padding: 20px;
+				border-radius: 10px;
+				text-align: center;
+				transition: transform 0.3s ease, box-shadow 0.3s ease;
+			}
 
-      .grid-item:hover {
-	  filter: brightness(110%);
-	  transform: translate(-5px, -5px);
-      box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
-      }
+			.grid-item:hover {
+				transform: translateY(-5px);
+				box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+			}
 
-      .headshot {
-	  width: 200px; /* Adjust as needed */
-	  height: 200px; /* Adjust as needed */
-	  border-radius: 50%; /* This creates the circular shape */
-	  object-fit: cover; /* Ensures the image covers the area without being stretched */
-	  border: 2px solid #000; /* Optional: Adds a border, you can customize it */
-      }
-    </style>
-  </head>
-  <body style="background: rgb(38, 38, 38);">
-    <div class="container">
-      <header>
-	<nav>
-	  <div>
-	    <h3>  Domenic P.J. Germano</h3>
-	  </div>
-          <div class="nav-links">
-            <!-- <a href="#about">About</a> -->
-            <!-- <a href="#publications">Publications</a> -->
-            <!-- <a href="#software">Software</a> -->
-            <!-- <a href="#teaching">Teaching</a> -->
-	    <a href="https://twitter.com/domenic_germano" style="color:rgb(138, 156, 222);">Twitter</a>
-	    <a href="https://github.com/DGermano8" style="color:rgb(138, 156, 222);">GitHub</a>
-          </div>
-	</nav>
-      </header>
+			.grid-item img {
+				max-width: 100%;
+				border-radius: 10px;
+			}
 
-      <main>
-	<section id="about">
+			.headshot {
+				width: 200px;
+				height: 200px;
+				border-radius: 50%;
+				object-fit: cover;
+				border: 3px solid #8a9cde;
+				display: block;
+				margin: 20px auto;
+			}
 
-	  <img src="./images/headshot.png" alt="Your Name Headshot" class="headshot">
+			footer {
+				text-align: center;
+				padding: 20px;
+				background: #262626;
+				color: #8a9cde;
+				margin-top: 40px;
+			}
 
-	  <h2>Welcome</h2>
-	  <p>
-	    Hello, I am a Research Fellow in the School of Mathematics and Statistics at The University of Melbourne!
-	</p>
-	<p>
-		My PhD was in  <em>"The mathematics of individual-based modelling: developing a realistic model of 
-		simple epithelial tissue"</em>, where I was supervised with A/Prof. James Osborne, Dr Stuart 
-		Johnston and Prof. Edmund Crampin, at The University of Melbourne. Afterwards, I had a six-month 
-		research position with Prof. Jennifer Flegg at The University of Melbourne, where, with Dr. Alexander 
-		Zarebski, we developed the Jump-Switch-Flow method (see below). I then moved to The University of Sydney, 
-		to work with Prof. Peter Kim, A/Prof. Robyn Araujo, and Prof. Federico Frascoli, where we developed an 
-		agent-based model and equivalent phenotypically structured PDE model, of T-cell and dendritic cell 
-		interactions in the lymph node to understand how dendritic cells self-organise to result in an improved 
-		immune response to certain cancers. 
-	  </p>
-	  <p>
-		I am interested in Mathematical Biology and Applied Mathematics, and  research problems within Tissue Dynamics 
-		and Dynamical systems. My current research interests include understanding how the immune system functions,
-		how diseases progress in people, tissue dynamics, and continuing my previous work on developing the
-		Jump-Switch-Flow method.
-	  </p>
-	  <p>
-	    If you're interested in my work and/or would like to chat, please feel free 
-		contact me at domenic (at) unimelb.edu.au !
-	  </p>
-	</section>
-	<section id="publications">
-	  <h2>Publications</h2>
-	  <div>
-	    <!-- <a href="./publications.html">Full publication list</a> -->
-	  </div>
+			footer a {
+				color: #8a9cde;
+				text-decoration: none;
+				margin: 0 10px;
+			}
 
-	  
-	  <div class="grid-container">
-		<div class="grid-item">
-			<p>  Modelling tissue boundaries</p>
-			<div class="image-container">
-				<a href="https://doi.org/10.1007/s11538-023-01214-8" target="_blank">
-				<img src="./images/boundarys.png" alt="Germano2022boundaries" title="Figurs of the paper">
-				</a>
-			</div>
+			footer a:hover {
+				color: #ffffff;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<nav>
+					<h3>Domenic P.J. Germano</h3>
+					<div class="nav-links">
+						<a href="#about">About</a>
+						<a href="#publications">Publications</a>
+						<a href="#software">Software</a>
+						<a href="#engagement">Engagement</a>
+						<!-- <a href="https://twitter.com/domenic_germano" target="_blank">Twitter</a> -->
+						<a href="https://github.com/DGermano8" target="_blank">GitHub</a>
+					</div>
+				</nav>
+			</header>
+
+			<main>
+				<section id="about">
+					<img src="./images/headshot.png" alt="Domenic Germano Headshot" class="headshot">
+					<h2>Welcome</h2>
+					<p>Hello, I am a Research Fellow in the School of Mathematics and Statistics at The University of Melbourne!</p>
+					<p>My PhD was in <em>"The mathematics of individual-based modelling: developing a realistic model of simple epithelial tissue"</em>. 
+						I am interested in Mathematical Biology and Applied Mathematics, and research problems within Tissue Dynamics and Dynamical systems. 
+						My current research interests include understanding how the immune system functions, how diseases progress in people, tissue dynamics,
+						and continuing my previous work on developing the Jump-Switch-Flow method.</p>
+					<p>If you're interested in my work, feel free to contact me at domenic (at) unimelb.edu.au!</p>
+				</section>
+
+				<section id="publications">
+					<h2>Publications</h2>
+					<div class="grid-container">
+						<div class="grid-item">
+							<p>Modelling tissue boundaries</p>
+							<a href="https://doi.org/10.1007/s11538-023-01214-8" target="_blank">
+								<img src="./images/boundarys.png" alt="Modelling tissue boundaries">
+							</a>
+						</div>
+						<div class="grid-item">
+							<p>Realistic deformable tissues</p>
+							<a href="https://doi.org/10.1016/j.mbs.2022.108895" target="_blank">
+								<img src="./images/deformable_tissues.png" alt="Realistic deformable tissues">
+							</a>
+						</div>
+						<div class="grid-item">
+							<p>Cell fate selection</p>
+							<a href="https://doi.org/10.1016/j.jtbi.2020.110535" target="_blank">
+								<img src="./images/cell_fate_selection.png" alt="Cell fate selection">
+							</a>
+						</div>
+						<div class="grid-item">
+							<p>Active tissue remodelling</p>
+							<a href="https://doi.org/10.1017/S1446181123000226" target="_blank">
+								<img src="./images/activeRemodelling.png" alt="Active tissue remodelling">
+							</a>
+						</div>
+					</div>
+				</section>
+
+				<section id="software">
+					<h2>Software</h2>
+					<div class="grid-item">
+						<p style="font-size: 1.5em;">Jump-Switch-Flow</p>
+						<a href="https://DGermano8.github.io/JSF/" target="_blank">
+							<img src="./JSF/images/jsf-logo.png" alt="Jump-Switch-Flow" style="max-width: 300px; height: auto;">
+						</a>
+						<p>Developed with <a href="https://aezarebski.github.io" target="_blank" style="color:rgb(108,136,241);">Dr. Alexander Zarebski</a></p>
+					</div>
+				</section>
+
+				<section id="engagement">
+					<h2>Engagement</h2>
+					<ul>
+						<li>I was an organiser for a week long MATRIX Research Program, titled <a href="https://www.matrix-inst.org.au/events/mathematics-of-tissue-dynamics/" target="_blank" style="color:rgb(108,136,241);">Mathematics of Tissue Dynamics</a> (2022).</li>
+						<li>I was an organiser for a one-day conference, titled <a href="https://mathematical-biology.science.unimelb.edu.au/2022/08/04/frontiers-of-mathematical-biology-a-workshop-honouring-prof-edmund-crampin/" target="_blank" style="color:rgb(108,136,241);">"Frontiers of Mathematical Biology: A workshop honouring Prof Edmund Crampin"</a> (2022).</li>
+						<li>I organised the annual one-day Mathematical Biology Special Interest Group Workshop, following the ANZIAM 2025 conference (2025)</li>
+					</ul>
+				</section>
+			</main>
+
+			<footer>
+				<p>&copy; 2025 Domenic Germano | <a href="https://twitter.com/domenic_germano" target="_blank">Twitter</a> | <a href="https://github.com/DGermano8" target="_blank">GitHub</a></p>
+			</footer>
 		</div>
-
-        <div class="grid-item">
-			<p> Realistic deformable tissues</p>
-			<div class="image-container">
-				<a href="https://doi.org/10.1016/j.mbs.2022.108895" target="_blank">
-				<img src="./images/deformable_tissues.png" alt="Germano2022deformable" title="Figure 7 of the paper">
-				</a>
-        	</div>
-		</div>
-
-		<div class="grid-item">
-			<p> Cell fate selection</p>
-			<div class="image-container">
-				<a href="https://doi.org/10.1016/j.jtbi.2020.110535" target="_blank">
-				<img src="./images/cell_fate_selection.png" alt="Germano2020cellfate" title="Figure 2 of the paper">
-				</a>
-			</div>
-        </div>
-
-        <div class="grid-item">
-			<p>  Active tissue remodelling </p>
-			<div class="image-container">
-	    		<a href="https://doi.org/10.1017/S1446181123000226" target="_blank">
-				<img src="./images/activeRemodelling.png" alt="Germano2022remodelling" title="Figure 5 of the paper">
-	      		</a>
-            </div>
-	    </div>
-	</section>
-	
-	<section id="software"  style="margin-top: 100px;">
-	  <h2>Software</h2>
-	  <div class="grid-item">
-		<p>  Jump-Switch-Flow </p>
-		<div class="software-image-container">
-				<a href="https://DGermano8.github.io/JSF/" target="_blank">
-					<img src="./JSF/images/jsf-logo.png">
-				</a>
-			</div>
-		</div>
-		<p> Developed with <a href="https://aezarebski.github.io" style="color:rgb(108,136,241);">Dr Alexander Zarebski</a>  </p>
-	</section>
-	<!-- <section id="teaching">
-	  <h2>Teaching</h2>
-	  <ul>
-	    <li><p>2023 <a href="https://handbook.unimelb.edu.au/2024/subjects/mast30032">Biological Modelling and Simulation (MAST30032)</a> at the University of Melbourne</p></li>
-	    <li><p>2021-2022 <a href="https://aezarebski.github.io/misc/github-tutorial/README.html">Git, GitHub and Reproducible Research</a> at the Department of Zoology, University of Oxford</p></li>
-	    <li><p>2020-2022 <a href="https://github.com/aezarebski/aas-extended-examples">Applied Analytic Statistics</a> at the Oxford Internet Institute</p></li>
-	  </ul>
-	</section>
-	<section id="notes">
-	  <a href="https://aezarebski.github.io/notes.html"><h2>Notes</h2></a>
-	</section> -->
-	<section id="engagment">
-		<h2>Engagment</h2>
-		<ul>
-		  <li> I was an organiser for a week long MATRIX Research Program, titled <a href="https://www.matrix-inst.org.au/events/mathematics-of-tissue-dynamics/" style="color:rgb(108,136,241);">Mathematics of Tissue Dynamics"</a> (2022). </li>
-		  <li> I was an organiser for a one-day conference, titled <a href="https://mathematical-biology.science.unimelb.edu.au/2022/08/04/frontiers-of-mathematical-biology-a-workshop-honouring-prof-edmund-crampin/" style="color:rgb(108,136,241);">"Frontiers of Mathematical Biology: A workshop honouring Prof Edmund Crampin"</a> (2022). </li>
-		</ul>
-	</section>
-      </main>
-    </div>
-  </body>
+	</body>
 </html>
-
