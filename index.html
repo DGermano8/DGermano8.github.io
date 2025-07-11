@@ -83,12 +83,12 @@
 				text-align: center;
 				transition: transform 0.3s ease, box-shadow 0.3s ease;
 			}
-
 			.grid-item:hover {
 				transform: translateY(-5px);
 				box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+				cursor: pointer;
 			}
-
+		
 			.grid-item img {
 				max-width: 100%;
 				border-radius: 10px;
@@ -122,6 +122,72 @@
 				color: #ffffff;
 			}
 		</style>
+		<!-- Modal Structure -->
+		<div id="modal" class="modal">
+			<div class="modal-content">
+				<span class="close" onclick="closeModal()">&times;</span>
+				<h2 id="modal-title" style="font-style: italic; color: #8a9cde;"></h2>
+				<p id="authors" style="font-style: italic;"></p>
+				<br>
+				<a id="modal-link" href="" target="_blank" style="color: rgb(108,136,241); font-weight: bold; display: block; text-align: center; margin-top: 10px;">Article Link</a>
+				<br>
+				<img id="modal-image" src="" alt="" style="max-width: 50%; border-radius: 10px;">
+				<p id="modal-description" style="justify-content: center;"></p>
+			</div>
+		</div>
+
+		<style>
+			.modal {
+				display: none;
+				position: fixed;
+				z-index: 1001;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				overflow: auto;
+				background-color: rgba(0, 0, 0, 0.8);
+			}
+
+			.modal-content {
+				background-color: #444;
+				margin: 10% auto;
+				padding: 20px;
+				border-radius: 10px;
+				width: 80%;
+				color: #e7e6e6;
+				text-align: center;
+			}
+
+			.close {
+				color: #aaa;
+				float: right;
+				font-size: 28px;
+				font-weight: bold;
+				cursor: pointer;
+			}
+
+			.close:hover,
+			.close:focus {
+				color: #fff;
+				text-decoration: none;
+			}
+		</style>
+
+		<script>
+			function openModal(title, authors, description, imageUrl, link) {
+				document.getElementById('modal-title').textContent = title;
+				document.getElementById('authors').textContent = authors;
+				document.getElementById('modal-description').textContent = description;
+				document.getElementById('modal-image').src = imageUrl;
+				document.getElementById('modal-link').href = link;
+				document.getElementById('modal').style.display = 'block';
+			}
+
+			function closeModal() {
+				document.getElementById('modal').style.display = 'none';
+			}
+		</script>
 	</head>
 	<body>
 		<div class="container">
@@ -154,43 +220,98 @@
 				<section id="publications">
 					<h2>Publications</h2>
 					<div class="grid-container">
-						<div class="grid-item">
-							<p>Jump-Switch-Flow</p> 
-							<a href="https://doi.org/10.48550/arXiv.2405.13239" target="_blank">
-								<img src="./images/JSFFigure1.png" alt="Jump-Switch-Flow">
-							</a>
+						<div class="grid-item" 
+							onclick="openModal('Mathematical modelling of macrophage and natural killer cell immune response during early stages of peritoneal endometriosis lesion onset',
+							'Claire M. Miller, Domenic P.J. Germano, Alicia M. Chenoweth, & Sarah Holdsworth-Carson', 
+							'In this work, we explore how the immune system contributes to the early development of endometriosis, focusing on the ' + 
+							'interactions between immune cells and endometrial cells in the peritoneal fluid. We develop a novel compartmental model ' +
+							'that captures the dynamics between innate immune cells — specifically macrophages and natural killer cells — and ectopic ' +
+							'endometrial cells during the initial stages of lesion formation. Our model accounts for retrograde menstruation, immune ' +
+							'detection, and immune clearance. We find that although increased retrograde menstration leads to heightened pro-inflammatory '+
+							'macrophage activation, this alone does not trigger disease. Instead, our results suggest that reduced immune cytotoxicity ' +
+							'plays a central role in driving disease onset. We also observe that once the system shifts into a diseased state, due to ' +
+							'hysteresis, restoring immune function may require a significantly greater effort to return to health. These findings are ' +
+							'consistent with clinical observations and offer a mechanistic framework for understanding early-stage endometriosis.',
+							'./images/endoImmuneModel.png', 'https://doi.org/10.1101/2025.01.20.633967')">
+							<p>Modelling the immune system's role in endometriosis onset</p>
+							<img src="./images/endoImmuneModel.png" alt="Modelling the immune system's role in endometriosis onset">
 						</div>
-						<div class="grid-item">
-							<p> Modelling the immune system's role in endometriosis onset</p>
-							<a href="https://doi.org/10.1101/2025.01.20.633967" target="_blank">
-								<img src="./images/endoImmuneModel.png" alt="Modelling the immune system's role in endometriosis onset">
-							</a>
+						
+						<div class="grid-item" 
+						onclick="openModal('A hybrid framework for compartmental models enabling simulation-based inference',
+						'Domenic P.J. Germano, Alexander E. Zarebski, Sophie Hautphenne, Robert Moss, Jennifer A. Flegg, & Mark B. Flegg', 
+						'Many systems in biology, chemistry, epidemiology and ecology involve both stochastic and deterministic behaviours, ' +
+						'but capturing both in a single model can be difficult. For example, traditional models, like the Lotka-Volterra ' +
+						'equations, can predict tiny, unrealistic population levels — so-called atto-foxes — when dealing with very small populations. ' +
+						'This becomes a major issue when studying things like species extinction or the clearance of an infection, where stochasticity ' +
+						'plays a key role. While discrete stochastic models like continuous-time Markov chains (CTMCs) can handle this properly, ' +
+						'they are often too slow to simulate for large systems. To solve this, we have developed a new framework called ' +
+						'Jump-Switch-Flow (JSF), which combines the accuracy of CTMCs with the speed of ordinary differential equations (ODEs). ' +
+						'JSF allows populations to truly reach extinction, avoiding the atto-fox issue. We apply our framework to several case ' +
+						'studies, including public health intervention analysis and SARS-CoV-2 infection data. We have also make JSF Openly Available as an easy-to-use Python package. ' +
+						'Overall, JSF is a powerful new tool for modelling complex, multi-scale systems more realistically and efficiently.',
+						'./images/JSFFigure1.png', 'https://doi.org/10.48550/arXiv.2405.13239')">
+							<p>A hybrid SSA-ODE framework for compartmental systems</p>
+							<img src="./images/JSFFigure1.png" alt="Jump-Switch-Flow">
 						</div>
 
-						<div class="grid-item">
-							<p>Modelling tissue boundaries</p>
-							<a href="https://doi.org/10.1007/s11538-023-01214-8" target="_blank">
-								<img src="./images/boundarys.png" alt="Modelling tissue boundaries">
-							</a>
-						</div>
-						<div class="grid-item">
-							<p>Realistic deformable tissues</p>
-							<a href="https://doi.org/10.1016/j.mbs.2022.108895" target="_blank">
-								<img src="./images/deformable_tissues.png" alt="Realistic deformable tissues">
-							</a>
-						</div>
-						<div class="grid-item">
-							<p>Cell fate selection</p>
-							<a href="https://doi.org/10.1016/j.jtbi.2020.110535" target="_blank">
-								<img src="./images/cell_fate_selection.png" alt="Cell fate selection">
-							</a>
-						</div>
-						<div class="grid-item">
+						<div class="grid-item" 
+							onclick="openModal('Active Remodelling of Tissues to Describe Biphasic Rheological Responses',
+							'Domenic P. J. Germano, Stephanie Khuu, Adrianne L Jenner, James M. Osborne, Mary R. Myerscough, & Mark B. Flegg',
+							'We develop a mathematical model to study how tissues deform under mechanical stress, focusing on how individual cells respond through elastic '+
+							'and plastic deformation. Cells in tissue are connected via adhesion molecules and can actively remodel when stretched. Our model captures this ' +
+							'by allowing cells to shift between two stable sizes, depending on the level of stress—reflecting experimentally observed behaviour. Without '+ 
+							'remodelling, the model simplifies to a standard linear interaction model. Under instantaneous remodelling, we perform a bifurcation analysis ' +
+							'to identify when bistable cell sizes arise. Under more general remodelling, simulations show tissues can contain both original and elongated cells ' +
+							'after sufficient stress. This work offers new insight into how tissues reshape through stress-driven cell-level mechanics.',
+							'./images/activeRemodelling.png', 'https://doi.org/10.1017/S1446181123000226')">
 							<p>Active tissue remodelling</p>
-							<a href="https://doi.org/10.1017/S1446181123000226" target="_blank">
-								<img src="./images/activeRemodelling.png" alt="Active tissue remodelling">
-							</a>
+							<img src="./images/activeRemodelling.png" alt="Active tissue remodelling">
 						</div>
+
+						<div class="grid-item" 
+							onclick="openModal('Free and Interfacial Boundaries in Individual-Based Models of Multicellular Biological systems',
+							'Domenic P. J. Germano, Adriana Zanca, Stuart T. Johnston, Jennifer A. Flegg, & James M. Osborne', 
+							'We investigate how the way we define cell boundaries in individual-based models influences collective cell behaviour in biological systems. ' + 
+							'These models are widely used to study processes like tissue development, wound healing, and tumour growth, but the impact of boundary assumptions ' + 
+							'is often overlooked. We examine three common modelling frameworks — overlapping spheres, Voronoi tessellation, and vertex models — with varying ' + 
+							'complexity of boundary description. By applying these models to several biological scenarios, we evaluate how sensitive tissue-scale dynamics are to ' +
+							'the choice of boundary description. Our work highlights the importance of carefully selecting boundary representations and provides guidance for ' +
+							'researchers developing or using individual-based models.',
+							'./images/boundarys.png', 'https://doi.org/10.1007/s11538-023-01214-8')">
+							<p>Modelling tissue boundaries in multicellular systems</p>
+							<img src="./images/boundarys.png" alt="Modelling tissue boundaries">
+						</div>
+
+						<div class="grid-item" 
+							onclick="openModal('Modelling realistic 3D deformations of simple epithelia in dynamic homeostasis',
+							'Domenic P.J. Germano, Stuart T. Johnston, Edmund J. Crampin, & James M. Osborne', 
+							'The maintenance of tissue and organ structures during dynamic homeostasis is often not well understood. In order for a system to be stable, cell renewal, ' + 
+							'cell migration and cell death must be finely balanced. While tissues like the endothelium, mesothelium, and linings of organs such as the lungs and gut ' +
+							'are common, few models capture how these structures stay stable over time. In this work, we develop a novel 3D, deformable, multilayer cell-centre model ' +
+							'that represents simple epithelial tissues. In our model, cell movement is driven by a combination of bending energy minimisation, cell–cell adhesion, ' +
+							'and viscous forces. We show that our model maintains a stable tissue structure even during continuous cell renewal, migration, and removal. The model reliably ' + 
+							'preserves tissue shape and integrity under dynamic conditions. This work offers a significant step forward in simulating realistic tissue maintenance and ' + 
+							'provides a flexible tool for studying more complex organ structures.',
+							'./images/deformable_tissues.png', 'https://doi.org/10.1016/j.mbs.2022.108895')">
+							<p>A 3D realistic deformable model of simple epithelia</p>
+							<img src="./images/deformable_tissues.png" alt="Realistic deformable tissues">
+						</div>
+
+						<div class="grid-item" 
+							onclick="openModal('A mathematical model of cell fate selection on a dynamic tissue',
+							'Domenic P.J. Germano, & James M. Osborne', 
+							'Tissues are not static structures—they undergo continuous cell turnover while maintaining their overall form through finely balanced regulatory mechanisms. ' + 
+							'While both cell motility and signalling are known to govern cell fate, it remains unclear how these processes interact across a tissue. ' + 
+							'Here, we present a multicellular, multiscale model that links two key processes in tissue dynamics: cell movement and intercellular signalling. Our model brings '+ 
+							'them together to study how cell fate decisions emerge in a dynamically renewing tissue. We find that the strength of intercellular signalling strongly influences a '+
+							'cell’s ability to differentiate. Additionally, our results suggest that maintaining healthy tissue structure requires careful tuning of turnover rates—excessive '+
+							'turnover can lead to disordered, undifferentiated tissue. This work highlights the importance of integrating mechanical and biochemical dynamics to understand tissue homeostasis.',
+							'./images/cell_fate_selection.png', 'https://doi.org/10.1016/j.jtbi.2020.110535')">
+							<p>Dynamic cell fate selection</p>
+							<img src="./images/cell_fate_selection.png" alt="Cell fate selection">
+						</div>
+
 					</div>
 				</section>
 
@@ -203,6 +324,15 @@
 						</a>
 						<p>Developed with <a href="https://aezarebski.github.io" target="_blank" style="color:rgb(108,136,241);">Dr. Alexander Zarebski</a></p>
 					</div>
+
+					<!-- <div class="grid-item" 
+							onclick="openModal('title',
+							'authors', 
+							'description',
+							'fig', 'doi')">
+							<p>plain_title</p>
+							<img src="fig" alt="desc">
+						</div> -->
 				</section>
 
 				<section id="engagement">
