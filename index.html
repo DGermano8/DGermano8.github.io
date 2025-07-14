@@ -87,6 +87,9 @@
 			}
 			.grid-item:hover {
 				transform: translateY(-5px);
+				transition: transform 0.5s ease;
+				scale: 1.05;
+				transition: scale 0.5s ease;
 				box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 				cursor: pointer;
 			}
@@ -125,8 +128,8 @@
 			}
 		</style>
 		<!-- Modal Structure -->
-		<div id="modal" class="modal">
-			<div class="modal-content">
+		<div id="modal" class="modal" onclick="closeModal(event)">
+			<div class="modal-content" onclick="event.stopPropagation()">
 				<span class="close" onclick="closeModal()">&times;</span>
 				<h2 id="modal-title" style="font-style: italic; color: #8a9cde;"></h2>
 				<p id="authors" style="font-style: italic;"></p>
@@ -137,6 +140,14 @@
 				<p id="modal-description" style="justify-content: center;"></p>
 			</div>
 		</div>
+
+		<script>
+			function closeModal(event) {
+				if (!event || event.target === document.getElementById('modal')) {
+					document.getElementById('modal').style.display = 'none';
+				}
+			}
+		</script>
 
 		<style>
 			.modal {
@@ -322,10 +333,10 @@
 
 				<section id="software">
 					<h2>Software</h2>
-					<div class="grid-item">
-						<p style="font-size: 1.5em;">Jump-Switch-Flow</p>
+					<div class="grid-item" onclick="window.location.href='https://DGermano8.github.io/JSF/'">
+						<p style="font-size: 1.25em;">Jump-Switch-Flow: A hybrid SSA-ODE framework for simulating compartmental models</p>
 						<a href="https://DGermano8.github.io/JSF/" target="_blank">
-							<img src="./JSF/images/jsf-logo.png" alt="Jump-Switch-Flow" style="max-width: 300px; height: auto;">
+							<img src="./JSF/images/jsf-logo.png" alt="Jump-Switch-Flow" style="max-width: 50%; min-width: 300px ; height: auto;">
 						</a>
 						<p>Developed with <a href="https://aezarebski.github.io" target="_blank" style="color:rgb(108,136,241);">Dr. Alexander Zarebski</a></p>
 					</div>
