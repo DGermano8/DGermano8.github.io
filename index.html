@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Domenic Germano</title>
-		<meta name="keywords" content="Tissue Dynamics, Tissue Mechanics, Individual-based Modelling, Dynamical System">
+		<meta name="keywords" content="Tissue Dynamics, Tissue Mechanics, Individual-based Modelling, Dynamical System, Immune modelling, Immune system, Mathematical Biology, Applied Mathematics, Mathematical Modelling, Mathematical Biophysics">
 		<meta name="author" content="Domenic P.J. Germano">
 		<link rel="canonical" href="https://DGermano8.github.io/">
 		<meta property="og:title" content="Domenic P.J. Germano | Mathematical Biology">
@@ -36,6 +36,40 @@
 				background-color: #262626;
 				z-index: 1000;
 				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+			}
+
+			.nav-links {
+				display: flex;
+			}
+
+			.menu-icon {
+				display: none;
+				cursor: pointer;
+				color: #8a9cde;
+				font-size: 1.5em;
+			}
+
+			@media (max-width: 768px) 
+			{
+				.nav-links {
+					display: none;
+					flex-direction: column;
+					background-color: #262626;
+					position: absolute;
+					top: 100%;
+					right: 0;
+					width: 200px;
+					box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+				}
+
+				.nav-links.active {
+					display: flex;
+				}
+
+				.menu-icon {
+					display: block;
+					position: absolute;
+				}
 			}
 
 			nav {
