@@ -102,7 +102,7 @@
 			}
 
 			section h2 {
-				text-align: center;
+				text-align: left;
 				color: #8a9cde;
 				margin-bottom: 20px;
 			}
@@ -202,7 +202,7 @@
 				margin: 10% auto;
 				padding: 20px;
 				border-radius: 10px;
-				width: 80%;
+				width: max(50%,500px);
 				color: #e7e6e6;
 				text-align: center;
 			}
@@ -236,19 +236,115 @@
 				document.getElementById('modal').style.display = 'none';
 			}
 		</script>
+
+<!-- <header>
+	<nav>
+		<h3>Domenic P.J. Germano</h3>
+		<div class="dropdown">
+			<button class="dropbtn">Menu</button>
+			<div class="dropdown-content">
+				<a href="#about">About</a>
+				<a href="#publications">Publications</a>
+				<a href="#software">Software</a>
+				<a href="#engagement">Engagement</a>
+				<a href="https://github.com/DGermano8" target="_blank">GitHub</a>
+			</div>
+		</div>
+	</nav>
+</header> -->
+
+<style>
+	/* Dropdown container */
+	.dropdown {
+		position: relative;
+		display: inline-block;
+	}
+
+	/* Dropdown button */
+	.dropbtn {
+		background-color: #262626;
+		color: #8a9cde;
+		padding: 10px 20px;
+		font-size: 16px;
+		border: none;
+		cursor: pointer;
+	}
+
+	/* Dropdown content (hidden by default) */
+	.dropdown-content {
+		display: none;
+		font-size: 16px;
+		position: absolute;
+		right: 0;
+		left: auto;
+		background-color: #444;
+		min-width: 160px;
+		box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+		z-index: 1;
+	}
+
+	/* Links inside the dropdown */
+	.dropdown-content a {
+		color: #8a9cde;
+		padding: 12px 16px;
+		text-decoration: none;
+		display: block;
+	}
+
+	/* Change color of dropdown links on hover */
+	.dropdown-content a:hover {
+		background-color: #555;
+		color: #ffffff;
+	}
+
+	/* Show the dropdown menu on hover */
+	.dropdown:hover .dropdown-content {
+		display: block;
+	}
+
+	/* Change the color of the dropdown button on hover */
+	.dropdown:hover .dropbtn {
+		background-color: #444;
+		border-radius: 10px;
+	}
+
+	/* Round the edges of the dropdown box */
+	.dropdown-content {
+		border-radius: 10px;
+	}
+</style>
+
+
+
 	</head>
 	<body>
 		<div class="container">
-			<header>
+			<!-- <header>
 				<nav>
 					<h3>Domenic P.J. Germano</h3>
 					<div class="nav-links">
-						<a href="#about">About</a>
+						<a href="aboutMe.html">About</a>
+						<a href="currentProjects.html">Projects</a>
 						<a href="#publications">Publications</a>
 						<a href="#software">Software</a>
 						<a href="#engagement">Engagement</a>
-						<!-- <a href="https://twitter.com/domenic_germano" target="_blank">Twitter</a> -->
 						<a href="https://github.com/DGermano8" target="_blank">GitHub</a>
+					</div>
+				</nav>
+			</header> -->
+			<header>
+				<nav>
+					<h3>Domenic P.J. Germano</h3>
+					<div class="dropdown">
+						<button class="dropbtn">Menu</button>
+						<div class="dropdown-content">
+							<a href="aboutMe.html">About</a>
+							<!-- <a href="currentProjects.html">Projects</a> -->
+							<a href="#publications">Publications</a>
+							<a href="#software">Software</a>
+							<a href="#engagement">Engagement</a>
+							<a href="https://github.com/DGermano8" target="_blank">GitHub</a>
+						</div>
 					</div>
 				</nav>
 			</header>
@@ -269,11 +365,11 @@
 				</section>
 
 				<section id="publications">
-					<h2>Publications</h2>
+					<h2>Select Publications</h2>
 					<div class="grid-container">
 						<div class="grid-item" 
 							onclick="openModal('Mathematical modelling of macrophage and natural killer cell immune response during early stages of peritoneal endometriosis lesion onset',
-							'Claire M. Miller, Domenic P.J. Germano, Alicia M. Chenoweth, & Sarah Holdsworth-Carson', 
+							'Claire M. Miller, Domenic P.J. Germano,Alicia M. Chenoweth, & Sarah Holdsworth-Carson', 
 							'In this work, we explore how the immune system contributes to the early development of endometriosis, focusing on the ' + 
 							'interactions between immune cells and endometrial cells in the peritoneal fluid. We develop a novel compartmental model ' +
 							'that captures the dynamics between innate immune cells — specifically macrophages and natural killer cells — and ectopic ' +
@@ -283,7 +379,7 @@
 							'plays a central role in driving disease onset. We also observe that once the system shifts into a diseased state, due to ' +
 							'hysteresis, restoring immune function may require a significantly greater effort to return to health. These findings are ' +
 							'consistent with clinical observations and offer a mechanistic framework for understanding early-stage endometriosis.',
-							'./images/endoImmuneModel.png', 'https://doi.org/10.1101/2025.01.20.633967')">
+							'./images/endoImmuneModel.png', 'https://doi.org/10.1098/rsif.2025.0076')">
 							<p>Modelling the immune system's role in endometriosis onset</p>
 							<img src="./images/endoImmuneModel.png" alt="Modelling the immune system's role in endometriosis onset">
 						</div>
@@ -366,6 +462,22 @@
 					</div>
 				</section>
 
+				<!-- <section id="collaborations">
+					<h2>Collaboration Network</h2>
+					<p>
+						I have been interested at how to visualise and quantify research. One such was to do this is by looking at networks relating
+						to authorship and citation patterns in scientific publications. Below is my collaboration network, with nodes representing authors
+						and edges representing co-authorships. The size of the nodes represents the number of publications of each author. By selecting an 
+						author, you can see their direct collaborators, in the context of my publications. The colours represent clusters of authors who I have collaborated with.
+						The below interactive online visualisation is made possible thanks to <a href="https://www.vosviewer.com" target="_blank" style="color:rgb(108,136,241);">VOSviewer</a>. 
+					</p>
+					<iframe allowfullscreen="true" ,
+					src="https://tinyurl.com/2b8e7bg4", 
+					width="100%" height="75%" ,
+					style="border: 1px solid #ddd; max-width: 1000px; min-height: 500px">
+					</iframe>
+				</section> -->
+
 				<section id="software">
 					<h2>Software</h2>
 					<div class="grid-item" onclick="window.location.href='https://DGermano8.github.io/JSF/'">
@@ -392,12 +504,13 @@
 						<li>I was an organiser for a week long MATRIX Research Program, titled <a href="https://www.matrix-inst.org.au/events/mathematics-of-tissue-dynamics/" target="_blank" style="color:rgb(108,136,241);">Mathematics of Tissue Dynamics</a> (2022).</li>
 						<li>I was an organiser for a one-day conference, titled <a href="https://mathematical-biology.science.unimelb.edu.au/2022/08/04/frontiers-of-mathematical-biology-a-workshop-honouring-prof-edmund-crampin/" target="_blank" style="color:rgb(108,136,241);">"Frontiers of Mathematical Biology: A workshop honouring Prof Edmund Crampin"</a> (2022).</li>
 						<li>I organised the annual one-day Mathematical Biology Special Interest Group Workshop, following the ANZIAM 2025 conference (2025)</li>
+						<li>Since 2022, I have been on the ANZIAM Mathematical Biology Special Interest Group Committee.</li>
 					</ul>
 				</section>
 			</main>
 
 			<footer>
-				<p>&copy; 2025 Domenic Germano | <a href="https://twitter.com/domenic_germano" target="_blank">Twitter</a> | <a href="https://github.com/DGermano8" target="_blank">GitHub</a></p>
+				<p>&copy; 2025 Domenic Germano | <a href="https://github.com/DGermano8" target="_blank">GitHub</a> | <a href="https://bsky.app/profile/dgermano.bsky.social" target="_blanck">Bluesky</a></p>
 			</footer>
 		</div>
 	</body>
