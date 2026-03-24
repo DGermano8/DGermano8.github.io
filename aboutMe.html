@@ -3,154 +3,334 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me</title>
-    <meta name="description" content="About Me - Learn more about me, my interests, and my background.">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>About Me – Domenic Germano</title>
+    <meta name="description" content="About Me - Learn more about Domenic Germano, his interests, and his background.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* ── Design tokens ── */
+        :root {
+            --bg:        #1e1e1e;
+            --surface:   #262626;
+            --card:      #2e2e2e;
+            --card-hover:#383838;
+            --accent:    #8a9cde;
+            --accent-lit:#a8b8f0;
+            --text:      #e2e1e1;
+            --muted:     #a0a0a0;
+            --border:    rgba(138,156,222,0.15);
+            --radius:    12px;
+            --shadow:    0 4px 24px rgba(0,0,0,0.45);
+            --transition: 0.25s ease;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: 'Helvetica Neue';
+            font-family: 'Inter', 'Helvetica Neue', sans-serif;
             font-size: 16px;
-            background: rgb(38, 38, 38);
-            color: #e7e6e6;
-            margin: 0;
-            padding: 0;
+            line-height: 1.7;
+            background: var(--bg);
+            color: var(--text);
             text-align: justify;
         }
 
+        a { color: var(--accent); text-decoration: none; transition: color var(--transition); }
+        a:hover { color: var(--accent-lit); }
+
         .container {
-            max-width: 700px;
-            margin: auto;
-            padding: 20px;
-            line-height: 1.6;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 24px;
         }
 
+        /* ── Navigation ── */
         header {
             position: sticky;
             top: 0;
-            background-color: #262626;
             z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            background: rgba(30,30,30,0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
         }
 
         nav {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 1em;
+            justify-content: space-between;
+            padding: 0 24px;
+            height: 60px;
+            max-width: 960px;
+            margin: 0 auto;
         }
 
-        nav h3 {
-            color: #8a9cde;
-            margin: 0;
+        .nav-brand {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--accent);
+            white-space: nowrap;
         }
 
         .nav-links {
             display: flex;
+            gap: 28px;
+            align-items: center;
         }
 
         .nav-links a {
-            color: #8a9cde;
-            text-decoration: none;
-            margin: 0 10px;
-            font-weight: bold;
-            transition: color 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--muted);
+            letter-spacing: 0.02em;
+            transition: color var(--transition);
+        }
+        .nav-links a:hover { color: var(--accent-lit); }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 6px;
+            border: none;
+            background: none;
+        }
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 2px;
+            transition: transform var(--transition), opacity var(--transition);
+        }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        @media (max-width: 700px) {
+            .hamburger { display: flex; }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                gap: 0;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: var(--surface);
+                border-bottom: 1px solid var(--border);
+                padding: 12px 0;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a {
+                padding: 12px 28px;
+                font-size: 1rem;
+                color: var(--muted);
+            }
         }
 
-        .nav-links a:hover {
-            color: #ffffff;
-        }
-
-        section {
-            margin: 40px 0;
-        }
+        /* ── Sections ── */
+        section { padding: 60px 0; }
+        section + section { border-top: 1px solid var(--border); }
 
         section h2 {
+            font-size: 1.55rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 28px;
+            letter-spacing: -0.01em;
             text-align: left;
-            color: #8a9cde;
-            margin-bottom: 20px;
         }
 
+        /* ── Position cards ── */
+        .position-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .position-list li {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            transition: transform var(--transition), box-shadow var(--transition),
+                        background var(--transition), border-color var(--transition);
+        }
+
+        .position-list li:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+            background: var(--card-hover);
+            border-color: rgba(138,156,222,0.35);
+        }
+
+        .position-date {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 8px;
+            letter-spacing: 0.02em;
+        }
+
+        .position-list li p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text);
+        }
+
+        /* ── Scroll reveal ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity 0.55s ease, transform 0.55s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* ── Footer ── */
         footer {
+            border-top: 1px solid var(--border);
+            padding: 28px 24px;
             text-align: center;
-            padding: 20px;
-            background: #262626;
-            color: #8a9cde;
-            margin-top: 40px;
+            color: var(--muted);
+            font-size: 0.88rem;
         }
-
-        footer a {
-            color: #8a9cde;
-            text-decoration: none;
-            margin: 0 10px;
-        }
-
-        footer a:hover {
-            color: #ffffff;
-        }
+        footer a { color: var(--accent); margin: 0 8px; }
+        footer a:hover { color: var(--accent-lit); }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <nav>
-                <h3>About Me</h3>
-                <div class="nav-links">
-                    <a href="index.html">Home</a>
-                </div>
-            </nav>
-        </header>
 
+    <!-- ── Navigation ── -->
+    <header>
+        <nav>
+            <span class="nav-brand">Domenic P.J. Germano</span>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a href="index.html" onclick="closeMenu()">Home</a>
+                <a href="index.html#publications" onclick="closeMenu()">Publications</a>
+                <a href="index.html#software" onclick="closeMenu()">Software</a>
+                <a href="index.html#engagement" onclick="closeMenu()">Engagement</a>
+                <a href="https://github.com/DGermano8" target="_blank" onclick="closeMenu()">GitHub</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ── Main content ── -->
+    <div class="container">
         <main>
-            <section>
-                <h2>Introduction</h2>
-                <p>I am a Mathematical Biologist and Applied Mathematician, with interests in broad areas, tissue dynamics, immune system dynamics, and developing efficient simulation methods.</p>
+
+            <section id="intro">
+                <h2 class="reveal">Introduction</h2>
+                <p class="reveal">I am a Mathematical Biologist and Applied Mathematician, with interests in broad areas, tissue dynamics, immune system dynamics, and developing efficient simulation methods.</p>
             </section>
-            <section>
-                <h2>Academic positions</h2>
-                <ul style="list-style: none; padding-left: 0;">
-                    <li style="margin-bottom: 20px;">
-                        <span style="font-weight: bold; display: inline-block; min-width: 170px;">July 2025 - Present:</span>
-                        <br>
-                        <span style="display: inline-block; vertical-align: top; text-align: justify; max-width: 700px;">
-                            I am currently a Research Fellow at The University of Melbourne, working with A/Prof. James Osborne on developing realistic individual based models in the context of tissue dynamics.
-                        </span>
+
+            <section id="positions">
+                <h2 class="reveal">Academic Positions</h2>
+                <ul class="position-list">
+
+                    <li class="reveal">
+                        <div class="position-date">July 2025 – Present</div>
+                        <p>Research Fellow, The University of Melbourne</p>
+                        <p>I am currently a Research Fellow at The University of Melbourne, working with Prof. James Osborne on developing realistic individual based models in the context of tissue dynamics.</p>
                     </li>
-                    <li style="margin-bottom: 20px;">
-                        <span style="font-weight: bold; display: inline-block; min-width: 170px;">January 2024 - April 2025:</span>
-                        <br>
-                        <span style="display: inline-block; vertical-align: top; text-align: justify; max-width: 700px;">
-                            I was a Postdoctoral Research Fellow at The University of Sydney, with Prof. Peter Kim, Prof. Federico Frascoli (Swinburne University of Technology) and A/Prof. Robyn Araujo (The University of Melbourne) and focusing on mathematical modelling of immune responses, focusing on the interactions between T cells and Dendritic cells.
-                        </span>
+
+                    <li class="reveal">
+                        <div class="position-date">January 2024 – April 2025</div>
+                        <p>Postdoctoral Research Fellow, The University of Sydney</p>
+                        <p>I was a Postdoctoral Research Fellow at The University of Sydney, with Prof. Peter Kim, Prof. Federico Frascoli (Swinburne University of Technology) and A/Prof. Robyn Araujo (The University of Melbourne), focusing on mathematical modelling of immune responses and the interactions between T cells and Dendritic cells.</p>
                     </li>
-                    <li style="margin-bottom: 20px;">
-                        <span style="font-weight: bold; display: inline-block; min-width: 170px;">July 2023 - December 2023:</span>
-                        <br>
-                        <span style="display: inline-block; vertical-align: top; text-align: justify; max-width: 700px;">
-                            I had a short Research Associate position at The University of Melbourne, working with Prof. Jennifer Flegg on developing hybrid stochastic-deterministic compartmental systems.
-                        </span>
+
+                    <li class="reveal">
+                        <div class="position-date">July 2023 – December 2023</div>
+                        <p> Research Associate</p>
+                        <p>I had a short Research Associate position at The University of Melbourne, working with Prof. Jennifer Flegg on developing hybrid stochastic-deterministic compartmental systems.</p>
                     </li>
-                    <li style="margin-bottom: 20px;">
-                        <span style="font-weight: bold; display: inline-block; min-width: 170px;">February 2019 - April 2023:</span>
-                        <br>
-                        <span style="display: inline-block; vertical-align: top; text-align: justify; max-width: 700px;">
-                            I was a PhD student at The University of Melbourne, working with Prof. Edmund Crampin, Dr Stuart Johnston and A/Prof. James Osborne. My thesis was titled <em>"The mathematics of individual-based modelling: developing a realistic model of simple epithelial tissue"</em>.
-                        </span>
-                    </li>
+
                 </ul>
             </section>
-            <!-- <section>
-                <h2>Interests</h2>
-                <p>Share your hobbies, passions, or anything you enjoy doing in your free time.</p>
-            </section> -->
-            <!-- <section>
-                <h2>Goals</h2>
-                <p>Talk about your aspirations, career goals, or what you're working towards.</p>
-            </section> -->
-        </main>
 
-        <footer>
-				<p>&copy; 2025 Domenic Germano | <a href="https://github.com/DGermano8" target="_blank">GitHub</a> | <a href="https://bsky.app/profile/dgermano.bsky.social" target="_blanck">Bluesky</a></p>
-        </footer>
+            <!-- add a section for education -->
+            <section id="education">
+                <h2 class="reveal">Education</h2>
+                <ul class="position-list">
+
+                    <li class="reveal">
+                        <div class="position-date">2019 – 2024</div>
+                        <p>PhD in Mathematics, The University of Melbourne.</p>
+                        <p> Thesis: <em>"The mathematics of individual-based modelling: developing a realistic model of simple epithelial tissue"</em>, with Prof. Edmund Crampin, Dr Stuart Johnston and A/Prof. James Osborne.</p>
+                    </li>
+
+                    <li class="reveal">
+                        <div class="position-date">2017 – 2018</div>
+                        <p>Masters of Science (with Distinction), The University of Melbourne.</p>
+                        <p> Major: Applied Mathematics, Minor: Discrete Mathematics and Optimisation.</p>
+                    </li>
+
+                    <li class="reveal">
+                        <div class="position-date">2016</div>
+                        <p>Graduate Diploma of Mathematical Sciences, The University of Melbourne.</p>
+                        <p> Applied Mathematics and Mathematical Physics.</p>
+                    </li>
+
+                    <li class="reveal">
+                        <div class="position-date">2013 – 2016</div>
+                        <p>Bachelor of Science, The University of Melbourne.</p>
+                        <p> Major: Physics</p>
+                    </li>
+
+                </ul>
+
+        </main>
     </div>
+
+    <footer>
+        <p>&copy; 2026 Domenic Germano &nbsp;&middot;&nbsp;
+            <a href="https://github.com/DGermano8" target="_blank">GitHub</a>
+            <a href="https://bsky.app/profile/dgermano.bsky.social" target="_blank">Bluesky</a>
+        </p>
+    </footer>
+
+    <script>
+        /* ── Navigation ── */
+        function toggleMenu() {
+            document.getElementById('nav-links').classList.toggle('open');
+            document.getElementById('hamburger').classList.toggle('open');
+        }
+        function closeMenu() {
+            document.getElementById('nav-links').classList.remove('open');
+            document.getElementById('hamburger').classList.remove('open');
+        }
+        document.addEventListener('click', function(e) {
+            var nav = document.getElementById('nav-links');
+            var btn = document.getElementById('hamburger');
+            if (nav.classList.contains('open') && !nav.contains(e.target) && !btn.contains(e.target)) {
+                closeMenu();
+            }
+        });
+
+        /* ── Scroll reveal ── */
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(function(el, i) {
+            el.style.transitionDelay = (i % 6) * 60 + 'ms';
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>

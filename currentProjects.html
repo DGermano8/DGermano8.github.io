@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me</title>
+    <meta name="description" content="About Me - Learn more about me, my interests, and my background.">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Helvetica Neue';
+            font-size: 16px;
+            background: rgb(38, 38, 38);
+            color: #e7e6e6;
+            margin: 0;
+            padding: 0;
+            text-align: justify;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            background-color: #262626;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1em;
+        }
+
+        nav h3 {
+            color: #8a9cde;
+            margin: 0;
+        }
+
+        .nav-links {
+            display: flex;
+        }
+
+        .nav-links a {
+            color: #8a9cde;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        section {
+            margin: 40px 0;
+        }
+
+        section h2 {
+            text-align: left;
+            color: #8a9cde;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #262626;
+            color: #8a9cde;
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: #8a9cde;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <h3>Current Projects</h3>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <p>Here are some of my current research projects. If you are interested in collaborating or learning more, please do feel free to reach out.
+            </p>
+            <p>There are also a number of student projects that are currently available for <span style="color:rgb(108,136,241);">Masters Projects</span>, so if you are interested in supervision, please let me know.
+            </p>
+            <section>
+                <h2>Understanding within-host dynamics of mycobacterium tuberculosis infection</h2>
+                <p>This project develops a mathematical model to describe the within-host dynamics of Mycobacterium tuberculosis (Mtb) infection. 
+                    This project aims to gain insights into the progression of the disease and the host's immune response. We focus on the 
+                    early stages of infection, to attempt to identify key factors that may influence the outcome of the infection.
+                </p>
+            </section>
+
+            <section>
+                <h2>Modelling T-cell response and dendritic cell interactions</h2>
+                <p>This project focuses on developing a mathematical model to describe the interactions between T-cells and dendritic cells during an immune response. 
+                    We develop an agent-based model to simulate the dynamics of these interactions, and derived a continuum PDE model to provide a mathematical
+                    tractable framework for understanding these complex processes.
+                </p>
+            </section>
+
+            <section>
+                <h2>Tumour-immune dynamics and tumour cell resistance</h2>
+                <p>This project investigates the complex interactions between tumours and the immune system, focusing on how tumours evade immune detection and develop resistance to the immune response. 
+                    By understanding how tumours undergo selective pressures to become resistant to the immune response, we aim to identify key factors that influence tumour progression.
+                </p>
+            </section>
+
+            <section>
+                <h2>Autonomous electric vehicle discharge to the grid</h2>
+                <p>As electric vehicles become more widespread, they provide a unique opportunity for grid support through vehicle-to-grid.
+                    One challenge is to ensure that the discharge of energy from these vehicles is optimised to meet grid demand, in an organised manner.
+                    This project will aim to develop a mathematical model to describe the discharge of energy from electric vehicles to the grid, and to identify risks for managing this process.
+                </p>
+            </section>
+
+            <section>
+                <h2>Understanding Malaria and Dengue prevalence in low incidence settings</h2>
+                <p>This project aims to develop a mathematical model to understand the dynamics of malaria and dengue transmission in low incidence settings. 
+                    By performing inference on real incidence data, we seek to identify intervention strategies to reduce the burden of these diseases.
+                </p>
+            </section>
+
+        </main>
+
+        <footer>
+				<p>&copy; 2025 Domenic Germano | <a href="https://github.com/DGermano8" target="_blank">GitHub</a> | <a href="https://bsky.app/profile/dgermano.bsky.social" target="_blanck">Bluesky</a></p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -10,451 +10,572 @@
 		<meta property="og:title" content="Domenic P.J. Germano | Mathematical Biology">
 		<meta property="og:url" content="https://DGermano8.github.io/">
 		<meta property="og:type" content="website">
-		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 		<style>
+			/* ── Design tokens ── */
+			:root {
+				--bg:        #1e1e1e;
+				--surface:   #262626;
+				--card:      #2e2e2e;
+				--card-hover:#383838;
+				--accent:    #8a9cde;
+				--accent-lit:#a8b8f0;
+				--text:      #e2e1e1;
+				--muted:     #a0a0a0;
+				--border:    rgba(138,156,222,0.15);
+				--radius:    12px;
+				--shadow:    0 4px 24px rgba(0,0,0,0.45);
+				--transition: 0.25s ease;
+			}
+
+			/* ── Reset & base ── */
+			*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+			html { scroll-behavior: smooth; }
+
 			body {
-				/* font-family: 'Roboto', sans-serif; */
-				font-family: 'Helvetica Neue';
+				font-family: 'Inter', 'Helvetica Neue', sans-serif;
 				font-size: 16px;
-				background: rgb(38, 38, 38);
-				color: #e7e6e6;
-				margin: 0;
-				padding: 0;
-				/* justify-content: center; */
+				line-height: 1.7;
+				background: var(--bg);
+				color: var(--text);
 				text-align: justify;
 			}
 
+			a { color: var(--accent); text-decoration: none; transition: color var(--transition); }
+			a:hover { color: var(--accent-lit); }
+
+			/* ── Layout ── */
 			.container {
-				max-width: 900px;
-				margin: auto;
-				padding: 20px;
-				line-height: 1.6;
+				max-width: 960px;
+				margin: 0 auto;
+				padding: 0 24px;
 			}
 
+			/* ── Navigation ── */
 			header {
 				position: sticky;
 				top: 0;
-				background-color: #262626;
 				z-index: 1000;
-				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-			}
-
-			.nav-links {
-				display: flex;
-			}
-
-			.menu-icon {
-				display: none;
-				cursor: pointer;
-				color: #8a9cde;
-				font-size: 1.5em;
-			}
-
-			@media (max-width: 768px) 
-			{
-				.nav-links {
-					display: none;
-					flex-direction: column;
-					background-color: #262626;
-					position: absolute;
-					top: 100%;
-					right: 0;
-					width: 200px;
-					box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-				}
-
-				.nav-links.active {
-					display: flex;
-				}
-
-				/* .menu-icon {
-					display: block;
-					position: absolute;
-				} */
+				background: rgba(30,30,30,0.92);
+				backdrop-filter: blur(12px);
+				-webkit-backdrop-filter: blur(12px);
+				border-bottom: 1px solid var(--border);
 			}
 
 			nav {
 				display: flex;
-				justify-content: space-between;
 				align-items: center;
-				padding: 1em;
+				justify-content: space-between;
+				padding: 0 24px;
+				height: 60px;
+				max-width: 960px;
+				margin: 0 auto;
 			}
 
-			nav h3 {
-				color: #8a9cde;
-				margin: 0;
+			.nav-brand {
+				font-size: 1.05rem;
+				font-weight: 600;
+				color: var(--accent);
+				white-space: nowrap;
+			}
+
+			.nav-links {
+				display: flex;
+				gap: 28px;
+				align-items: center;
 			}
 
 			.nav-links a {
-				color: #8a9cde;
-				text-decoration: none;
-				margin: 0 10px;
-				font-weight: bold;
-				transition: color 0.3s ease;
+				font-size: 0.9rem;
+				font-weight: 500;
+				color: var(--muted);
+				letter-spacing: 0.02em;
+				transition: color var(--transition);
 			}
 
-			.nav-links a:hover {
-				color: #ffffff;
+			.nav-links a:hover { color: var(--accent-lit); }
+
+			/* Hamburger button */
+			.hamburger {
+				display: none;
+				flex-direction: column;
+				gap: 5px;
+				cursor: pointer;
+				padding: 6px;
+				border: none;
+				background: none;
+			}
+			.hamburger span {
+				display: block;
+				width: 24px;
+				height: 2px;
+				background: var(--accent);
+				border-radius: 2px;
+				transition: transform var(--transition), opacity var(--transition);
+			}
+			.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+			.hamburger.open span:nth-child(2) { opacity: 0; }
+			.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+			/* Mobile drawer */
+			@media (max-width: 700px) {
+				.hamburger { display: flex; }
+
+				.nav-links {
+					display: none;
+					flex-direction: column;
+					gap: 0;
+					position: absolute;
+					top: 60px;
+					left: 0;
+					right: 0;
+					background: var(--surface);
+					border-bottom: 1px solid var(--border);
+					padding: 12px 0;
+					box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+				}
+				.nav-links.open { display: flex; }
+				.nav-links a {
+					padding: 12px 28px;
+					font-size: 1rem;
+					color: var(--muted);
+				}
+				.nav-links a:hover { color: var(--accent-lit); }
 			}
 
-			section {
-				margin: 40px 0;
-			}
+			/* ── Sections ── */
+			section { padding: 60px 0; }
+			section + section { border-top: 1px solid var(--border); }
 
 			section h2 {
+				font-size: 1.55rem;
+				font-weight: 600;
+				color: var(--accent);
+				margin-bottom: 28px;
+				letter-spacing: -0.01em;
 				text-align: left;
-				color: #8a9cde;
-				margin-bottom: 20px;
 			}
 
+			/* ── Hero / About ── */
+			.hero {
+				display: flex;
+				align-items: center;
+				gap: 48px;
+				padding: 72px 0 60px;
+			}
+
+			.headshot {
+				width: 180px;
+				height: 180px;
+				border-radius: 50%;
+				object-fit: cover;
+				border: 3px solid var(--accent);
+				flex-shrink: 0;
+				box-shadow: 0 0 0 6px rgba(138,156,222,0.12);
+			}
+
+			.hero-text h2 { margin-bottom: 16px; }
+			.hero-text p  { color: var(--text); margin-bottom: 12px; }
+
+			@media (max-width: 600px) {
+				.hero {
+					flex-direction: column;
+					text-align: center;
+					gap: 28px;
+					padding: 48px 0 40px;
+				}
+				.hero-text { text-align: justify; }
+			}
+
+			/* ── Publication cards ── */
 			.grid-container {
 				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+				grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
 				gap: 20px;
 			}
 
 			.grid-item {
-				background: #444;
+				background: var(--card);
+				border: 1px solid var(--border);
+				border-radius: var(--radius);
 				padding: 20px;
-				border-radius: 10px;
 				text-align: center;
-				transition: transform 0.3s ease, box-shadow 0.3s ease;
-			}
-			.grid-item:hover {
-				/* transform: translateY(-5px);
-				transition: transform 1.0s ease; */
-				scale: 1.05;
-				transition: scale 0.5s ease;
-				box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 				cursor: pointer;
+				transition: transform var(--transition), box-shadow var(--transition),
+				            background var(--transition), border-color var(--transition);
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 14px;
 			}
-		
+
+			.grid-item:hover {
+				transform: translateY(-4px);
+				box-shadow: var(--shadow);
+				background: var(--card-hover);
+				border-color: rgba(138,156,222,0.35);
+			}
+
+			.grid-item p {
+				font-size: 0.9rem;
+				font-weight: 500;
+				line-height: 1.45;
+				color: var(--text);
+				margin: 0;
+			}
+
 			.grid-item img {
-				max-width: 100%;
-				border-radius: 10px;
-			}
-
-			.headshot {
-				width: 200px;
-				height: 200px;
-				border-radius: 50%;
+				width: 100%;
+				border-radius: 8px;
 				object-fit: cover;
-				border: 3px solid #8a9cde;
-				display: block;
-				margin: 20px auto;
 			}
 
-			footer {
+			/* ── Software card ── */
+			.software-card {
+				background: var(--card);
+				border: 1px solid var(--border);
+				border-radius: var(--radius);
+				padding: 36px 32px;
 				text-align: center;
-				padding: 20px;
-				background: #262626;
-				color: #8a9cde;
-				margin-top: 40px;
+				cursor: pointer;
+				transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+			}
+			.software-card:hover {
+				transform: translateY(-4px);
+				box-shadow: var(--shadow);
+				border-color: rgba(138,156,222,0.35);
+			}
+			.software-card .sw-title {
+				font-size: 1.05rem;
+				font-weight: 600;
+				margin-bottom: 24px;
+				color: var(--text);
+			}
+			.software-card img {
+				max-width: 280px;
+				width: 100%;
+				border-radius: 8px;
+			}
+			.software-card .sw-credit {
+				margin-top: 20px;
+				font-size: 0.9rem;
+				color: var(--muted);
 			}
 
-			footer a {
-				color: #8a9cde;
-				text-decoration: none;
-				margin: 0 10px;
+			/* ── Engagement list ── */
+			.engagement-list {
+				list-style: none;
+				display: flex;
+				flex-direction: column;
+				gap: 14px;
 			}
 
-			footer a:hover {
-				color: #ffffff;
+			.engagement-list li {
+				background: var(--card);
+				border: 1px solid var(--border);
+				border-radius: var(--radius);
+				padding: 16px 20px 16px 42px;
+				font-size: 0.95rem;
+				line-height: 1.65;
+				position: relative;
 			}
-		</style>
-		<!-- Modal Structure -->
-		<div id="modal" class="modal" onclick="closeModal(event)">
-			<div class="modal-content" onclick="event.stopPropagation()">
-				<span class="close" onclick="closeModal()">&times;</span>
-				<h2 id="modal-title" style="font-style: italic; color: #8a9cde;"></h2>
-				<p id="authors" style="font-style: italic;"></p>
-				<br>
-				<a id="modal-link" href="" target="_blank" style="color: rgb(108,136,241); font-weight: bold; display: block; text-align: center; margin-top: 10px;">Article Link</a>
-				<br>
-				<img id="modal-image" src="" alt="" style="max-width: 50%; min-width: 300px; border-radius: 10px;">
-				<p id="modal-description" style="text-align: justify;"></p>
-			</div>
-		</div>
 
-		<script>
-			function closeModal(event) {
-				if (!event || event.target === document.getElementById('modal')) {
-					document.getElementById('modal').style.display = 'none';
-				}
+			.engagement-list li::before {
+				content: '\25B8';
+				position: absolute;
+				left: 16px;
+				top: 17px;
+				color: var(--accent);
+				font-size: 0.85rem;
 			}
-		</script>
 
-		<style>
+			/* ── Scroll reveal ── */
+			.reveal {
+				opacity: 0;
+				transform: translateY(22px);
+				transition: opacity 0.55s ease, transform 0.55s ease;
+			}
+			.reveal.visible {
+				opacity: 1;
+				transform: none;
+			}
+
+			/* ── Modal ── */
 			.modal {
 				display: none;
 				position: fixed;
-				z-index: 1001;
-				left: 0;
-				top: 0;
-				width: 100%;
-				height: 100%;
-				overflow: auto;
-				background-color: rgba(0, 0, 0, 0.8);
+				inset: 0;
+				z-index: 2000;
+				background: rgba(0,0,0,0.75);
+				backdrop-filter: blur(4px);
+				-webkit-backdrop-filter: blur(4px);
+				overflow-y: auto;
+				padding: 40px 16px;
 			}
 
 			.modal-content {
-				background-color: #444;
-				margin: 10% auto;
-				padding: 20px;
-				border-radius: 10px;
-				width: max(50%,500px);
-				color: #e7e6e6;
-				text-align: center;
+				background: var(--card);
+				border: 1px solid var(--border);
+				border-radius: 16px;
+				max-width: 640px;
+				width: 100%;
+				margin: 0 auto;
+				padding: 36px 32px;
+				position: relative;
+				color: var(--text);
+				text-align: left;
 			}
 
-			.close {
-				color: #aaa;
-				float: right;
-				font-size: 28px;
-				font-weight: bold;
+			.modal-close {
+				position: absolute;
+				top: 14px;
+				right: 18px;
+				background: none;
+				border: none;
+				color: var(--muted);
+				font-size: 1.75rem;
 				cursor: pointer;
+				line-height: 1;
+				transition: color var(--transition);
+			}
+			.modal-close:hover { color: var(--text); }
+
+			#modal-title {
+				font-size: 1.08rem;
+				font-weight: 600;
+				font-style: italic;
+				color: var(--accent);
+				margin-bottom: 8px;
+				padding-right: 28px;
+				line-height: 1.4;
 			}
 
-			.close:hover,
-			.close:focus {
-				color: #fff;
-				text-decoration: none;
+			#authors {
+				font-size: 0.87rem;
+				font-style: italic;
+				color: var(--muted);
+				margin-bottom: 22px;
 			}
+
+			.modal-link-btn {
+				display: inline-block;
+				margin-bottom: 24px;
+				padding: 8px 22px;
+				border: 1.5px solid var(--accent);
+				border-radius: 6px;
+				font-size: 0.87rem;
+				font-weight: 600;
+				color: var(--accent);
+				transition: background var(--transition), color var(--transition);
+			}
+			.modal-link-btn:hover {
+				background: var(--accent);
+				color: #1e1e1e;
+			}
+
+			#modal-image {
+				width: 100%;
+				max-width: 380px;
+				border-radius: 8px;
+				display: block;
+				margin: 0 auto 20px;
+			}
+
+			#modal-description {
+				font-size: 0.92rem;
+				line-height: 1.75;
+				color: var(--text);
+				text-align: justify;
+			}
+
+			/* ── Footer ── */
+			footer {
+				border-top: 1px solid var(--border);
+				padding: 28px 24px;
+				text-align: center;
+				color: var(--muted);
+				font-size: 0.88rem;
+			}
+			footer a { color: var(--accent); margin: 0 8px; }
+			footer a:hover { color: var(--accent-lit); }
 		</style>
+	</head>
 
-		<script>
-			function openModal(title, authors, description, imageUrl, link) {
-				document.getElementById('modal-title').textContent = title;
-				document.getElementById('authors').textContent = authors;
-				document.getElementById('modal-description').textContent = description;
-				document.getElementById('modal-image').src = imageUrl;
-				document.getElementById('modal-link').href = link;
-				document.getElementById('modal').style.display = 'block';
-			}
-
-			function closeModal() {
-				document.getElementById('modal').style.display = 'none';
-			}
-		</script>
-
-<!-- <header>
-	<nav>
-		<h3>Domenic P.J. Germano</h3>
-		<div class="dropdown">
-			<button class="dropbtn">Menu</button>
-			<div class="dropdown-content">
-				<a href="#about">About</a>
-				<a href="#publications">Publications</a>
-				<a href="#software">Software</a>
-				<a href="#engagement">Engagement</a>
-				<a href="https://github.com/DGermano8" target="_blank">GitHub</a>
+	<body>
+		<!-- ── Modal ── -->
+		<div id="modal" class="modal" onclick="handleModalBackdrop(event)">
+			<div class="modal-content">
+				<button class="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
+				<h2 id="modal-title"></h2>
+				<p id="authors"></p>
+				<a id="modal-link" href="" target="_blank" class="modal-link-btn">View Article</a>
+				<img id="modal-image" src="" alt="">
+				<p id="modal-description"></p>
 			</div>
 		</div>
-	</nav>
-</header> -->
 
-<style>
-	/* Dropdown container */
-	.dropdown {
-		position: relative;
-		display: inline-block;
-	}
+		<!-- ── Navigation ── -->
+		<header>
+			<nav>
+				<span class="nav-brand">Domenic P.J. Germano</span>
+				<button class="hamburger" id="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">
+					<span></span><span></span><span></span>
+				</button>
+				<div class="nav-links" id="nav-links">
+					<a href="aboutMe.html" onclick="closeMenu()">About</a>
+					<a href="#publications" onclick="closeMenu()">Publications</a>
+					<a href="#software" onclick="closeMenu()">Software</a>
+					<a href="#engagement" onclick="closeMenu()">Engagement</a>
+					<a href="https://github.com/DGermano8" target="_blank" onclick="closeMenu()">GitHub</a>
+				</div>
+			</nav>
+		</header>
 
-	/* Dropdown button */
-	.dropbtn {
-		background-color: #262626;
-		color: #8a9cde;
-		padding: 10px 20px;
-		font-size: 16px;
-		border: none;
-		cursor: pointer;
-	}
-
-	/* Dropdown content (hidden by default) */
-	.dropdown-content {
-		display: none;
-		font-size: 16px;
-		position: absolute;
-		right: 0;
-		left: auto;
-		background-color: #444;
-		min-width: 160px;
-		box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-		z-index: 1;
-	}
-
-	/* Links inside the dropdown */
-	.dropdown-content a {
-		color: #8a9cde;
-		padding: 12px 16px;
-		text-decoration: none;
-		display: block;
-	}
-
-	/* Change color of dropdown links on hover */
-	.dropdown-content a:hover {
-		background-color: #555;
-		color: #ffffff;
-	}
-
-	/* Show the dropdown menu on hover */
-	.dropdown:hover .dropdown-content {
-		display: block;
-	}
-
-	/* Change the color of the dropdown button on hover */
-	.dropdown:hover .dropbtn {
-		background-color: #444;
-		border-radius: 10px;
-	}
-
-	/* Round the edges of the dropdown box */
-	.dropdown-content {
-		border-radius: 10px;
-	}
-</style>
-
-
-
-	</head>
-	<body>
+		<!-- ── Main content ── -->
 		<div class="container">
-			<!-- <header>
-				<nav>
-					<h3>Domenic P.J. Germano</h3>
-					<div class="nav-links">
-						<a href="aboutMe.html">About</a>
-						<a href="currentProjects.html">Projects</a>
-						<a href="#publications">Publications</a>
-						<a href="#software">Software</a>
-						<a href="#engagement">Engagement</a>
-						<a href="https://github.com/DGermano8" target="_blank">GitHub</a>
-					</div>
-				</nav>
-			</header> -->
-			<header>
-				<nav>
-					<h3>Domenic P.J. Germano</h3>
-					<div class="dropdown">
-						<button class="dropbtn">Menu</button>
-						<div class="dropdown-content">
-							<a href="aboutMe.html">About</a>
-							<!-- <a href="currentProjects.html">Projects</a> -->
-							<a href="#publications">Publications</a>
-							<a href="#software">Software</a>
-							<a href="#engagement">Engagement</a>
-							<a href="https://github.com/DGermano8" target="_blank">GitHub</a>
+			<main>
+
+				<!-- About -->
+				<section id="about">
+					<div class="hero reveal">
+						<img src="./images/headshot.png" alt="Domenic Germano Headshot" class="headshot">
+						<div class="hero-text">
+							<h2>Welcome</h2>
+							<p>Hello, I am a Research Fellow in the School of Mathematics and Statistics at The University of Melbourne!</p>
+							<p>I am interested in Mathematical Biology and Applied Mathematics, with research problems within Tissue Dynamics and Dynamical Systems.
+								My current research interests include understanding how the immune system functions, how diseases progress in people and become can chronic, tissue dynamics and model development,
+								and developing hybrid stochastic-deterministic methodology.</p>
+							<p>If you're interested in any of my work, please feel free to contact me at domenic (at) unimelb.edu.au !</p>
 						</div>
 					</div>
-				</nav>
-			</header>
-
-			<main>
-				<section id="about">
-					<img src="./images/headshot.png" alt="Domenic Germano Headshot" class="headshot">
-					<h2>Welcome</h2>
-					<p>Hello, I am a Research Fellow in the School of Mathematics and Statistics at The University of Melbourne!</p>
-					<!-- <p>My PhD was in <em>"The mathematics of individual-based modelling: developing a realistic model of simple epithelial tissue"</em>. 
-						I am interested in Mathematical Biology and Applied Mathematics, and research problems within Tissue Dynamics and Dynamical systems. 
-						My current research interests include understanding how the immune system functions, how diseases progress in people, tissue dynamics,
-						and continuing my previous work on developing the Jump-Switch-Flow method.</p> -->
-						<p>I am interested in Mathematical Biology and Applied Mathematics, with research problems within Tissue Dynamics and Dynamical Systems. 
-							My current research interests include understanding how the immune system functions, how diseases progress in people and become can chronic, tissue dynamics and model development,
-							and developing hybrid stochastic-deterministic methodology.</p>
-					<p>If you're interested in any of my work, please feel free to contact me at domenic (at) unimelb.edu.au !</p>
 				</section>
 
+				<!-- Publications -->
 				<section id="publications">
-					<h2>Select Publications</h2>
+					<h2 class="reveal">Select Publications</h2>
 					<div class="grid-container">
-						<div class="grid-item" 
-							onclick="openModal('Mathematical modelling of macrophage and natural killer cell immune response during early stages of peritoneal endometriosis lesion onset',
-							'Claire M. Miller, Domenic P.J. Germano,Alicia M. Chenoweth, & Sarah Holdsworth-Carson', 
-							'In this work, we explore how the immune system contributes to the early development of endometriosis, focusing on the ' + 
-							'interactions between immune cells and endometrial cells in the peritoneal fluid. We develop a novel compartmental model ' +
-							'that captures the dynamics between innate immune cells — specifically macrophages and natural killer cells — and ectopic ' +
-							'endometrial cells during the initial stages of lesion formation. Our model accounts for retrograde menstruation, immune ' +
-							'detection, and immune clearance. We find that although increased retrograde menstration leads to heightened pro-inflammatory '+
-							'macrophage activation, this alone does not trigger disease. Instead, our results suggest that reduced immune cytotoxicity ' +
-							'plays a central role in driving disease onset. We also observe that once the system shifts into a diseased state, due to ' +
-							'hysteresis, restoring immune function may require a significantly greater effort to return to health. These findings are ' +
-							'consistent with clinical observations and offer a mechanistic framework for understanding early-stage endometriosis.',
-							'./images/endoImmuneModel.png', 'https://doi.org/10.1098/rsif.2025.0076')">
-							<p>Modelling the immune system's role in endometriosis onset</p>
+						
+						<div class="grid-item reveal"
+							onclick="openModal(
+							'Multiscale Modelling of Birth-Death Processes',
+							'Tom Kimpson, Domenic P.J. Germano, Jennifer A. Flegg, & Mark B. Flegg', 
+							'Simulating biological systems — like predator-prey dynamics or diseases spreading through a population — is a balancing act: precise methods ' +
+							'are too slow when numbers are large, while fast approximations break down when species are rare. Hybrid approaches split the difference, treating ' +
+							'rare and abundant species differently, but scientists have long struggled to know exactly where to draw that dividing line without introducing '+
+							'unreliable results. This paper solves that problem for one of biologys most critical questions: extinction risk. By developing a rigorous ' +
+							'mathematical framework, the authors show how errors in extinction probability estimates can be precisely identified and bounded, leading to a ' +
+							'simple, practical rule that tells users how to set up their simulations to stay within any chosen error tolerance — no guesswork required. ' +
+							'Tested on a classic predator-prey model, the method reliably delivers trustworthy results without unnecessary computational cost, opening the door '+
+							'to more principled and efficient simulation across ecology, epidemiology, and cell biology.',
+							'./images/MultiScale_BD.png',
+							'https://doi.org/10.48550/arXiv.2601.12712')">
+							<p>Multiscale Modelling of Birth-Death Processes </p>
+							<img src="./images/MultiScale_BD.png" alt="Multiscale Modelling of Birth-Death Processes">
+						</div>
+							
+
+						<div class="grid-item reveal"
+							onclick="openModal(
+								'Mathematical modelling of macrophage and natural killer cell immune response during early stages of peritoneal endometriosis lesion onset',
+								'Claire M. Miller, Domenic P.J. Germano, Alicia M. Chenoweth, & Sarah Holdsworth-Carson',
+								'In this work, we explore how the immune system contributes to the early development of endometriosis, focusing on the ' +
+								'interactions between immune cells and endometrial cells in the peritoneal fluid. We develop a novel compartmental model ' +
+								'that captures the dynamics between innate immune cells \u2014 specifically macrophages and natural killer cells \u2014 and ectopic ' +
+								'endometrial cells during the initial stages of lesion formation. Our model accounts for retrograde menstruation, immune ' +
+								'detection, and immune clearance. We find that although increased retrograde menstruation leads to heightened pro-inflammatory ' +
+								'macrophage activation, this alone does not trigger disease. Instead, our results suggest that reduced immune cytotoxicity ' +
+								'plays a central role in driving disease onset. We also observe that once the system shifts into a diseased state, due to ' +
+								'hysteresis, restoring immune function may require a significantly greater effort to return to health. These findings are ' +
+								'consistent with clinical observations and offer a mechanistic framework for understanding early-stage endometriosis.',
+								'./images/endoImmuneModel.png',
+								'https://doi.org/10.1098/rsif.2025.0076')">
+							<p>Modelling the immune system&#8217;s role in endometriosis onset</p>
 							<img src="./images/endoImmuneModel.png" alt="Modelling the immune system's role in endometriosis onset">
 						</div>
-						
-						<div class="grid-item" 
-						onclick="openModal('A hybrid framework for compartmental models enabling simulation-based inference',
-						'Domenic P.J. Germano, Alexander E. Zarebski, Sophie Hautphenne, Robert Moss, Jennifer A. Flegg, & Mark B. Flegg', 
-						'Many systems in biology, chemistry, epidemiology and ecology involve both stochastic and deterministic behaviours, ' +
-						'but capturing both in a single model can be difficult. For example, traditional models, like the Lotka-Volterra ' +
-						'equations, can predict tiny, unrealistic population levels — so-called atto-foxes — when dealing with very small populations. ' +
-						'This becomes a major issue when studying things like species extinction or the clearance of an infection, where stochasticity ' +
-						'plays a key role. While discrete stochastic models like continuous-time Markov chains (CTMCs) can handle this properly, ' +
-						'they are often too slow to simulate for large systems. To solve this, we have developed a new framework called ' +
-						'Jump-Switch-Flow (JSF), which combines the accuracy of CTMCs with the speed of ordinary differential equations (ODEs). ' +
-						'JSF allows populations to truly reach extinction, avoiding the atto-fox issue. We apply our framework to several case ' +
-						'studies, including public health intervention analysis and SARS-CoV-2 infection data. We have also make JSF Openly Available as an easy-to-use Python package. ' +
-						'Overall, JSF is a powerful new tool for modelling complex, multi-scale systems more realistically and efficiently.',
-						'./images/JSFFigure1.png', 'https://doi.org/10.48550/arXiv.2405.13239')">
+
+						<div class="grid-item reveal"
+							onclick="openModal(
+								'A hybrid framework for compartmental models enabling simulation-based inference',
+								'Domenic P.J. Germano, Alexander E. Zarebski, Sophie Hautphenne, Robert Moss, Jennifer A. Flegg, & Mark B. Flegg',
+								'Many systems in biology, chemistry, epidemiology and ecology involve both stochastic and deterministic behaviours, ' +
+								'but capturing both in a single model can be difficult. For example, traditional models, like the Lotka\u2013Volterra ' +
+								'equations, can predict tiny, unrealistic population levels \u2014 so-called atto-foxes \u2014 when dealing with very small populations. ' +
+								'This becomes a major issue when studying things like species extinction or the clearance of an infection, where stochasticity ' +
+								'plays a key role. While discrete stochastic models like continuous-time Markov chains (CTMCs) can handle this properly, ' +
+								'they are often too slow to simulate for large systems. To solve this, we have developed a new framework called ' +
+								'Jump-Switch-Flow (JSF), which combines the accuracy of CTMCs with the speed of ordinary differential equations (ODEs). ' +
+								'JSF allows populations to truly reach extinction, avoiding the atto-fox issue. We apply our framework to several case ' +
+								'studies, including public health intervention analysis and SARS-CoV-2 infection data. We have also made JSF openly available as an easy-to-use Python package. ' +
+								'Overall, JSF is a powerful new tool for modelling complex, multi-scale systems more realistically and efficiently.',
+								'./images/JSFFigure1.png',
+								'https://doi.org/10.48550/arXiv.2405.13239')">
 							<p>A hybrid SSA-ODE framework for compartmental systems</p>
 							<img src="./images/JSFFigure1.png" alt="Jump-Switch-Flow">
 						</div>
 
-						<div class="grid-item" 
-							onclick="openModal('Active Remodelling of Tissues to Describe Biphasic Rheological Responses',
-							'Domenic P. J. Germano, Stephanie Khuu, Adrianne L Jenner, James M. Osborne, Mary R. Myerscough, & Mark B. Flegg',
-							'We develop a mathematical model to study how tissues deform under mechanical stress, focusing on how individual cells respond through elastic '+
-							'and plastic deformation. Cells in tissue are connected via adhesion molecules and can actively remodel when stretched. Our model captures this ' +
-							'by allowing cells to shift between two stable sizes, depending on the level of stress—reflecting experimentally observed behaviour. Without '+ 
-							'remodelling, the model simplifies to a standard linear interaction model. Under instantaneous remodelling, we perform a bifurcation analysis ' +
-							'to identify when bistable cell sizes arise. Under more general remodelling, simulations show tissues can contain both original and elongated cells ' +
-							'after sufficient stress. This work offers new insight into how tissues reshape through stress-driven cell-level mechanics.',
-							'./images/activeRemodelling.png', 'https://doi.org/10.1017/S1446181123000226')">
+						<div class="grid-item reveal"
+							onclick="openModal(
+								'Active Remodelling of Tissues to Describe Biphasic Rheological Responses',
+								'Domenic P. J. Germano, Stephanie Khuu, Adrianne L Jenner, James M. Osborne, Mary R. Myerscough, & Mark B. Flegg',
+								'We develop a mathematical model to study how tissues deform under mechanical stress, focusing on how individual cells respond through elastic ' +
+								'and plastic deformation. Cells in tissue are connected via adhesion molecules and can actively remodel when stretched. Our model captures this ' +
+								'by allowing cells to shift between two stable sizes, depending on the level of stress\u2014reflecting experimentally observed behaviour. Without ' +
+								'remodelling, the model simplifies to a standard linear interaction model. Under instantaneous remodelling, we perform a bifurcation analysis ' +
+								'to identify when bistable cell sizes arise. Under more general remodelling, simulations show tissues can contain both original and elongated cells ' +
+								'after sufficient stress. This work offers new insight into how tissues reshape through stress-driven cell-level mechanics.',
+								'./images/activeRemodelling.png',
+								'https://doi.org/10.1017/S1446181123000226')">
 							<p>Active tissue remodelling</p>
 							<img src="./images/activeRemodelling.png" alt="Active tissue remodelling">
 						</div>
 
-						<div class="grid-item" 
-							onclick="openModal('Free and Interfacial Boundaries in Individual-Based Models of Multicellular Biological systems',
-							'Domenic P. J. Germano, Adriana Zanca, Stuart T. Johnston, Jennifer A. Flegg, & James M. Osborne', 
-							'We investigate how the way we define cell boundaries in individual-based models influences collective cell behaviour in biological systems. ' + 
-							'These models are widely used to study processes like tissue development, wound healing, and tumour growth, but the impact of boundary assumptions ' + 
-							'is often overlooked. We examine three common modelling frameworks — overlapping spheres, Voronoi tessellation, and vertex models — with varying ' + 
-							'complexity of boundary description. By applying these models to several biological scenarios, we evaluate how sensitive tissue-scale dynamics are to ' +
-							'the choice of boundary description. Our work highlights the importance of carefully selecting boundary representations and provides guidance for ' +
-							'researchers developing or using individual-based models.',
-							'./images/boundarys.png', 'https://doi.org/10.1007/s11538-023-01214-8')">
+						<div class="grid-item reveal"
+							onclick="openModal(
+								'Free and Interfacial Boundaries in Individual-Based Models of Multicellular Biological systems',
+								'Domenic P. J. Germano, Adriana Zanca, Stuart T. Johnston, Jennifer A. Flegg, & James M. Osborne',
+								'We investigate how the way we define cell boundaries in individual-based models influences collective cell behaviour in biological systems. ' +
+								'These models are widely used to study processes like tissue development, wound healing, and tumour growth, but the impact of boundary assumptions ' +
+								'is often overlooked. We examine three common modelling frameworks \u2014 overlapping spheres, Voronoi tessellation, and vertex models \u2014 with varying ' +
+								'complexity of boundary description. By applying these models to several biological scenarios, we evaluate how sensitive tissue-scale dynamics are to ' +
+								'the choice of boundary description. Our work highlights the importance of carefully selecting boundary representations and provides guidance for ' +
+								'researchers developing or using individual-based models.',
+								'./images/boundarys.png',
+								'https://doi.org/10.1007/s11538-023-01214-8')">
 							<p>Modelling tissue boundaries in multicellular systems</p>
 							<img src="./images/boundarys.png" alt="Modelling tissue boundaries">
 						</div>
 
-						<div class="grid-item" 
-							onclick="openModal('Modelling realistic 3D deformations of simple epithelia in dynamic homeostasis',
-							'Domenic P.J. Germano, Stuart T. Johnston, Edmund J. Crampin, & James M. Osborne', 
-							'The maintenance of tissue and organ structures during dynamic homeostasis is often not well understood. In order for a system to be stable, cell renewal, ' + 
-							'cell migration and cell death must be finely balanced. While tissues like the endothelium, mesothelium, and linings of organs such as the lungs and gut ' +
-							'are common, few models capture how these structures stay stable over time. In this work, we develop a novel 3D, deformable, multilayer cell-centre model ' +
-							'that represents simple epithelial tissues. In our model, cell movement is driven by a combination of bending energy minimisation, cell–cell adhesion, ' +
-							'and viscous forces. We show that our model maintains a stable tissue structure even during continuous cell renewal, migration, and removal. The model reliably ' + 
-							'preserves tissue shape and integrity under dynamic conditions. This work offers a significant step forward in simulating realistic tissue maintenance and ' + 
-							'provides a flexible tool for studying more complex organ structures.',
-							'./images/deformable_tissues.png', 'https://doi.org/10.1016/j.mbs.2022.108895')">
+						<div class="grid-item reveal"
+							onclick="openModal(
+								'Modelling realistic 3D deformations of simple epithelia in dynamic homeostasis',
+								'Domenic P.J. Germano, Stuart T. Johnston, Edmund J. Crampin, & James M. Osborne',
+								'The maintenance of tissue and organ structures during dynamic homeostasis is often not well understood. In order for a system to be stable, cell renewal, ' +
+								'cell migration and cell death must be finely balanced. While tissues like the endothelium, mesothelium, and linings of organs such as the lungs and gut ' +
+								'are common, few models capture how these structures stay stable over time. In this work, we develop a novel 3D, deformable, multilayer cell-centre model ' +
+								'that represents simple epithelial tissues. In our model, cell movement is driven by a combination of bending energy minimisation, cell\u2013cell adhesion, ' +
+								'and viscous forces. We show that our model maintains a stable tissue structure even during continuous cell renewal, migration, and removal. The model reliably ' +
+								'preserves tissue shape and integrity under dynamic conditions. This work offers a significant step forward in simulating realistic tissue maintenance and ' +
+								'provides a flexible tool for studying more complex organ structures.',
+								'./images/deformable_tissues.png',
+								'https://doi.org/10.1016/j.mbs.2022.108895')">
 							<p>A 3D realistic deformable model of simple epithelia</p>
 							<img src="./images/deformable_tissues.png" alt="Realistic deformable tissues">
 						</div>
 
-						<div class="grid-item" 
-							onclick="openModal('A mathematical model of cell fate selection on a dynamic tissue',
-							'Domenic P.J. Germano, & James M. Osborne', 
-							'Tissues are not static structures—they undergo continuous cell turnover while maintaining their overall form through finely balanced regulatory mechanisms. ' + 
-							'While both cell motility and signalling are known to govern cell fate, it remains unclear how these processes interact across a tissue. ' + 
-							'Here, we present a multicellular, multiscale model that links two key processes in tissue dynamics: cell movement and intercellular signalling. Our model brings '+ 
-							'them together to study how cell fate decisions emerge in a dynamically renewing tissue. We find that the strength of intercellular signalling strongly influences a '+
-							'cell’s ability to differentiate. Additionally, our results suggest that maintaining healthy tissue structure requires careful tuning of turnover rates—excessive '+
-							'turnover can lead to disordered, undifferentiated tissue. This work highlights the importance of integrating mechanical and biochemical dynamics to understand tissue homeostasis.',
-							'./images/cell_fate_selection.png', 'https://doi.org/10.1016/j.jtbi.2020.110535')">
+						<div class="grid-item reveal"
+							onclick="openModal(
+								'A mathematical model of cell fate selection on a dynamic tissue',
+								'Domenic P.J. Germano, & James M. Osborne',
+								'Tissues are not static structures\u2014they undergo continuous cell turnover while maintaining their overall form through finely balanced regulatory mechanisms. ' +
+								'While both cell motility and signalling are known to govern cell fate, it remains unclear how these processes interact across a tissue. ' +
+								'Here, we present a multicellular, multiscale model that links two key processes in tissue dynamics: cell movement and intercellular signalling. Our model brings ' +
+								'them together to study how cell fate decisions emerge in a dynamically renewing tissue. We find that the strength of intercellular signalling strongly influences a ' +
+								'cell\u2019s ability to differentiate. Additionally, our results suggest that maintaining healthy tissue structure requires careful tuning of turnover rates\u2014excessive ' +
+								'turnover can lead to disordered, undifferentiated tissue. This work highlights the importance of integrating mechanical and biochemical dynamics to understand tissue homeostasis.',
+								'./images/cell_fate_selection.png',
+								'https://doi.org/10.1016/j.jtbi.2020.110535')">
 							<p>Dynamic cell fate selection</p>
 							<img src="./images/cell_fate_selection.png" alt="Cell fate selection">
 						</div>
@@ -462,56 +583,93 @@
 					</div>
 				</section>
 
-				<!-- <section id="collaborations">
-					<h2>Collaboration Network</h2>
-					<p>
-						I have been interested at how to visualise and quantify research. One such was to do this is by looking at networks relating
-						to authorship and citation patterns in scientific publications. Below is my collaboration network, with nodes representing authors
-						and edges representing co-authorships. The size of the nodes represents the number of publications of each author. By selecting an 
-						author, you can see their direct collaborators, in the context of my publications. The colours represent clusters of authors who I have collaborated with.
-						The below interactive online visualisation is made possible thanks to <a href="https://www.vosviewer.com" target="_blank" style="color:rgb(108,136,241);">VOSviewer</a>. 
-					</p>
-					<iframe allowfullscreen="true" ,
-					src="https://tinyurl.com/2b8e7bg4", 
-					width="100%" height="75%" ,
-					style="border: 1px solid #ddd; max-width: 1000px; min-height: 500px">
-					</iframe>
-				</section> -->
-
+				<!-- Software -->
 				<section id="software">
-					<h2>Software</h2>
-					<div class="grid-item" onclick="window.location.href='https://DGermano8.github.io/JSF/'">
-						<p style="font-size: 1.25em;">Jump-Switch-Flow: A hybrid SSA-ODE framework for simulating compartmental models</p>
-						<a href="https://DGermano8.github.io/JSF/" target="_blank">
-							<img src="./JSF/images/jsf-logo.png" alt="Jump-Switch-Flow" style="max-width: 50%; min-width: 300px ; height: auto;">
+					<h2 class="reveal">Software</h2>
+					<div class="software-card reveal" onclick="window.location.href='https://DGermano8.github.io/JSF/'">
+						<p class="sw-title">Jump-Switch-Flow: A hybrid SSA-ODE framework for simulating compartmental models</p>
+						<a href="https://DGermano8.github.io/JSF/" target="_blank" onclick="event.stopPropagation()">
+							<img src="./JSF/images/jsf-logo.png" alt="Jump-Switch-Flow">
 						</a>
-						<p>Developed with <a href="https://aezarebski.github.io" target="_blank" style="color:rgb(108,136,241);">Dr. Alexander Zarebski</a></p>
+						<p class="sw-credit">Developed with <a href="https://aezarebski.github.io" target="_blank" onclick="event.stopPropagation()">Dr. Alexander Zarebski</a></p>
 					</div>
-
-					<!-- <div class="grid-item" 
-							onclick="openModal('title',
-							'authors', 
-							'description',
-							'fig', 'doi')">
-							<p>plain_title</p>
-							<img src="fig" alt="desc">
-						</div> -->
 				</section>
 
+				<!-- Engagement -->
 				<section id="engagement">
-					<h2>Engagement</h2>
-					<ul>
-						<li>I was an organiser for a week long MATRIX Research Program, titled <a href="https://www.matrix-inst.org.au/events/mathematics-of-tissue-dynamics/" target="_blank" style="color:rgb(108,136,241);">Mathematics of Tissue Dynamics</a> (2022).</li>
-						<li>I was an organiser for a one-day conference, titled <a href="https://mathematical-biology.science.unimelb.edu.au/2022/08/04/frontiers-of-mathematical-biology-a-workshop-honouring-prof-edmund-crampin/" target="_blank" style="color:rgb(108,136,241);">"Frontiers of Mathematical Biology: A workshop honouring Prof Edmund Crampin"</a> (2022).</li>
-						<li>I organised the annual one-day Mathematical Biology Special Interest Group Workshop, following the ANZIAM 2025 conference (2025)</li>
-						<li>Since 2022, I have been on the ANZIAM Mathematical Biology Special Interest Group Committee.</li>
+					<h2 class="reveal">Engagement</h2>
+					<ul class="engagement-list">
+						<li class="reveal">I am the current Secretary of the Mathematical Biology Special Interest Group associated with ANZIAM (2026).</li>
+						<li class="reveal">I organised the annual one-day Mathematical Biology Special Interest Group Workshop, following the ANZIAM 2025 conference, and also the MBSIG Hubbed meeting for 2025.</li>
+						<li class="reveal">I was an organiser for a week long MATRIX Research Program, titled <a href="https://www.matrix-inst.org.au/events/mathematics-of-tissue-dynamics/" target="_blank">Mathematics of Tissue Dynamics</a> (2022).</li>
+						<li class="reveal">I was an organiser for a one-day conference, titled <a href="https://mathematical-biology.science.unimelb.edu.au/2022/08/04/frontiers-of-mathematical-biology-a-workshop-honouring-prof-edmund-crampin/" target="_blank">&#8220;Frontiers of Mathematical Biology: A workshop honouring Prof Edmund Crampin&#8221;</a> (2022).</li>
+						<li class="reveal">From 2022 to 2026, I have been on the ANZIAM Mathematical Biology Special Interest Group Committee.</li>
 					</ul>
 				</section>
-			</main>
 
-			<footer>
-				<p>&copy; 2025 Domenic Germano | <a href="https://github.com/DGermano8" target="_blank">GitHub</a> | <a href="https://bsky.app/profile/dgermano.bsky.social" target="_blanck">Bluesky</a></p>
-			</footer>
+			</main>
 		</div>
+
+		<footer>
+			<p>&copy; 2026 Domenic Germano &nbsp;&middot;&nbsp;
+				<a href="https://github.com/DGermano8" target="_blank">GitHub</a>
+				<a href="https://bsky.app/profile/dgermano.bsky.social" target="_blank">Bluesky</a>
+			</p>
+		</footer>
+
+		<script>
+			/* ── Navigation ── */
+			function toggleMenu() {
+				document.getElementById('nav-links').classList.toggle('open');
+				document.getElementById('hamburger').classList.toggle('open');
+			}
+			function closeMenu() {
+				document.getElementById('nav-links').classList.remove('open');
+				document.getElementById('hamburger').classList.remove('open');
+			}
+			document.addEventListener('click', function(e) {
+				var nav = document.getElementById('nav-links');
+				var btn = document.getElementById('hamburger');
+				if (nav.classList.contains('open') && !nav.contains(e.target) && !btn.contains(e.target)) {
+					closeMenu();
+				}
+			});
+
+			/* ── Modal ── */
+			function openModal(title, authors, description, imageUrl, link) {
+				document.getElementById('modal-title').textContent = title;
+				document.getElementById('authors').textContent = authors;
+				document.getElementById('modal-description').textContent = description;
+				document.getElementById('modal-image').src = imageUrl;
+				document.getElementById('modal-link').href = link;
+				document.getElementById('modal').style.display = 'block';
+				document.body.style.overflow = 'hidden';
+			}
+			function closeModal() {
+				document.getElementById('modal').style.display = 'none';
+				document.body.style.overflow = '';
+			}
+			function handleModalBackdrop(event) {
+				if (event.target === document.getElementById('modal')) closeModal();
+			}
+			document.addEventListener('keydown', function(e) {
+				if (e.key === 'Escape') closeModal();
+			});
+
+			/* ── Scroll reveal ── */
+			var observer = new IntersectionObserver(function(entries) {
+				entries.forEach(function(entry) {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('visible');
+						observer.unobserve(entry.target);
+					}
+				});
+			}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+			document.querySelectorAll('.reveal').forEach(function(el, i) {
+				el.style.transitionDelay = (i % 6) * 60 + 'ms';
+				observer.observe(el);
+			});
+		</script>
 	</body>
 </html>
